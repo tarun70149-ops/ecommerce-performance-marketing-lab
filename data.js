@@ -1,175 +1,372 @@
 /**
- * VERIDO E-COMMERCE PERFORMANCE MARKETING LAB
+ * =========================================================
+ * DODS E-COMMERCE PERFORMANCE MARKETING LAB
  * Central Data Layer Configuration
+ * =========================================================
+ *
+ * BRAND:
+ * DODS
+ *
+ * NOTE:
+ * Internal VERIDO compatibility names are intentionally
+ * preserved for the current website architecture.
+ * This prevents existing cart, checkout and tracking
+ * systems from breaking during the brand migration.
+ * =========================================================
  */
 
-window.VERIDO_DATA = {
+(function () {
 
-  /* =========================================
-     WEBSITE INFORMATION
-  ========================================= */
-
-  website: {
-    brand: "VERIDO",
-    website_type: "ecommerce",
-    market: "India",
-    city: "Jaipur",
-    country: "IN"
-  },
+  "use strict";
 
 
-  /* =========================================
-     DEFAULT USER CONTEXT
-  ========================================= */
+  /* =========================================================
+     DODS DATA LAYER CONFIGURATION
+  ========================================================= */
 
-  user: {
-    logged_in: false,
-    user_type: "guest"
-  },
+  window.DODS_DATA = {
 
+    /* =========================================
+       WEBSITE INFORMATION
+    ========================================= */
 
-  /* =========================================
-     CURRENT PAGE
-  ========================================= */
+    website: {
 
-  page: {
+      brand: "DODS",
 
-    type: "unknown",
+      website_type:
+        "ecommerce",
 
-    title: document.title || "",
+      market:
+        "India",
 
-    url: window.location.href,
+      city:
+        "Jaipur",
 
-    path: window.location.pathname,
+      country:
+        "IN"
 
-    referrer: document.referrer || ""
-  },
-
-
-  /* =========================================
-     MARKETING ATTRIBUTION
-  ========================================= */
-
-  marketing: {
-
-    source: "",
-    medium: "",
-    campaign: "",
-    term: "",
-    content: "",
-
-    gclid: "",
-    fbclid: "",
-
-    landing_page: window.location.href,
-
-    first_touch_source: "",
-    first_touch_medium: "",
-    first_touch_campaign: "",
-
-    last_touch_source: "",
-    last_touch_medium: "",
-    last_touch_campaign: ""
-  },
+    },
 
 
-  /* =========================================
-     E-COMMERCE CONTEXT
-  ========================================= */
+    /* =========================================
+       DEFAULT USER CONTEXT
+    ========================================= */
 
-  ecommerce: {
+    user: {
 
-    currency: "INR",
+      logged_in:
+        false,
 
-    cart_value: 0,
+      user_type:
+        "guest"
 
-    cart_items: 0,
-
-    checkout_value: 0,
-
-    order_value: 0,
-
-    transaction_id: ""
-  },
+    },
 
 
-  /* =========================================
-     CONSENT
-  ========================================= */
+    /* =========================================
+       CURRENT PAGE
+    ========================================= */
 
-  consent: {
+    page: {
 
-    analytics: true,
+      type:
+        "unknown",
 
-    advertising: true,
+      title:
+        document.title || "",
 
-    functionality: true
-  }
+      url:
+        window.location.href,
 
-};
+      path:
+        window.location.pathname,
 
+      referrer:
+        document.referrer || ""
 
-/* =========================================
-   UTM / CLICK ID CAPTURE
-========================================= */
-
-(function captureMarketingData() {
-
-  const params =
-    new URLSearchParams(window.location.search);
-
-  const marketing =
-    window.VERIDO_DATA.marketing;
+    },
 
 
-  marketing.source =
-    params.get("utm_source") || "";
+    /* =========================================
+       MARKETING ATTRIBUTION
+    ========================================= */
 
-  marketing.medium =
-    params.get("utm_medium") || "";
+    marketing: {
 
-  marketing.campaign =
-    params.get("utm_campaign") || "";
+      source:
+        "",
 
-  marketing.term =
-    params.get("utm_term") || "";
+      medium:
+        "",
 
-  marketing.content =
-    params.get("utm_content") || "";
+      campaign:
+        "",
 
-  marketing.gclid =
-    params.get("gclid") || "";
+      term:
+        "",
 
-  marketing.fbclid =
-    params.get("fbclid") || "";
+      content:
+        "",
+
+      gclid:
+        "",
+
+      fbclid:
+        "",
+
+      landing_page:
+        window.location.href,
 
 
-  /* -----------------------------------------
-     Save first-touch attribution
-  ----------------------------------------- */
+      /* -----------------------------------------
+         FIRST TOUCH
+      ----------------------------------------- */
 
-  const firstTouch =
-    localStorage.getItem(
-      "verido_first_touch"
-    );
+      first_touch_source:
+        "",
 
-  if (!firstTouch) {
+      first_touch_medium:
+        "",
 
-    const firstTouchData = {
+      first_touch_campaign:
+        "",
 
-      source: marketing.source,
 
-      medium: marketing.medium,
+      /* -----------------------------------------
+         LAST TOUCH
+      ----------------------------------------- */
 
-      campaign: marketing.campaign,
+      last_touch_source:
+        "",
 
-      term: marketing.term,
+      last_touch_medium:
+        "",
 
-      content: marketing.content,
+      last_touch_campaign:
+        ""
 
-      gclid: marketing.gclid,
+    },
 
-      fbclid: marketing.fbclid,
+
+    /* =========================================
+       E-COMMERCE CONTEXT
+    ========================================= */
+
+    ecommerce: {
+
+      currency:
+        "INR",
+
+      cart_value:
+        0,
+
+      cart_items:
+        0,
+
+      checkout_value:
+        0,
+
+      order_value:
+        0,
+
+      transaction_id:
+        ""
+
+    },
+
+
+    /* =========================================
+       CONSENT
+    ========================================= */
+
+    consent: {
+
+      analytics:
+        true,
+
+      advertising:
+        true,
+
+      functionality:
+        true
+
+    }
+
+  };
+
+
+  /* =========================================================
+     BACKWARD COMPATIBILITY
+  =========================================================
+     
+     Existing website files may still use:
+
+     window.VERIDO_DATA
+
+     We keep it working so that changing the brand
+     does NOT break existing JavaScript.
+  ========================================================= */
+
+  window.VERIDO_DATA =
+    window.DODS_DATA;
+
+
+  /* =========================================================
+     UTM / CLICK ID CAPTURE
+  ========================================================= */
+
+  (function captureMarketingData() {
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const marketing =
+      window.DODS_DATA.marketing;
+
+
+    /* -----------------------------------------
+       UTM SOURCE
+    ----------------------------------------- */
+
+    marketing.source =
+      params.get("utm_source") || "";
+
+
+    /* -----------------------------------------
+       UTM MEDIUM
+    ----------------------------------------- */
+
+    marketing.medium =
+      params.get("utm_medium") || "";
+
+
+    /* -----------------------------------------
+       UTM CAMPAIGN
+    ----------------------------------------- */
+
+    marketing.campaign =
+      params.get("utm_campaign") || "";
+
+
+    /* -----------------------------------------
+       UTM TERM
+    ----------------------------------------- */
+
+    marketing.term =
+      params.get("utm_term") || "";
+
+
+    /* -----------------------------------------
+       UTM CONTENT
+    ----------------------------------------- */
+
+    marketing.content =
+      params.get("utm_content") || "";
+
+
+    /* -----------------------------------------
+       GOOGLE CLICK ID
+    ----------------------------------------- */
+
+    marketing.gclid =
+      params.get("gclid") || "";
+
+
+    /* -----------------------------------------
+       META CLICK ID
+    ----------------------------------------- */
+
+    marketing.fbclid =
+      params.get("fbclid") || "";
+
+
+    /* =====================================================
+       SAVE FIRST-TOUCH ATTRIBUTION
+    ===================================================== */
+
+    const firstTouch =
+      localStorage.getItem(
+        "verido_first_touch"
+      );
+
+
+    if (!firstTouch) {
+
+      const firstTouchData = {
+
+        source:
+          marketing.source,
+
+        medium:
+          marketing.medium,
+
+        campaign:
+          marketing.campaign,
+
+        term:
+          marketing.term,
+
+        content:
+          marketing.content,
+
+        gclid:
+          marketing.gclid,
+
+        fbclid:
+          marketing.fbclid,
+
+        landing_page:
+          window.location.href,
+
+        timestamp:
+          new Date().toISOString()
+
+      };
+
+
+      localStorage.setItem(
+
+        "verido_first_touch",
+
+        JSON.stringify(
+          firstTouchData
+        )
+
+      );
+
+    }
+
+
+    /* =====================================================
+       SAVE LAST-TOUCH ATTRIBUTION
+    ===================================================== */
+
+    const lastTouchData = {
+
+      source:
+        marketing.source,
+
+      medium:
+        marketing.medium,
+
+      campaign:
+        marketing.campaign,
+
+      term:
+        marketing.term,
+
+      content:
+        marketing.content,
+
+      gclid:
+        marketing.gclid,
+
+      fbclid:
+        marketing.fbclid,
 
       landing_page:
         window.location.href,
@@ -182,158 +379,177 @@ window.VERIDO_DATA = {
 
     localStorage.setItem(
 
-      "verido_first_touch",
+      "verido_last_touch",
 
-      JSON.stringify(firstTouchData)
+      JSON.stringify(
+        lastTouchData
+      )
 
     );
 
-  }
+
+  })();
 
 
-  /* -----------------------------------------
-     Save last-touch attribution
-  ----------------------------------------- */
+  /* =========================================================
+     LOAD SAVED ATTRIBUTION
+  ========================================================= */
 
-  const lastTouchData = {
+  (function loadAttribution() {
 
-    source: marketing.source,
-
-    medium: marketing.medium,
-
-    campaign: marketing.campaign,
-
-    term: marketing.term,
-
-    content: marketing.content,
-
-    gclid: marketing.gclid,
-
-    fbclid: marketing.fbclid,
-
-    landing_page:
-      window.location.href,
-
-    timestamp:
-      new Date().toISOString()
-
-  };
+    const marketing =
+      window.DODS_DATA.marketing;
 
 
-  localStorage.setItem(
+    /* =====================================================
+       LOAD FIRST-TOUCH
+    ===================================================== */
 
-    "verido_last_touch",
+    try {
 
-    JSON.stringify(lastTouchData)
+      const firstTouch =
+        JSON.parse(
 
+          localStorage.getItem(
+            "verido_first_touch"
+          )
+
+        );
+
+
+      if (firstTouch) {
+
+        marketing.first_touch_source =
+          firstTouch.source || "";
+
+
+        marketing.first_touch_medium =
+          firstTouch.medium || "";
+
+
+        marketing.first_touch_campaign =
+          firstTouch.campaign || "";
+
+      }
+
+
+    } catch (error) {
+
+      console.warn(
+        "Could not load first-touch attribution."
+      );
+
+    }
+
+
+    /* =====================================================
+       LOAD LAST-TOUCH
+    ===================================================== */
+
+    try {
+
+      const lastTouch =
+        JSON.parse(
+
+          localStorage.getItem(
+            "verido_last_touch"
+          )
+
+        );
+
+
+      if (lastTouch) {
+
+        marketing.last_touch_source =
+          lastTouch.source || "";
+
+
+        marketing.last_touch_medium =
+          lastTouch.medium || "";
+
+
+        marketing.last_touch_campaign =
+          lastTouch.campaign || "";
+
+      }
+
+
+    } catch (error) {
+
+      console.warn(
+        "Could not load last-touch attribution."
+      );
+
+    }
+
+
+  })();
+
+
+  /* =========================================================
+     GLOBAL DATA LAYER
+  ========================================================= */
+
+  window.dataLayer =
+    window.dataLayer || [];
+
+
+  /* =========================================================
+     INITIAL DODS DATA EVENT
+  ========================================================= */
+
+  window.dataLayer.push({
+
+    event:
+      "dods_data_initialized",
+
+    dods:
+      window.DODS_DATA
+
+  });
+
+
+  /* =========================================================
+     LEGACY EVENT
+  =========================================================
+     
+     Existing GTM / analytics setup may still listen for:
+
+     verido_data_initialized
+
+     So we keep it temporarily.
+  ========================================================= */
+
+  window.dataLayer.push({
+
+    event:
+      "verido_data_initialized",
+
+    verido:
+      window.DODS_DATA
+
+  });
+
+
+  /* =========================================================
+     DEBUG
+  ========================================================= */
+
+  console.log(
+    "✅ DODS data layer configuration loaded."
+  );
+
+
+  console.log(
+    "🏷️ Brand:",
+    window.DODS_DATA.website.brand
+  );
+
+
+  console.log(
+    "📊 DODS DATA:",
+    window.DODS_DATA
   );
 
 
 })();
-
-
-/* =========================================
-   LOAD SAVED ATTRIBUTION
-========================================= */
-
-(function loadAttribution() {
-
-  const marketing =
-    window.VERIDO_DATA.marketing;
-
-
-  try {
-
-    const firstTouch =
-      JSON.parse(
-        localStorage.getItem(
-          "verido_first_touch"
-        )
-      );
-
-    if (firstTouch) {
-
-      marketing.first_touch_source =
-        firstTouch.source || "";
-
-      marketing.first_touch_medium =
-        firstTouch.medium || "";
-
-      marketing.first_touch_campaign =
-        firstTouch.campaign || "";
-
-    }
-
-
-  } catch (error) {
-
-    console.warn(
-      "Could not load first-touch attribution."
-    );
-
-  }
-
-
-  try {
-
-    const lastTouch =
-      JSON.parse(
-        localStorage.getItem(
-          "verido_last_touch"
-        )
-      );
-
-    if (lastTouch) {
-
-      marketing.last_touch_source =
-        lastTouch.source || "";
-
-      marketing.last_touch_medium =
-        lastTouch.medium || "";
-
-      marketing.last_touch_campaign =
-        lastTouch.campaign || "";
-
-    }
-
-
-  } catch (error) {
-
-    console.warn(
-      "Could not load last-touch attribution."
-    );
-
-  }
-
-})();
-
-
-/* =========================================
-   PUSH INITIAL DATA TO DATA LAYER
-========================================= */
-
-window.dataLayer =
-  window.dataLayer || [];
-
-
-window.dataLayer.push({
-
-  event: "verido_data_initialized",
-
-  verido: window.VERIDO_DATA
-
-});
-
-
-/* =========================================
-   DEBUG
-========================================= */
-
-console.log(
-  "✅ VERIDO data layer configuration loaded."
-);
-
-console.log(
-  "VERIDO DATA:",
-  window.VERIDO_DATA
-);
