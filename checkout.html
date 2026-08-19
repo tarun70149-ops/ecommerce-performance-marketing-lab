@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Checkout | VERIDO</title>
+
+  <meta
+    name="description"
+    content="Secure checkout for your VERIDO order."
+  >
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f6f6f6;
+      color: #171717;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+    }
+
+    /* =========================
+       TOP BAR
+    ========================== */
+
+    .top-bar {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 9px 15px;
+      font-size: 13px;
+    }
+
+    /* =========================
+       CHECKOUT HEADER
+    ========================== */
+
+    .checkout-header {
+      background: white;
+      border-bottom: 1px solid #eee;
+      padding: 20px 6%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .secure-checkout {
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* =========================
+       CHECKOUT CONTAINER
+    ========================== */
+
+    .checkout-container {
+      max-width: 1250px;
+      margin: auto;
+      padding: 55px 6% 90px;
+    }
+
+    .checkout-title {
+      margin-bottom: 35px;
+    }
+
+    .checkout-title span {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #777;
+    }
+
+    .checkout-title h1 {
+      font-size: 42px;
+      margin-top: 10px;
+    }
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1.45fr 0.8fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    /* =========================
+       CARD
+    ========================== */
+
+    .card {
+      background: white;
+      border: 1px solid #e5e5e5;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 19px;
+      margin-bottom: 22px;
+    }
+
+    /* =========================
+       FORM
+    ========================== */
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      outline: none;
+      background: white;
+      font-size: 13px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #111;
+    }
+
+    /* =========================
+       PAYMENT
+    ========================== */
+
+    .payment-options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .payment-option {
+      border: 1px solid #ddd;
+      padding: 16px;
+
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      font-size: 13px;
+    }
+
+    .payment-option input {
+      accent-color: #111;
+    }
+
+    .payment-option.active {
+      border-color: #111;
+    }
+
+    .payment-description {
+      color: #777;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    /* =========================
+       CHECKBOX
+    ========================== */
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: #666;
+      margin-top: 20px;
+    }
+
+    .terms input {
+      margin-top: 2px;
+    }
+
+    /* =========================
+       ORDER SUMMARY
+    ========================== */
+
+    .order-summary {
+      background: white;
+      border: 1px solid #e5e5e5;
+      padding: 25px;
+
+      position: sticky;
+      top: 25px;
+    }
+
+    .order-summary h2 {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .summary-product {
+      display: flex;
+      gap: 12px;
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .summary-product-image {
+      width: 65px;
+      height: 80px;
+      background: #eee;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .summary-product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .summary-product-info {
+      flex: 1;
+    }
+
+    .summary-product-name {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .summary-product-meta {
+      color: #777;
+      font-size: 11px;
+      margin-bottom: 7px;
+    }
+
+    .summary-product-price {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .summary-row span:last-child {
+      font-weight: 600;
+    }
+
+    .discount {
+      color: #218838;
+    }
+
+    .divider {
+      border-top: 1px solid #eee;
+      margin: 20px 0;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    /* =========================
+       PLACE ORDER
+    ========================== */
+
+    .place-order-btn {
+      width: 100%;
+      padding: 17px;
+      background: #111;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .place-order-btn:hover {
+      background: #333;
+    }
+
+    .secure-note {
+      text-align: center;
+      color: #777;
+      font-size: 11px;
+      margin-top: 13px;
+    }
+
+    /* =========================
+       TRUST
+    ========================== */
+
+    .trust {
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .trust div {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    /* =========================
+       SUCCESS MESSAGE
+    ========================== */
+
+    .success-message {
+      display: none;
+      background: #e9f7ef;
+      border: 1px solid #b7e4c7;
+      padding: 20px;
+      margin-bottom: 20px;
+      color: #176b36;
+      font-size: 13px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      background: #111;
+      color: white;
+      padding: 40px 6% 25px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      color: #777;
+      font-size: 12px;
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 900px) {
+
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .order-summary {
+        position: static;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .checkout-title h1 {
+        font-size: 34px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: auto;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .checkout-header {
+        padding: 18px 5%;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
+  <div class="top-bar">
+
+    Free shipping on orders above ₹999 • Secure checkout
+
+  </div>
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="checkout-header">
+
+    <a
+      href="index.html"
+      class="logo">
+
+      VERIDO
+
+    </a>
+
+    <div class="secure-checkout">
+
+      🔒 Secure Checkout
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       CHECKOUT
+  ========================== -->
+
+  <main class="checkout-container">
+
+
+    <div class="checkout-title">
+
+      <span>
+        VERIDO
+      </span>
+
+      <h1>
+        Checkout
+      </h1>
+
+    </div>
+
+
+    <!-- SUCCESS -->
+
+    <div
+      class="success-message"
+      id="successMessage">
+
+      <strong>
+        Order placed successfully!
+      </strong>
+
+      Your demo order has been created.
+
+    </div>
+
+
+    <div class="checkout-layout">
+
+
+      <!-- =========================
+           LEFT SIDE
+      ========================== -->
+
+      <section>
+
+
+        <!-- CUSTOMER INFORMATION -->
+
+        <div class="card">
+
+          <h2>
+            Contact Information
+          </h2>
+
+
+          <div class="form-grid">
+
+
+            <div class="form-group">
+
+              <label>
+                First Name
+              </label>
+
+              <input
+                type="text"
+                id="firstName"
+                placeholder="Tarun"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Last Name
+              </label>
+
+              <input
+                type="text"
+                id="lastName"
+                placeholder="Mehra"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Email Address
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                placeholder="you@example.com"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Phone Number
+              </label>
+
+              <input
+                type="tel"
+                id="phone"
+                placeholder="9876543210"
+                required>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- SHIPPING -->
+
+        <div class="card">
+
+          <h2>
+            Shipping Address
+          </h2>
+
+
+          <div class="form-grid">
+
+
+            <div class="form-group full-width">
+
+              <label>
+                Address
+              </label>
+
+              <input
+                type="text"
+                id="address"
+                placeholder="House / Street / Area"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                City
+              </label>
+
+              <input
+                type="text"
+                id="city"
+                placeholder="Jaipur"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                State
+              </label>
+
+              <select
+                id="state"
+                required>
+
+                <option value="">
+                  Select State
+                </option>
+
+                <option>
+                  Rajasthan
+                </option>
+
+                <option>
+                  Delhi
+                </option>
+
+                <option>
+                  Maharashtra
+                </option>
+
+                <option>
+                  Gujarat
+                </option>
+
+                <option>
+                  Karnataka
+                </option>
+
+                <option>
+                  Uttar Pradesh
+                </option>
+
+                <option>
+                  Haryana
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                PIN Code
+              </label>
+
+              <input
+                type="text"
+                id="pin"
+                placeholder="302001"
+                maxlength="6"
+                required>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PAYMENT -->
+
+        <div class="card">
+
+          <h2>
+            Payment Method
+          </h2>
+
+
+          <div class="payment-options">
+
+
+            <label
+              class="payment-option active">
+
+              <input
+                type="radio"
+                name="payment"
+                value="upi"
+                checked>
+
+              <div>
+
+                <strong>
+                  UPI
+                </strong>
+
+                <div class="payment-description">
+                  Pay using Google Pay, PhonePe or any UPI app.
+                </div>
+
+              </div>
+
+            </label>
+
+
+            <label
+              class="payment-option">
+
+              <input
+                type="radio"
+                name="payment"
+                value="card">
+
+              <div>
+
+                <strong>
+                  Credit / Debit Card
+                </strong>
+
+                <div class="payment-description">
+                  Secure card payment.
+                </div>
+
+              </div>
+
+            </label>
+
+
+            <label
+              class="payment-option">
+
+              <input
+                type="radio"
+                name="payment"
+                value="cod">
+
+              <div>
+
+                <strong>
+                  Cash on Delivery
+                </strong>
+
+                <div class="payment-description">
+                  Pay when your order arrives.
+                </div>
+
+              </div>
+
+            </label>
+
+          </div>
+
+
+          <!-- TERMS -->
+
+          <label class="terms">
+
+            <input
+              type="checkbox"
+              id="terms">
+
+            <span>
+
+              I agree to the
+              <a
+                href="terms.html"
+                style="text-decoration:underline;">
+
+                Terms & Conditions
+
+              </a>
+
+              and
+              <a
+                href="privacy.html"
+                style="text-decoration:underline;">
+
+                Privacy Policy
+
+              </a>.
+
+            </span>
+
+          </label>
+
+        </div>
+
+
+      </section>
+
+
+      <!-- =========================
+           RIGHT SIDE
+      ========================== -->
+
+      <aside class="order-summary">
+
+
+        <h2>
+          Your Order
+        </h2>
+
+
+        <!-- PRODUCT 1 -->
+
+        <div class="summary-product">
+
+          <div class="summary-product-image">
+
+            <img
+              src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=400&q=85"
+              alt="Essential Oversized Tee">
+
+          </div>
+
+
+          <div class="summary-product-info">
+
+            <div class="summary-product-name">
+
+              Essential Oversized Tee
+
+            </div>
+
+            <div class="summary-product-meta">
+
+              Size: M • Qty: 1
+
+            </div>
+
+            <div class="summary-product-price">
+
+              ₹899
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div class="summary-product">
+
+          <div class="summary-product-image">
+
+            <img
+              src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=400&q=85"
+              alt="Classic Everyday Cap">
+
+          </div>
+
+
+          <div class="summary-product-info">
+
+            <div class="summary-product-name">
+
+              Classic Everyday Cap
+
+            </div>
+
+            <div class="summary-product-meta">
+
+              One Size • Qty: 1
+
+            </div>
+
+            <div class="summary-product-price">
+
+              ₹599
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary-row">
+
+          <span>
+            Subtotal
+          </span>
+
+          <span>
+            ₹1,498
+          </span>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Shipping
+          </span>
+
+          <span>
+            FREE
+          </span>
+
+        </div>
+
+
+        <div
+          class="summary-row discount">
+
+          <span>
+            Discount
+          </span>
+
+          <span>
+            ₹0
+          </span>
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <div class="total-row">
+
+          <span>
+            Total
+          </span>
+
+          <span>
+            ₹1,498
+          </span>
+
+        </div>
+
+
+        <!-- PLACE ORDER -->
+
+        <button
+          class="place-order-btn"
+          id="placeOrderBtn">
+
+          Place Order • ₹1,498
+
+        </button>
+
+
+        <div class="secure-note">
+
+          🔒 Your payment information is secure.
+
+        </div>
+
+
+        <!-- TRUST -->
+
+        <div class="trust">
+
+          <div>
+            ✓ Secure checkout
+          </div>
+
+          <div>
+            ✓ Easy 7-day returns
+          </div>
+
+          <div>
+            ✓ Customer support available
+          </div>
+
+        </div>
+
+      </aside>
+
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 VERIDO
+      </span>
+
+      <span>
+        Secure E-commerce Demo
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /*
+     * ============================================
+     * DATALAYER
+     * ============================================
+     */
+
+    window.dataLayer =
+      window.dataLayer || [];
+
+
+    /*
+     * ============================================
+     * ORDER DATA
+     * ============================================
+     */
+
+    const order = {
+
+      transaction_id:
+        "VER-DEMO-" +
+        Date.now(),
+
+      currency:
+        "INR",
+
+      value:
+        1498,
+
+      shipping:
+        0,
+
+      tax:
+        0,
+
+      coupon:
+        "",
+
+      items: [
+
+        {
+
+          item_id:
+            "VER-001",
+
+          item_name:
+            "Essential Oversized Tee",
+
+          item_category:
+            "Apparel",
+
+          item_variant:
+            "M",
+
+          price:
+            899,
+
+          quantity:
+            1
+
+        },
+
+        {
+
+          item_id:
+            "VER-003",
+
+          item_name:
+            "Classic Everyday Cap",
+
+          item_category:
+            "Accessories",
+
+          item_variant:
+            "One Size",
+
+          price:
+            599,
+
+          quantity:
+            1
+
+        }
+
+      ]
+
+    };
+
+
+    /*
+     * ============================================
+     * EVENT HELPER
+     * ============================================
+     */
+
+    function pushEvent(
+      eventName,
+      parameters = {}
+    ) {
+
+      window.dataLayer.push({
+
+        event:
+          eventName,
+
+        ...parameters
+
+      });
+
+
+      console.log(
+        "GTM Event:",
+        eventName,
+        parameters
+      );
+
+    }
+
+
+    /*
+     * ============================================
+     * CHECKOUT PAGE EVENT
+     *
+     * This event tells GA4:
+     * User reached checkout.
+     * ============================================
+     */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        pushEvent(
+          "checkout_page_view",
+          {
+
+            ecommerce: {
+
+              currency:
+                order.currency,
+
+              value:
+                order.value,
+
+              items:
+                order.items
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    /*
+     * ============================================
+     * PAYMENT METHOD
+     * ============================================
+     */
+
+    document
+      .querySelectorAll(
+        'input[name="payment"]'
+      )
+      .forEach(
+        function(radio) {
+
+          radio.addEventListener(
+            "change",
+            function() {
+
+              document
+                .querySelectorAll(
+                  ".payment-option"
+                )
+                .forEach(
+                  option =>
+                    option.classList.remove(
+                      "active"
+                    )
+                );
+
+
+              this
+                .closest(
+                  ".payment-option"
+                )
+                .classList.add(
+                  "active"
+                );
+
+
+              pushEvent(
+                "select_payment_method",
+                {
+
+                  payment_type:
+                    this.value
+
+                }
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * PLACE ORDER
+     *
+     * IMPORTANT:
+     *
+     * Purchase should only fire after
+     * successful order completion.
+     * ============================================
+     */
+
+    document
+      .getElementById(
+        "placeOrderBtn"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+
+          /*
+           * FORM VALIDATION
+           */
+
+          const firstName =
+            document
+              .getElementById(
+                "firstName"
+              )
+              .value
+              .trim();
+
+
+          const lastName =
+            document
+              .getElementById(
+                "lastName"
+              )
+              .value
+              .trim();
+
+
+          const email =
+            document
+              .getElementById(
+                "email"
+              )
+              .value
+              .trim();
+
+
+          const phone =
+            document
+              .getElementById(
+                "phone"
+              )
+              .value
+              .trim();
+
+
+          const address =
+            document
+              .getElementById(
+                "address"
+              )
+              .value
+              .trim();
+
+
+          const city =
+            document
+              .getElementById(
+                "city"
+              )
+              .value
+              .trim();
+
+
+          const state =
+            document
+              .getElementById(
+                "state"
+              )
+              .value;
+
+
+          const pin =
+            document
+              .getElementById(
+                "pin"
+              )
+              .value
+              .trim();
+
+
+          const terms =
+            document
+              .getElementById(
+                "terms"
+              )
+              .checked;
+
+
+          /*
+           * VALIDATION
+           */
+
+          if (
+            !firstName ||
+            !lastName ||
+            !email ||
+            !phone ||
+            !address ||
+            !city ||
+            !state ||
+            !pin
+          ) {
+
+            alert(
+              "Please complete all required fields."
+            );
+
+            return;
+
+          }
+
+
+          if (
+            !/^\d{10}$/.test(
+              phone
+            )
+          ) {
+
+            alert(
+              "Please enter a valid 10-digit phone number."
+            );
+
+            return;
+
+          }
+
+
+          if (
+            !/^\d{6}$/.test(
+              pin
+            )
+          ) {
+
+            alert(
+              "Please enter a valid 6-digit PIN code."
+            );
+
+            return;
+
+          }
+
+
+          if (!terms) {
+
+            alert(
+              "Please accept the Terms & Conditions."
+            );
+
+            return;
+
+          }
+
+
+          /*
+           * GET PAYMENT METHOD
+           */
+
+          const payment =
+            document
+              .querySelector(
+                'input[name="payment"]:checked'
+              )
+              .value;
+
+
+          /*
+           * GENERATE UNIQUE TRANSACTION ID
+           */
+
+          order.transaction_id =
+            "VER-" +
+            Date.now();
+
+
+          /*
+           * ========================================
+           * PURCHASE EVENT
+           * ========================================
+           *
+           * This is our PRIMARY E-COMMERCE
+           * CONVERSION EVENT.
+           *
+           * GA4 receives:
+           *
+           * transaction_id
+           * value
+           * currency
+           * shipping
+           * tax
+           * items
+           *
+           * ========================================
+           */
+
+          pushEvent(
+            "purchase",
+            {
+
+              ecommerce: {
+
+                transaction_id:
+                  order.transaction_id,
+
+                value:
+                  order.value,
+
+                currency:
+                  order.currency,
+
+                shipping:
+                  order.shipping,
+
+                tax:
+                  order.tax,
+
+                coupon:
+                  order.coupon,
+
+                payment_type:
+                  payment,
+
+                items:
+                  order.items
+
+              }
+
+            }
+          );
+
+
+          /*
+           * ========================================
+           * SUCCESS STATE
+           * ========================================
+           */
+
+          document
+            .getElementById(
+              "successMessage"
+            )
+            .style.display =
+            "block";
+
+
+          /*
+           * CHANGE BUTTON
+           */
+
+          this.innerText =
+            "Order Placed ✓";
+
+
+          this.disabled =
+            true;
+
+
+          this.style.background =
+            "#218838";
+
+
+          /*
+           * CONFIRMATION EVENT
+           */
+
+          pushEvent(
+            "order_confirmation_view",
+            {
+
+              transaction_id:
+                order.transaction_id
+
+            }
+          );
+
+
+          /*
+           * SCROLL TO SUCCESS
+           */
+
+          window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+          });
+
+        }
+      );
+
+
+  </script>
+
+</body>
+
+</html>
