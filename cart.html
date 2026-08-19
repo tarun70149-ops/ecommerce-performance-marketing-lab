@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Shopping Cart | VERIDO</title>
+
+  <meta
+    name="description"
+    content="Review your VERIDO shopping cart before checkout."
+  >
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #171717;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+    }
+
+    /* =========================
+       TOP BAR
+    ========================== */
+
+    .top-bar {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 9px 15px;
+      font-size: 13px;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .navbar {
+      background: white;
+      border-bottom: 1px solid #eee;
+      padding: 18px 6%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .cart-icon {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    /* =========================
+       PAGE HEADER
+    ========================== */
+
+    .page-header {
+      background: #eaeaea;
+      text-align: center;
+      padding: 65px 20px;
+    }
+
+    .page-header span {
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .page-header h1 {
+      font-size: 45px;
+      margin-top: 12px;
+    }
+
+    /* =========================
+       CART CONTAINER
+    ========================== */
+
+    .cart-container {
+      max-width: 1250px;
+      margin: auto;
+      padding: 60px 6% 90px;
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1.6fr 0.8fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    /* =========================
+       CART ITEMS
+    ========================== */
+
+    .cart-items {
+      background: white;
+      border: 1px solid #eee;
+    }
+
+    .cart-header {
+      padding: 20px 22px;
+      border-bottom: 1px solid #eee;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-header h2 {
+      font-size: 18px;
+    }
+
+    .cart-header span {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .cart-item {
+      padding: 22px;
+      border-bottom: 1px solid #eee;
+
+      display: grid;
+      grid-template-columns: 115px 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-image {
+      width: 115px;
+      height: 140px;
+      background: #eee;
+      overflow: hidden;
+    }
+
+    .cart-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .item-category {
+      font-size: 10px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .item-name {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .item-meta {
+      color: #777;
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    .item-price {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .item-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .quantity-control {
+      display: flex;
+      border: 1px solid #ccc;
+      background: white;
+    }
+
+    .quantity-control button {
+      width: 34px;
+      height: 34px;
+      background: white;
+      font-size: 16px;
+    }
+
+    .quantity-control input {
+      width: 42px;
+      border: none;
+      outline: none;
+      text-align: center;
+    }
+
+    .remove-btn {
+      background: transparent;
+      color: #777;
+      text-decoration: underline;
+      font-size: 12px;
+    }
+
+    .remove-btn:hover {
+      color: #111;
+    }
+
+    .item-total {
+      font-size: 16px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* =========================
+       EMPTY CART
+    ========================== */
+
+    .empty-cart {
+      display: none;
+      background: white;
+      padding: 80px 30px;
+      text-align: center;
+      border: 1px solid #eee;
+    }
+
+    .empty-cart .icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .empty-cart h2 {
+      margin-bottom: 8px;
+    }
+
+    .empty-cart p {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    /* =========================
+       CART ACTIONS
+    ========================== */
+
+    .cart-actions {
+      padding: 20px 22px;
+      background: white;
+      border-top: 1px solid #eee;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .continue-btn {
+      padding: 13px 20px;
+      background: #f1f1f1;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .clear-btn {
+      padding: 13px 20px;
+      background: white;
+      border: 1px solid #ddd;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* =========================
+       SUMMARY
+    ========================== */
+
+    .summary {
+      background: white;
+      border: 1px solid #eee;
+      padding: 25px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .summary h2 {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .summary-row span:last-child {
+      font-weight: 600;
+    }
+
+    .discount-row {
+      color: #218838;
+    }
+
+    .summary-divider {
+      border-top: 1px solid #eee;
+      margin: 20px 0;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 16px;
+      background: #111;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .checkout-btn:hover {
+      background: #333;
+    }
+
+    .secure-note {
+      text-align: center;
+      color: #777;
+      font-size: 11px;
+      margin-top: 14px;
+    }
+
+    /* =========================
+       COUPON
+    ========================== */
+
+    .coupon-box {
+      margin-top: 25px;
+      padding-top: 25px;
+      border-top: 1px solid #eee;
+    }
+
+    .coupon-box label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .coupon-form {
+      display: flex;
+    }
+
+    .coupon-form input {
+      flex: 1;
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid #ddd;
+      outline: none;
+      text-transform: uppercase;
+    }
+
+    .coupon-form button {
+      padding: 12px 15px;
+      background: #111;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .coupon-message {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #218838;
+      display: none;
+    }
+
+    /* =========================
+       BENEFITS
+    ========================== */
+
+    .cart-benefits {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .benefit {
+      background: white;
+      border: 1px solid #eee;
+      padding: 18px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .benefit span {
+      color: #777;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      background: #111;
+      color: white;
+      padding: 55px 6% 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 45px;
+    }
+
+    footer h3 {
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    footer h4 {
+      margin-bottom: 14px;
+    }
+
+    footer p,
+    footer li {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 8px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      color: #777;
+      font-size: 12px;
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 900px) {
+
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        position: static;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .page-header h1 {
+        font-size: 36px;
+      }
+
+      .cart-item {
+        grid-template-columns: 80px 1fr;
+      }
+
+      .cart-image {
+        width: 80px;
+        height: 105px;
+      }
+
+      .item-total {
+        grid-column: 2;
+      }
+
+      .cart-actions {
+        flex-direction: column;
+      }
+
+      .cart-benefits {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
+  <div class="top-bar">
+
+    Free shipping on orders above ₹999 • Easy 7-day returns
+
+  </div>
+
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
+  <header class="navbar">
+
+    <a
+      href="index.html"
+      class="logo"
+      data-event="logo_click">
+
+      VERIDO
+
+    </a>
+
+
+    <nav>
+
+      <ul class="nav-links">
+
+        <li>
+          <a href="index.html">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="shop.html"
+            data-event="shop_navigation">
+
+            Shop
+
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="offers.html"
+            data-event="offers_navigation">
+
+            Offers
+
+          </a>
+        </li>
+
+        <li>
+          <a href="about.html">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a href="contact.html">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+
+    <div class="nav-actions">
+
+      <a
+        href="cart.html"
+        class="cart-icon"
+        data-event="cart_click">
+
+        🛒 Cart
+
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       PAGE HEADER
+  ========================== -->
+
+  <section class="page-header">
+
+    <span>
+      VERIDO
+    </span>
+
+    <h1>
+      Your Cart
+    </h1>
+
+  </section>
+
+
+  <!-- =========================
+       CART
+  ========================== -->
+
+  <main class="cart-container">
+
+
+    <div
+      class="cart-layout"
+      id="cartLayout">
+
+
+      <!-- =========================
+           CART ITEMS
+      ========================== -->
+
+      <section>
+
+        <div
+          class="cart-items"
+          id="cartItems">
+
+
+          <div class="cart-header">
+
+            <h2>
+              Shopping Bag
+            </h2>
+
+            <span id="itemCount">
+              2 Items
+            </span>
+
+          </div>
+
+
+          <!-- PRODUCT 1 -->
+
+          <article
+            class="cart-item"
+            data-product-id="VER-001"
+            data-product-name="Essential Oversized Tee"
+            data-product-price="899"
+            data-quantity="1">
+
+
+            <div class="cart-image">
+
+              <img
+                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500&q=85"
+                alt="Essential Oversized Tee">
+
+            </div>
+
+
+            <div>
+
+              <div class="item-category">
+                Apparel
+              </div>
+
+              <div class="item-name">
+                Essential Oversized Tee
+              </div>
+
+              <div class="item-meta">
+                Size: M • Black
+              </div>
+
+              <div class="item-price">
+                ₹899
+              </div>
+
+
+              <div class="item-actions">
+
+                <div class="quantity-control">
+
+                  <button
+                    class="minus-btn">
+                    −
+                  </button>
+
+                  <input
+                    class="quantity-input"
+                    type="number"
+                    value="1"
+                    min="1"
+                    max="10">
+
+                  <button
+                    class="plus-btn">
+                    +
+                  </button>
+
+                </div>
+
+
+                <button
+                  class="remove-btn">
+
+                  Remove
+
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="item-total">
+
+              ₹<span class="line-total">
+                899
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <!-- PRODUCT 2 -->
+
+          <article
+            class="cart-item"
+            data-product-id="VER-003"
+            data-product-name="Classic Everyday Cap"
+            data-product-price="599"
+            data-quantity="1">
+
+
+            <div class="cart-image">
+
+              <img
+                src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=500&q=85"
+                alt="Classic Everyday Cap">
+
+            </div>
+
+
+            <div>
+
+              <div class="item-category">
+                Accessories
+              </div>
+
+              <div class="item-name">
+                Classic Everyday Cap
+              </div>
+
+              <div class="item-meta">
+                One Size • Black
+              </div>
+
+              <div class="item-price">
+                ₹599
+              </div>
+
+
+              <div class="item-actions">
+
+                <div class="quantity-control">
+
+                  <button
+                    class="minus-btn">
+                    −
+                  </button>
+
+                  <input
+                    class="quantity-input"
+                    type="number"
+                    value="1"
+                    min="1"
+                    max="10">
+
+                  <button
+                    class="plus-btn">
+                    +
+                  </button>
+
+                </div>
+
+
+                <button
+                  class="remove-btn">
+
+                  Remove
+
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="item-total">
+
+              ₹<span class="line-total">
+                599
+              </span>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+
+        <!-- EMPTY CART -->
+
+        <div
+          class="empty-cart"
+          id="emptyCart">
+
+          <div class="icon">
+            🛒
+          </div>
+
+          <h2>
+            Your cart is empty
+          </h2>
+
+          <p>
+            Looks like you haven't added
+            anything yet.
+          </p>
+
+          <a
+            href="shop.html"
+            class="checkout-btn"
+            style="display:inline-block;width:auto;">
+
+            Start Shopping
+
+          </a>
+
+        </div>
+
+
+        <!-- CART ACTIONS -->
+
+        <div
+          class="cart-actions"
+          id="cartActions">
+
+          <a
+            href="shop.html"
+            class="continue-btn"
+            data-event="continue_shopping">
+
+            ← Continue Shopping
+
+          </a>
+
+
+          <button
+            class="clear-btn"
+            id="clearCartBtn">
+
+            Clear Cart
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           SUMMARY
+      ========================== -->
+
+      <aside
+        class="summary"
+        id="summary">
+
+
+        <h2>
+          Order Summary
+        </h2>
+
+
+        <div class="summary-row">
+
+          <span>
+            Subtotal
+          </span>
+
+          <span id="subtotal">
+            ₹1,498
+          </span>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Shipping
+          </span>
+
+          <span id="shipping">
+            ₹0
+          </span>
+
+        </div>
+
+
+        <div
+          class="summary-row discount-row">
+
+          <span>
+            Discount
+          </span>
+
+          <span id="discount">
+            -₹0
+          </span>
+
+        </div>
+
+
+        <div class="summary-divider"></div>
+
+
+        <div class="total-row">
+
+          <span>
+            Total
+          </span>
+
+          <span id="total">
+            ₹1,498
+          </span>
+
+        </div>
+
+
+        <!-- CHECKOUT -->
+
+        <button
+          class="checkout-btn"
+          id="checkoutBtn">
+
+          Proceed to Checkout
+
+        </button>
+
+
+        <div class="secure-note">
+
+          🔒 Secure & encrypted checkout
+
+        </div>
+
+
+        <!-- COUPON -->
+
+        <div class="coupon-box">
+
+          <label>
+            Have a coupon?
+          </label>
+
+
+          <div class="coupon-form">
+
+            <input
+              type="text"
+              id="couponInput"
+              placeholder="ENTER CODE">
+
+            <button
+              id="couponBtn">
+
+              Apply
+
+            </button>
+
+          </div>
+
+
+          <div
+            class="coupon-message"
+            id="couponMessage">
+
+            Coupon applied successfully.
+
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+
+    <!-- =========================
+         BENEFITS
+    ========================== -->
+
+    <div class="cart-benefits">
+
+      <div class="benefit">
+
+        <strong>
+          🚚 Fast Delivery
+        </strong>
+
+        <span>
+          Delivery across India
+        </span>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <strong>
+          ↩ Easy Returns
+        </strong>
+
+        <span>
+          7-day return policy
+        </span>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <strong>
+          🔒 Secure Payment
+        </strong>
+
+        <span>
+          Safe checkout process
+        </span>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="footer-grid">
+
+
+      <div>
+
+        <h3>
+          VERIDO
+        </h3>
+
+        <p>
+          Premium everyday essentials
+          designed for modern lifestyles.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Shop
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="shop.html">
+              All Products
+            </a>
+          </li>
+
+          <li>
+            <a href="shop.html?category=apparel">
+              Apparel
+            </a>
+          </li>
+
+          <li>
+            <a href="shop.html?category=footwear">
+              Footwear
+            </a>
+          </li>
+
+          <li>
+            <a href="shop.html?category=accessories">
+              Accessories
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Support
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="contact.html">
+              Contact
+            </a>
+          </li>
+
+          <li>
+            <a href="faq.html">
+              FAQ
+            </a>
+          </li>
+
+          <li>
+            <a href="shipping.html">
+              Shipping
+            </a>
+          </li>
+
+          <li>
+            <a href="returns.html">
+              Returns
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Company
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="about.html">
+              About
+            </a>
+          </li>
+
+          <li>
+            <a href="privacy.html">
+              Privacy
+            </a>
+          </li>
+
+          <li>
+            <a href="terms.html">
+              Terms
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 VERIDO
+      </span>
+
+      <span>
+        Performance Marketing Lab
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    window.dataLayer =
+      window.dataLayer || [];
+
+
+    /*
+     * ============================================
+     * CART EVENT HELPER
+     * ============================================
+     */
+
+    function pushEvent(
+      eventName,
+      parameters = {}
+    ) {
+
+      window.dataLayer.push({
+
+        event: eventName,
+
+        ...parameters
+
+      });
+
+      console.log(
+        "GTM Event:",
+        eventName,
+        parameters
+      );
+
+    }
+
+
+    /*
+     * ============================================
+     * GET CART ITEMS
+     * ============================================
+     */
+
+    function getCartItems() {
+
+      const cards =
+        document.querySelectorAll(
+          ".cart-item"
+        );
+
+
+      const items = [];
+
+
+      cards.forEach(
+        function(card) {
+
+          const quantity =
+            Number(
+              card.querySelector(
+                ".quantity-input"
+              ).value
+            ) || 1;
+
+
+          items.push({
+
+            item_id:
+              card.dataset.productId,
+
+            item_name:
+              card.dataset.productName,
+
+            price:
+              Number(
+                card.dataset.productPrice
+              ),
+
+            quantity:
+              quantity
+
+          });
+
+        }
+      );
+
+
+      return items;
+
+    }
+
+
+    /*
+     * ============================================
+     * CALCULATE CART
+     * ============================================
+     */
+
+    function calculateCart() {
+
+      const cards =
+        document.querySelectorAll(
+          ".cart-item"
+        );
+
+
+      let subtotal = 0;
+
+      let totalQuantity = 0;
+
+
+      cards.forEach(
+        function(card) {
+
+          const price =
+            Number(
+              card.dataset.productPrice
+            );
+
+
+          const quantity =
+            Number(
+              card.querySelector(
+                ".quantity-input"
+              ).value
+            ) || 1;
+
+
+          const lineTotal =
+            price * quantity;
+
+
+          card.querySelector(
+            ".line-total"
+          ).innerText =
+            lineTotal.toLocaleString(
+              "en-IN"
+            );
+
+
+          subtotal +=
+            lineTotal;
+
+
+          totalQuantity +=
+            quantity;
+
+        }
+      );
+
+
+      const shipping =
+        subtotal >= 999 || subtotal === 0
+          ? 0
+          : 99;
+
+
+      const discount =
+        Number(
+          window.currentDiscount || 0
+        );
+
+
+      const total =
+        Math.max(
+          0,
+          subtotal +
+          shipping -
+          discount
+        );
+
+
+      document.getElementById(
+        "subtotal"
+      ).innerText =
+        "₹" +
+        subtotal.toLocaleString(
+          "en-IN"
+        );
+
+
+      document.getElementById(
+        "shipping"
+      ).innerText =
+        shipping === 0
+          ? "FREE"
+          : "₹" +
+            shipping.toLocaleString(
+              "en-IN"
+            );
+
+
+      document.getElementById(
+        "discount"
+      ).innerText =
+        "-₹" +
+        discount.toLocaleString(
+          "en-IN"
+        );
+
+
+      document.getElementById(
+        "total"
+      ).innerText =
+        "₹" +
+        total.toLocaleString(
+          "en-IN"
+        );
+
+
+      document.getElementById(
+        "itemCount"
+      ).innerText =
+        totalQuantity +
+        (
+          totalQuantity === 1
+            ? " Item"
+            : " Items"
+        );
+
+
+      return {
+
+        subtotal:
+          subtotal,
+
+        shipping:
+          shipping,
+
+        discount:
+          discount,
+
+        total:
+          total,
+
+        totalQuantity:
+          totalQuantity
+
+      };
+
+    }
+
+
+    /*
+     * ============================================
+     * CART VIEW EVENT
+     *
+     * GA4:
+     * view_cart
+     * ============================================
+     */
+
+    function trackViewCart() {
+
+      const cart =
+        calculateCart();
+
+
+      const items =
+        getCartItems();
+
+
+      if (!items.length) {
+        return;
+      }
+
+
+      pushEvent(
+        "view_cart",
+        {
+
+          ecommerce: {
+
+            currency:
+              "INR",
+
+            value:
+              cart.total,
+
+            items:
+              items
+
+          }
+
+        }
+      );
+
+    }
+
+
+    /*
+     * ============================================
+     * QUANTITY UPDATE
+     * ============================================
+     */
+
+    document
+      .querySelectorAll(
+        ".cart-item"
+      )
+      .forEach(
+        function(card) {
+
+          const minus =
+            card.querySelector(
+              ".minus-btn"
+            );
+
+
+          const plus =
+            card.querySelector(
+              ".plus-btn"
+            );
+
+
+          const input =
+            card.querySelector(
+              ".quantity-input"
+            );
+
+
+          function updateQuantity() {
+
+            let quantity =
+              Number(
+                input.value
+              ) || 1;
+
+
+            if (quantity < 1) {
+              quantity = 1;
+            }
+
+
+            if (quantity > 10) {
+              quantity = 10;
+            }
+
+
+            input.value =
+              quantity;
+
+
+            calculateCart();
+
+
+            pushEvent(
+              "change_cart_quantity",
+              {
+
+                item_id:
+                  card.dataset.productId,
+
+                item_name:
+                  card.dataset.productName,
+
+                quantity:
+                  quantity
+
+              }
+            );
+
+          }
+
+
+          minus.addEventListener(
+            "click",
+            function() {
+
+              let quantity =
+                Number(
+                  input.value
+                ) || 1;
+
+
+              if (quantity > 1) {
+
+                input.value =
+                  quantity - 1;
+
+                updateQuantity();
+
+              }
+
+            }
+          );
+
+
+          plus.addEventListener(
+            "click",
+            function() {
+
+              let quantity =
+                Number(
+                  input.value
+                ) || 1;
+
+
+              if (quantity < 10) {
+
+                input.value =
+                  quantity + 1;
+
+                updateQuantity();
+
+              }
+
+            }
+          );
+
+
+          input.addEventListener(
+            "change",
+            updateQuantity
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * REMOVE ITEM
+     * ============================================
+     */
+
+    document
+      .querySelectorAll(
+        ".remove-btn"
+      )
+      .forEach(
+        function(button) {
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              const card =
+                this.closest(
+                  ".cart-item"
+                );
+
+
+              const item = {
+
+                item_id:
+                  card.dataset.productId,
+
+                item_name:
+                  card.dataset.productName,
+
+                price:
+                  Number(
+                    card.dataset.productPrice
+                  ),
+
+                quantity:
+                  Number(
+                    card.querySelector(
+                      ".quantity-input"
+                    ).value
+                  ) || 1
+
+              };
+
+
+              pushEvent(
+                "remove_from_cart",
+                {
+
+                  ecommerce: {
+
+                    currency:
+                      "INR",
+
+                    value:
+                      item.price *
+                      item.quantity,
+
+                    items: [
+                      item
+                    ]
+
+                  }
+
+                }
+              );
+
+
+              card.remove();
+
+
+              calculateCart();
+
+
+              checkEmptyCart();
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * EMPTY CART CHECK
+     * ============================================
+     */
+
+    function checkEmptyCart() {
+
+      const items =
+        document.querySelectorAll(
+          ".cart-item"
+        );
+
+
+      const empty =
+        document.getElementById(
+          "emptyCart"
+        );
+
+
+      const layout =
+        document.getElementById(
+          "cartLayout"
+        );
+
+
+      if (items.length === 0) {
+
+        document.getElementById(
+          "cartItems"
+        ).style.display =
+          "none";
+
+
+        document.getElementById(
+          "cartActions"
+        ).style.display =
+          "none";
+
+
+        document.getElementById(
+          "summary"
+        ).style.display =
+          "none";
+
+
+        empty.style.display =
+          "block";
+
+      }
+
+    }
+
+
+    /*
+     * ============================================
+     * CLEAR CART
+     * ============================================
+     */
+
+    document
+      .getElementById(
+        "clearCartBtn"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          const items =
+            getCartItems();
+
+
+          if (!items.length) {
+            return;
+          }
+
+
+          pushEvent(
+            "clear_cart",
+            {
+
+              ecommerce: {
+
+                currency:
+                  "INR",
+
+                items:
+                  items
+
+              }
+
+            }
+          );
+
+
+          document
+            .querySelectorAll(
+              ".cart-item"
+            )
+            .forEach(
+              item =>
+                item.remove()
+            );
+
+
+          calculateCart();
+
+
+          checkEmptyCart();
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * COUPON
+     * ============================================
+     */
+
+    window.currentDiscount = 0;
+
+
+    document
+      .getElementById(
+        "couponBtn"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          const input =
+            document.getElementById(
+              "couponInput"
+            );
+
+
+          const code =
+            input.value
+              .trim()
+              .toUpperCase();
+
+
+          if (
+            code === "VERIDO15"
+          ) {
+
+            const cart =
+              calculateCart();
+
+
+            window.currentDiscount =
+              Math.round(
+                cart.subtotal * 0.15
+              );
+
+
+            calculateCart();
+
+
+            document.getElementById(
+              "couponMessage"
+            ).style.display =
+              "block";
+
+
+            pushEvent(
+              "apply_promotion",
+              {
+
+                promotion_id:
+                  "VERIDO15",
+
+                promotion_name:
+                  "15% First Order Discount"
+
+              }
+            );
+
+          } else {
+
+            alert(
+              "Invalid coupon. Try VERIDO15."
+            );
+
+          }
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * BEGIN CHECKOUT
+     * ============================================
+     */
+
+    document
+      .getElementById(
+        "checkoutBtn"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          const cart =
+            calculateCart();
+
+
+          const items =
+            getCartItems();
+
+
+          if (!items.length) {
+
+            alert(
+              "Your cart is empty."
+            );
+
+            return;
+
+          }
+
+
+          /*
+           * GA4 E-COMMERCE EVENT
+           */
+
+          pushEvent(
+            "begin_checkout",
+            {
+
+              ecommerce: {
+
+                currency:
+                  "INR",
+
+                value:
+                  cart.total,
+
+                coupon:
+                  document
+                    .getElementById(
+                      "couponInput"
+                    )
+                    .value
+                    .trim()
+                    .toUpperCase(),
+
+                items:
+                  items
+
+              }
+
+            }
+          );
+
+
+          /*
+           * Move to checkout.
+           */
+
+          window.location.href =
+            "checkout.html";
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * GENERIC DATA EVENT TRACKING
+     * ============================================
+     */
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+        const element =
+          event.target.closest(
+            "[data-event]"
+          );
+
+
+        if (!element) {
+          return;
+        }
+
+
+        const eventName =
+          element.getAttribute(
+            "data-event"
+          );
+
+
+        pushEvent(
+          eventName
+        );
+
+      }
+    );
+
+
+    /*
+     * ============================================
+     * INITIAL CART VIEW
+     * ============================================
+     */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        calculateCart();
+
+        trackViewCart();
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>
