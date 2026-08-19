@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>FAQ | VERIDO</title>
+
+  <meta
+    name="description"
+    content="Frequently asked questions about VERIDO products, orders, shipping, returns and payments."
+  >
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #171717;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+    }
+
+    /* =========================
+       TOP BAR
+    ========================== */
+
+    .top-bar {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 9px 15px;
+      font-size: 13px;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .navbar {
+      background: white;
+      border-bottom: 1px solid #eee;
+      padding: 18px 6%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      background: #e9e9e9;
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    .hero span {
+      font-size: 11px;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin: 14px 0;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #666;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       CONTAINER
+    ========================== */
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 60px 6% 90px;
+    }
+
+    /* =========================
+       SEARCH
+    ========================== */
+
+    .faq-search {
+      background: white;
+      border: 1px solid #eee;
+      padding: 20px;
+      margin-bottom: 35px;
+    }
+
+    .faq-search input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .faq-search input:focus {
+      border-color: #111;
+    }
+
+    /* =========================
+       CATEGORY
+    ========================== */
+
+    .category {
+      margin-bottom: 45px;
+    }
+
+    .category-title {
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    /* =========================
+       FAQ ITEM
+    ========================== */
+
+    .faq-item {
+      background: white;
+      border: 1px solid #eee;
+      margin-bottom: 10px;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: white;
+
+      padding: 20px;
+
+      text-align: left;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .faq-question:hover {
+      background: #fafafa;
+    }
+
+    .faq-icon {
+      font-size: 18px;
+      transition: transform .2s ease;
+    }
+
+    .faq-answer {
+      display: none;
+
+      padding: 0 20px 20px;
+
+      color: #777;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    /* =========================
+       NO RESULTS
+    ========================== */
+
+    .no-results {
+      display: none;
+
+      background: white;
+      border: 1px solid #eee;
+
+      padding: 35px;
+
+      text-align: center;
+
+      color: #777;
+
+      font-size: 13px;
+    }
+
+    /* =========================
+       CTA
+    ========================== */
+
+    .contact-cta {
+      background: #111;
+      color: white;
+
+      text-align: center;
+
+      padding: 45px 25px;
+
+      margin-top: 25px;
+    }
+
+    .contact-cta h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .contact-cta p {
+      color: #aaa;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .cta-btn {
+      padding: 13px 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .primary {
+      background: white;
+      color: #111;
+    }
+
+    .secondary {
+      border: 1px solid #555;
+      color: white;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      background: #111;
+      color: white;
+      padding: 45px 6% 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    footer h3 {
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    footer h4 {
+      margin-bottom: 14px;
+    }
+
+    footer p,
+    footer li {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 8px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+
+      color: #777;
+      font-size: 12px;
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .cta-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
+  <div class="top-bar">
+
+    Need more help? Contact our support team.
+
+  </div>
+
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
+  <header class="navbar">
+
+    <a
+      href="index.html"
+      class="logo"
+      data-event="logo_click">
+
+      VERIDO
+
+    </a>
+
+
+    <nav>
+
+      <ul class="nav-links">
+
+        <li>
+          <a href="index.html">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="shop.html"
+            data-event="shop_navigation">
+
+            Shop
+
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="offers.html"
+            data-event="offers_navigation">
+
+            Offers
+
+          </a>
+        </li>
+
+        <li>
+          <a href="about.html">
+            About
+
+          </a>
+        </li>
+
+        <li>
+          <a href="contact.html">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+
+    <div class="nav-actions">
+
+      <a
+        href="cart.html"
+        data-event="cart_click">
+
+        🛒 Cart
+
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero">
+
+    <span>
+      VERIDO SUPPORT
+    </span>
+
+    <h1>
+      Frequently Asked Questions
+    </h1>
+
+    <p>
+
+      Find quick answers about products,
+      orders, payments, shipping and returns.
+
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main class="container">
+
+
+    <!-- =========================
+         SEARCH
+    ========================== -->
+
+    <div class="faq-search">
+
+      <input
+        type="search"
+        id="faqSearch"
+        placeholder="Search your question...">
+
+    </div>
+
+
+    <!-- =========================
+         NO RESULTS
+    ========================== -->
+
+    <div
+      class="no-results"
+      id="noResults">
+
+      No matching questions found.
+
+      <br><br>
+
+      Try another search or contact our support team.
+
+    </div>
+
+
+    <!-- =========================
+         SHOPPING
+    ========================== -->
+
+    <section
+      class="category"
+      data-category="shopping">
+
+
+      <h2 class="category-title">
+        Shopping & Products
+      </h2>
+
+
+      <!-- FAQ 1 -->
+
+      <div
+        class="faq-item"
+        data-keywords="products product sizes size apparel">
+
+        <button
+          class="faq-question">
+
+          <span>
+            What products does VERIDO sell?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          VERIDO offers everyday apparel,
+          footwear and accessories designed
+          for modern lifestyles.
+
+        </div>
+
+      </div>
+
+
+      <!-- FAQ 2 -->
+
+      <div
+        class="faq-item"
+        data-keywords="size sizing clothes apparel">
+
+        <button
+          class="faq-question">
+
+          <span>
+            How do I choose the right size?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          Check the size information available
+          on the relevant product page before
+          adding the item to your cart.
+
+        </div>
+
+      </div>
+
+
+      <!-- FAQ 3 -->
+
+      <div
+        class="faq-item"
+        data-keywords="product quality materials">
+
+        <button
+          class="faq-question">
+
+          <span>
+            How do you maintain product quality?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          We focus on practical design,
+          reliable materials and a consistent
+          customer experience.
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         ORDERS
+    ========================== -->
+
+    <section
+      class="category"
+      data-category="orders">
+
+
+      <h2 class="category-title">
+        Orders
+      </h2>
+
+
+      <!-- FAQ 4 -->
+
+      <div
+        class="faq-item"
+        data-keywords="order track tracking status">
+
+        <button
+          class="faq-question">
+
+          <span>
+            How can I track my order?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          Contact our support team with your
+          order ID and we'll help you check
+          your order status.
+
+        </div>
+
+      </div>
+
+
+      <!-- FAQ 5 -->
+
+      <div
+        class="faq-item"
+        data-keywords="change cancel order">
+
+        <button
+          class="faq-question">
+
+          <span>
+            Can I change or cancel my order?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          Contact support as soon as possible.
+          We'll check whether the order can
+          still be changed or cancelled.
+
+        </div>
+
+      </div>
+
+
+      <!-- FAQ 6 -->
+
+      <div
+        class="faq-item"
+        data-keywords="payment online card upi cash">
+
+        <button
+          class="faq-question">
+
+          <span>
+            What payment methods are available?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          The demo checkout supports UPI,
+          credit/debit cards and cash on delivery.
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         SHIPPING
+    ========================== -->
+
+    <section
+      class="category"
+      data-category="shipping">
+
+
+      <h2 class="category-title">
+        Shipping & Returns
+      </h2>
+
+
+      <!-- FAQ 7 -->
+
+      <div
+        class="faq-item"
+        data-keywords="shipping delivery delivery time">
+
+        <button
+          class="faq-question">
+
+          <span>
+            How long does delivery take?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          Standard delivery for this demo
+          project is estimated at 3–5 business days.
+
+        </div>
+
+      </div>
+
+
+      <!-- FAQ 8 -->
+
+      <div
+        class="faq-item"
+        data-keywords="return refund exchange">
+
+        <button
+          class="faq-question">
+
+          <span>
+            What is the return policy?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          Eligible products can be returned
+          within 7 days according to the
+          applicable return policy.
+
+        </div>
+
+      </div>
+
+
+      <!-- FAQ 9 -->
+
+      <div
+        class="faq-item"
+        data-keywords="shipping free delivery charges">
+
+        <button
+          class="faq-question">
+
+          <span>
+            Is shipping free?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          Free shipping is available on
+          eligible orders above ₹999.
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="contact-cta">
+
+
+      <h2>
+        Still Have Questions?
+      </h2>
+
+
+      <p>
+
+        Our support team can help you
+        with products, orders and delivery.
+
+      </p>
+
+
+      <div class="cta-buttons">
+
+
+        <a
+          href="contact.html"
+          class="cta-btn primary"
+          id="faqContactCta">
+
+          Contact Support
+
+        </a>
+
+
+        <a
+          href="shop.html"
+          class="cta-btn secondary"
+          id="faqShopCta">
+
+          Continue Shopping
+
+        </a>
+
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+
+    <div class="footer-grid">
+
+
+      <div>
+
+        <h3>
+          VERIDO
+        </h3>
+
+        <p>
+
+          Premium everyday essentials
+          designed for modern lifestyles.
+
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Shop
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="shop.html">
+              All Products
+            </a>
+          </li>
+
+          <li>
+            <a href="offers.html">
+              Offers
+            </a>
+          </li>
+
+          <li>
+            <a href="cart.html">
+              Cart
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Support
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="contact.html">
+              Contact
+            </a>
+          </li>
+
+          <li>
+            <a href="faq.html">
+              FAQ
+            </a>
+          </li>
+
+          <li>
+            <a href="shipping.html">
+              Shipping
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Company
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="about.html">
+              About
+            </a>
+          </li>
+
+          <li>
+            <a href="privacy.html">
+              Privacy
+            </a>
+          </li>
+
+          <li>
+            <a href="terms.html">
+              Terms
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 VERIDO
+      </span>
+
+      <span>
+        Performance Marketing Lab
+      </span>
+
+    </div>
+
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+
+    /*
+     * ============================================
+     * DATALAYER
+     * ============================================
+     */
+
+    window.dataLayer =
+      window.dataLayer || [];
+
+
+    /*
+     * ============================================
+     * EVENT HELPER
+     * ============================================
+     */
+
+    function pushEvent(
+      eventName,
+      parameters = {}
+    ) {
+
+      window.dataLayer.push({
+
+        event:
+          eventName,
+
+        ...parameters
+
+      });
+
+
+      console.log(
+        "GTM Event:",
+        eventName,
+        parameters
+      );
+
+    }
+
+
+    /*
+     * ============================================
+     * FAQ PAGE VIEW
+     * ============================================
+     */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        pushEvent(
+          "view_faq_page",
+          {
+
+            page_type:
+              "faq",
+
+            page_title:
+              document.title
+
+          }
+        );
+
+      }
+    );
+
+
+    /*
+     * ============================================
+     * FAQ OPEN / CLOSE
+     * ============================================
+     */
+
+    document
+      .querySelectorAll(
+        ".faq-question"
+      )
+      .forEach(
+        function(button) {
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              const item =
+                this.closest(
+                  ".faq-item"
+                );
+
+
+              const question =
+                this
+                  .querySelector(
+                    "span:first-child"
+                  )
+                  .innerText
+                  .trim();
+
+
+              const wasOpen =
+                item.classList.contains(
+                  "active"
+                );
+
+
+              item.classList.toggle(
+                "active"
+              );
+
+
+              pushEvent(
+                wasOpen
+                  ? "faq_close"
+                  : "faq_open",
+                {
+
+                  question:
+                    question
+
+                }
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * FAQ SEARCH
+     * ============================================
+     */
+
+    const searchInput =
+      document.getElementById(
+        "faqSearch"
+      );
+
+
+    const noResults =
+      document.getElementById(
+        "noResults"
+      );
+
+
+    searchInput.addEventListener(
+      "input",
+      function() {
+
+        const searchTerm =
+          this.value
+            .toLowerCase()
+            .trim();
+
+
+        let visibleCount = 0;
+
+
+        document
+          .querySelectorAll(
+            ".faq-item"
+          )
+          .forEach(
+            function(item) {
+
+              const question =
+                item
+                  .querySelector(
+                    ".faq-question"
+                  )
+                  .innerText
+                  .toLowerCase();
+
+
+              const keywords =
+                item
+                  .dataset
+                  .keywords
+                  .toLowerCase();
+
+
+              const answer =
+                item
+                  .querySelector(
+                    ".faq-answer"
+                  )
+                  .innerText
+                  .toLowerCase();
+
+
+              const matches =
+                !searchTerm ||
+                question.includes(
+                  searchTerm
+                ) ||
+                keywords.includes(
+                  searchTerm
+                ) ||
+                answer.includes(
+                  searchTerm
+                );
+
+
+              item.style.display =
+                matches
+                  ? "block"
+                  : "none";
+
+
+              if (matches) {
+                visibleCount++;
+              }
+
+            }
+          );
+
+
+        document
+          .querySelectorAll(
+            ".category"
+          )
+          .forEach(
+            function(category) {
+
+              const visibleItems =
+                category.querySelectorAll(
+                  ".faq-item[style*='display: block']"
+                );
+
+
+              category.style.display =
+                visibleItems.length ||
+                !searchTerm
+                  ? "block"
+                  : "none";
+
+            }
+          );
+
+
+        noResults.style.display =
+          visibleCount === 0
+            ? "block"
+            : "none";
+
+
+        if (searchTerm) {
+
+          pushEvent(
+            "faq_search",
+            {
+
+              search_term:
+                searchTerm
+
+            }
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+     * ============================================
+     * CTA TRACKING
+     * ============================================
+     */
+
+    document
+      .getElementById(
+        "faqContactCta"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          pushEvent(
+            "faq_contact_cta_click",
+            {
+
+              destination:
+                "contact.html"
+
+            }
+          );
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "faqShopCta"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          pushEvent(
+            "faq_shop_cta_click",
+            {
+
+              destination:
+                "shop.html"
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * NAVIGATION TRACKING
+     * ============================================
+     */
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+        const element =
+          event.target.closest(
+            "[data-event]"
+          );
+
+
+        if (!element) {
+          return;
+        }
+
+
+        const eventName =
+          element.getAttribute(
+            "data-event"
+          );
+
+
+        pushEvent(
+          eventName
+        );
+
+      }
+    );
+
+
+  </script>
+
+</body>
+
+</html>
