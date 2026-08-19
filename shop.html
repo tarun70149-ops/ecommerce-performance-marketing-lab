@@ -1314,11 +1314,15 @@
      * ============================================
      */
 
-    function addToCart(
-      productId,
-      productName,
-      price
-    ) {
+    function addToCart(productId, productName, price) {
+
+  window.VERIDO_CART.add(
+    productId,
+    productName,
+    price
+  );
+
+}
 
       pushEvent(
         "add_to_cart",
