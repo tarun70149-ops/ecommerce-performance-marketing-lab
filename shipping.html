@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Shipping & Delivery | VERIDO</title>
+
+  <meta
+    name="description"
+    content="Learn about VERIDO shipping, delivery timelines, shipping charges and order delivery information."
+  >
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #171717;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =========================
+       TOP BAR
+    ========================== */
+
+    .top-bar {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 9px 15px;
+      font-size: 13px;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .navbar {
+      background: white;
+      border-bottom: 1px solid #eee;
+      padding: 18px 6%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-actions {
+      font-size: 14px;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      background: #e9e9e9;
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    .hero span {
+      font-size: 11px;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin: 14px 0;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #666;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       CONTAINER
+    ========================== */
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+      padding: 60px 6% 90px;
+    }
+
+    /* =========================
+       SHIPPING CARDS
+    ========================== */
+
+    .shipping-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 45px;
+    }
+
+    .shipping-card {
+      background: white;
+      border: 1px solid #eee;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .shipping-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .shipping-card h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .shipping-card p {
+      color: #777;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       CONTENT CARD
+    ========================== */
+
+    .content-card {
+      background: white;
+      border: 1px solid #eee;
+      padding: 35px;
+      margin-bottom: 20px;
+    }
+
+    .content-card h2 {
+      font-size: 23px;
+      margin-bottom: 18px;
+    }
+
+    .content-card h3 {
+      font-size: 16px;
+      margin: 24px 0 8px;
+    }
+
+    .content-card p {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .content-card ul {
+      padding-left: 20px;
+    }
+
+    .content-card li {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 5px;
+    }
+
+    /* =========================
+       DELIVERY TABLE
+    ========================== */
+
+    .delivery-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .delivery-table th,
+    .delivery-table td {
+      border: 1px solid #ddd;
+      padding: 13px;
+      text-align: left;
+      font-size: 12px;
+    }
+
+    .delivery-table th {
+      background: #f1f1f1;
+      font-weight: 700;
+    }
+
+    /* =========================
+       CTA
+    ========================== */
+
+    .cta {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 45px 25px;
+      margin-top: 30px;
+    }
+
+    .cta h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .cta p {
+      color: #aaa;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .cta-btn {
+      padding: 13px 21px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .primary {
+      background: white;
+      color: #111;
+    }
+
+    .secondary {
+      border: 1px solid #555;
+      color: white;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      background: #111;
+      color: white;
+      padding: 45px 6% 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    footer h3 {
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    footer h4 {
+      margin-bottom: 14px;
+    }
+
+    footer p,
+    footer li {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 8px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+
+      color: #777;
+      font-size: 12px;
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 900px) {
+
+      .shipping-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .shipping-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content-card {
+        padding: 25px;
+      }
+
+      .delivery-table {
+        font-size: 11px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .cta-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
+  <div class="top-bar">
+
+    Free shipping on eligible orders above ₹999
+
+  </div>
+
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
+  <header class="navbar">
+
+    <a
+      href="index.html"
+      class="logo"
+      data-event="logo_click">
+
+      VERIDO
+
+    </a>
+
+
+    <nav>
+
+      <ul class="nav-links">
+
+        <li>
+          <a href="index.html">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="shop.html"
+            data-event="shop_navigation">
+
+            Shop
+
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="offers.html"
+            data-event="offers_navigation">
+
+            Offers
+
+          </a>
+        </li>
+
+        <li>
+          <a href="about.html">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a href="contact.html">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+
+    <div class="nav-actions">
+
+      <a
+        href="cart.html"
+        data-event="cart_click">
+
+        🛒 Cart
+
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero">
+
+    <span>
+      VERIDO DELIVERY
+    </span>
+
+    <h1>
+      Shipping & Delivery
+    </h1>
+
+    <p>
+
+      Everything you need to know about
+      delivery timelines, shipping charges
+      and your order.
+
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main class="container">
+
+
+    <!-- =========================
+         QUICK INFO
+    ========================== -->
+
+    <section class="shipping-grid">
+
+
+      <div class="shipping-card">
+
+        <div class="shipping-icon">
+          🚚
+        </div>
+
+        <h3>
+          Fast Delivery
+        </h3>
+
+        <p>
+
+          Standard delivery is estimated
+          at 3–5 business days.
+
+        </p>
+
+      </div>
+
+
+      <div class="shipping-card">
+
+        <div class="shipping-icon">
+          📦
+        </div>
+
+        <h3>
+          Order Processing
+        </h3>
+
+        <p>
+
+          Orders are generally processed
+          within 1–2 business days.
+
+        </p>
+
+      </div>
+
+
+      <div class="shipping-card">
+
+        <div class="shipping-icon">
+          🔒
+        </div>
+
+        <h3>
+          Secure Delivery
+        </h3>
+
+        <p>
+
+          Your order is packed carefully
+          before being dispatched.
+
+        </p>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         DELIVERY INFORMATION
+    ========================== -->
+
+    <section class="content-card">
+
+
+      <h2>
+        Delivery Information
+      </h2>
+
+
+      <p>
+
+        We aim to make the delivery process
+        simple and transparent. Delivery times
+        may vary depending on location,
+        availability and external factors.
+
+      </p>
+
+
+      <h3>
+        Standard Delivery
+      </h3>
+
+      <p>
+
+        Most orders are expected to arrive
+        within 3–5 business days after
+        dispatch.
+
+      </p>
+
+
+      <h3>
+        Order Processing
+      </h3>
+
+      <p>
+
+        Orders generally require 1–2 business
+        days for processing before shipment.
+
+      </p>
+
+
+      <h3>
+        Delivery Attempts
+      </h3>
+
+      <p>
+
+        The delivery partner may make multiple
+        attempts if the customer is unavailable.
+
+      </p>
+
+
+    </section>
+
+
+    <!-- =========================
+         SHIPPING TABLE
+    ========================== -->
+
+    <section class="content-card">
+
+
+      <h2>
+        Shipping Options
+      </h2>
+
+
+      <table class="delivery-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Shipping Type
+            </th>
+
+            <th>
+              Estimated Time
+            </th>
+
+            <th>
+              Shipping Charge
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr>
+
+            <td>
+              Standard Delivery
+            </td>
+
+            <td>
+              3–5 Business Days
+            </td>
+
+            <td>
+              Free above ₹999
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Standard Delivery
+            </td>
+
+            <td>
+              3–5 Business Days
+            </td>
+
+            <td>
+              ₹79 below ₹999
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Express Delivery
+            </td>
+
+            <td>
+              1–2 Business Days
+            </td>
+
+            <td>
+              Demo / Subject to availability
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+    </section>
+
+
+    <!-- =========================
+         IMPORTANT NOTES
+    ========================== -->
+
+    <section class="content-card">
+
+
+      <h2>
+        Important Notes
+      </h2>
+
+
+      <ul>
+
+        <li>
+          Delivery timelines are estimates
+          and are not guaranteed.
+        </li>
+
+        <li>
+          Remote locations may require
+          additional delivery time.
+        </li>
+
+        <li>
+          Orders may be delayed during
+          holidays or high-demand periods.
+        </li>
+
+        <li>
+          Customers should provide a complete
+          and accurate delivery address.
+        </li>
+
+        <li>
+          Please contact support if your order
+          has not arrived within the expected
+          delivery window.
+        </li>
+
+      </ul>
+
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="cta">
+
+
+      <h2>
+        Need Help With Your Order?
+      </h2>
+
+
+      <p>
+
+        Our support team can help you
+        with delivery and order questions.
+
+      </p>
+
+
+      <div class="cta-buttons">
+
+
+        <a
+          href="contact.html"
+          class="cta-btn primary"
+          id="shippingContactCta">
+
+          Contact Support
+
+        </a>
+
+
+        <a
+          href="shop.html"
+          class="cta-btn secondary"
+          id="shippingShopCta">
+
+          Continue Shopping
+
+        </a>
+
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+
+    <div class="footer-grid">
+
+
+      <div>
+
+        <h3>
+          VERIDO
+        </h3>
+
+        <p>
+
+          Premium everyday essentials
+          designed for modern lifestyles.
+
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Shop
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="shop.html">
+              All Products
+            </a>
+          </li>
+
+          <li>
+            <a href="offers.html">
+              Offers
+            </a>
+          </li>
+
+          <li>
+            <a href="cart.html">
+              Cart
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Support
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="contact.html">
+              Contact
+            </a>
+          </li>
+
+          <li>
+            <a href="faq.html">
+              FAQ
+            </a>
+          </li>
+
+          <li>
+            <a href="shipping.html">
+              Shipping
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Company
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="about.html">
+              About
+            </a>
+          </li>
+
+          <li>
+            <a href="privacy.html">
+              Privacy
+            </a>
+          </li>
+
+          <li>
+            <a href="terms.html">
+              Terms
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 VERIDO
+      </span>
+
+      <span>
+        Performance Marketing Lab
+      </span>
+
+    </div>
+
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+
+    /*
+     * ============================================
+     * DATALAYER
+     * ============================================
+     */
+
+    window.dataLayer =
+      window.dataLayer || [];
+
+
+    /*
+     * ============================================
+     * EVENT HELPER
+     * ============================================
+     */
+
+    function pushEvent(
+      eventName,
+      parameters = {}
+    ) {
+
+      window.dataLayer.push({
+
+        event:
+          eventName,
+
+        ...parameters
+
+      });
+
+
+      console.log(
+        "GTM Event:",
+        eventName,
+        parameters
+      );
+
+    }
+
+
+    /*
+     * ============================================
+     * SHIPPING PAGE VIEW
+     * ============================================
+     */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        pushEvent(
+          "view_shipping_page",
+          {
+
+            page_type:
+              "shipping",
+
+            page_title:
+              document.title
+
+          }
+        );
+
+      }
+    );
+
+
+    /*
+     * ============================================
+     * SHIPPING CTA
+     * ============================================
+     */
+
+    document
+      .getElementById(
+        "shippingContactCta"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          pushEvent(
+            "shipping_contact_cta_click",
+            {
+
+              destination:
+                "contact.html"
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * SHOP CTA
+     * ============================================
+     */
+
+    document
+      .getElementById(
+        "shippingShopCta"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          pushEvent(
+            "shipping_shop_cta_click",
+            {
+
+              destination:
+                "shop.html"
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * NAVIGATION TRACKING
+     * ============================================
+     */
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+        const element =
+          event.target.closest(
+            "[data-event]"
+          );
+
+
+        if (!element) {
+          return;
+        }
+
+
+        const eventName =
+          element.getAttribute(
+            "data-event"
+          );
+
+
+        pushEvent(
+          eventName
+        );
+
+      }
+    );
+
+
+  </script>
+
+</body>
+
+</html>
