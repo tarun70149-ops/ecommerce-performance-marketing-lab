@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shop | VERIDO</title>
+
+  <meta
+    name="description"
+    content="Shop premium everyday essentials from VERIDO."
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #171717;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+    }
+
+    /* =========================
+       TOP BAR
+    ========================== */
+
+    .top-bar {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 9px 15px;
+      font-size: 13px;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .navbar {
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 6%;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .cart-count {
+      background: #111;
+      color: white;
+      border-radius: 50%;
+      min-width: 20px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    /* =========================
+       PAGE HERO
+    ========================== */
+
+    .page-header {
+      background: #eaeaea;
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    .page-header span {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .page-header h1 {
+      font-size: 48px;
+      margin: 12px 0;
+    }
+
+    .page-header p {
+      color: #666;
+      max-width: 550px;
+      margin: auto;
+    }
+
+    /* =========================
+       SHOP AREA
+    ========================== */
+
+    .shop-container {
+      max-width: 1400px;
+      margin: auto;
+      padding: 55px 6%;
+    }
+
+    .shop-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .results-count {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .sort-select {
+      padding: 11px 14px;
+      border: 1px solid #ddd;
+      background: white;
+      min-width: 180px;
+    }
+
+    /* =========================
+       FILTERS
+    ========================== */
+
+    .category-filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .filter-btn {
+      padding: 11px 20px;
+      background: white;
+      border: 1px solid #ddd;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #111;
+      color: white;
+      border-color: #111;
+    }
+
+    /* =========================
+       PRODUCTS
+    ========================== */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .product-card {
+      background: white;
+      overflow: hidden;
+    }
+
+    .product-image {
+      height: 350px;
+      background: #eee;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: #111;
+      color: white;
+      padding: 6px 9px;
+      font-size: 10px;
+      font-weight: 700;
+      z-index: 2;
+    }
+
+    .product-info {
+      padding: 17px;
+    }
+
+    .product-category {
+      color: #888;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .product-name {
+      font-size: 16px;
+      font-weight: 700;
+      margin-top: 5px;
+    }
+
+    .product-price {
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .old-price {
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 5px;
+      font-weight: 400;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 8px;
+      padding: 0 17px 17px;
+    }
+
+    .product-actions button {
+      flex: 1;
+      padding: 11px 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .view-btn {
+      background: #f1f1f1;
+    }
+
+    .cart-btn {
+      background: #111;
+      color: white;
+    }
+
+    /* =========================
+       EMPTY STATE
+    ========================== */
+
+    .empty-state {
+      display: none;
+      text-align: center;
+      padding: 80px 20px;
+      color: #777;
+    }
+
+    .empty-state h2 {
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      background: #111;
+      color: white;
+      padding: 55px 6% 25px;
+      margin-top: 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 45px;
+    }
+
+    footer h3 {
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    footer h4 {
+      margin-bottom: 14px;
+    }
+
+    footer p,
+    footer li {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 8px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      color: #777;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 1000px) {
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .page-header h1 {
+        font-size: 38px;
+      }
+
+      .product-image {
+        height: 420px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
+  <div class="top-bar">
+    Free shipping on orders above ₹999 • Easy 7-day returns
+  </div>
+
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <header class="navbar">
+
+    <a
+      href="index.html"
+      class="logo"
+      data-event="logo_click">
+      VERIDO
+    </a>
+
+    <nav>
+
+      <ul class="nav-links">
+
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+
+        <li>
+          <a
+            href="shop.html"
+            data-event="shop_navigation">
+            Shop
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="offers.html"
+            data-event="offers_navigation">
+            Offers
+          </a>
+        </li>
+
+        <li>
+          <a href="about.html">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a href="contact.html">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <div class="nav-actions">
+
+      <a
+        href="cart.html"
+        data-event="cart_click">
+        🛒
+        <span
+          class="cart-count"
+          id="cartCount">
+          0
+        </span>
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       PAGE HEADER
+  ========================== -->
+
+  <section class="page-header">
+
+    <span>VERIDO COLLECTION</span>
+
+    <h1>Shop All</h1>
+
+    <p>
+      Explore premium everyday essentials
+      designed for modern lifestyles.
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       SHOP
+  ========================== -->
+
+  <main class="shop-container">
+
+    <!-- Toolbar -->
+
+    <div class="shop-toolbar">
+
+      <div
+        class="results-count"
+        id="resultsCount">
+        Showing 8 products
+      </div>
+
+      <select
+        class="sort-select"
+        id="sortSelect"
+        data-event="sort_products">
+
+        <option value="default">
+          Sort: Featured
+        </option>
+
+        <option value="low">
+          Price: Low to High
+        </option>
+
+        <option value="high">
+          Price: High to Low
+        </option>
+
+        <option value="name">
+          Name: A-Z
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Category Filters -->
+
+    <div class="category-filters">
+
+      <button
+        class="filter-btn active"
+        data-category="all">
+        All
+      </button>
+
+      <button
+        class="filter-btn"
+        data-category="apparel">
+        Apparel
+      </button>
+
+      <button
+        class="filter-btn"
+        data-category="footwear">
+        Footwear
+      </button>
+
+      <button
+        class="filter-btn"
+        data-category="accessories">
+        Accessories
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         PRODUCT GRID
+    ========================== -->
+
+    <div
+      class="products"
+      id="productGrid">
+
+
+      <!-- PRODUCT 1 -->
+
+      <article
+        class="product-card"
+        data-id="VER-001"
+        data-name="Essential Oversized Tee"
+        data-category="apparel"
+        data-price="899">
+
+        <div class="product-image">
+
+          <span class="badge">
+            BESTSELLER
+          </span>
+
+          <img
+            src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85"
+            alt="Essential Oversized Tee"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            Apparel
+          </div>
+
+          <div class="product-name">
+            Essential Oversized Tee
+          </div>
+
+          <div class="product-price">
+            ₹899
+            <span class="old-price">
+              ₹1,199
+            </span>
+          </div>
+
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            class="view-btn"
+            onclick="viewProduct(
+              'VER-001',
+              'Essential Oversized Tee',
+              899
+            )">
+            View Product
+          </button>
+
+          <button
+            class="cart-btn"
+            onclick="addToCart(
+              'VER-001',
+              'Essential Oversized Tee',
+              899
+            )">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 2 -->
+
+      <article
+        class="product-card"
+        data-id="VER-002"
+        data-name="Minimal Everyday Hoodie"
+        data-category="apparel"
+        data-price="1499">
+
+        <div class="product-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=85"
+            alt="Minimal Everyday Hoodie"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            Apparel
+          </div>
+
+          <div class="product-name">
+            Minimal Everyday Hoodie
+          </div>
+
+          <div class="product-price">
+            ₹1,499
+            <span class="old-price">
+              ₹1,999
+            </span>
+          </div>
+
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            class="view-btn"
+            onclick="viewProduct(
+              'VER-002',
+              'Minimal Everyday Hoodie',
+              1499
+            )">
+            View Product
+          </button>
+
+          <button
+            class="cart-btn"
+            onclick="addToCart(
+              'VER-002',
+              'Minimal Everyday Hoodie',
+              1499
+            )">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 3 -->
+
+      <article
+        class="product-card"
+        data-id="VER-003"
+        data-name="Classic Everyday Cap"
+        data-category="accessories"
+        data-price="599">
+
+        <div class="product-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=900&q=85"
+            alt="Classic Everyday Cap"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            Accessories
+          </div>
+
+          <div class="product-name">
+            Classic Everyday Cap
+          </div>
+
+          <div class="product-price">
+            ₹599
+            <span class="old-price">
+              ₹799
+            </span>
+          </div>
+
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            class="view-btn"
+            onclick="viewProduct(
+              'VER-003',
+              'Classic Everyday Cap',
+              599
+            )">
+            View Product
+          </button>
+
+          <button
+            class="cart-btn"
+            onclick="addToCart(
+              'VER-003',
+              'Classic Everyday Cap',
+              599
+            )">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 4 -->
+
+      <article
+        class="product-card"
+        data-id="VER-004"
+        data-name="Premium Everyday Sneakers"
+        data-category="footwear"
+        data-price="2499">
+
+        <div class="product-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85"
+            alt="Premium Everyday Sneakers"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            Footwear
+          </div>
+
+          <div class="product-name">
+            Premium Everyday Sneakers
+          </div>
+
+          <div class="product-price">
+            ₹2,499
+            <span class="old-price">
+              ₹3,499
+            </span>
+          </div>
+
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            class="view-btn"
+            onclick="viewProduct(
+              'VER-004',
+              'Premium Everyday Sneakers',
+              2499
+            )">
+            View Product
+          </button>
+
+          <button
+            class="cart-btn"
+            onclick="addToCart(
+              'VER-004',
+              'Premium Everyday Sneakers',
+              2499
+            )">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 5 -->
+
+      <article
+        class="product-card"
+        data-id="VER-005"
+        data-name="Premium Cotton Shirt"
+        data-category="apparel"
+        data-price="1299">
+
+        <div class="product-image">
+
+          <span class="badge">
+            NEW
+          </span>
+
+          <img
+            src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=900&q=85"
+            alt="Premium Cotton Shirt"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            Apparel
+          </div>
+
+          <div class="product-name">
+            Premium Cotton Shirt
+          </div>
+
+          <div class="product-price">
+            ₹1,299
+          </div>
+
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            class="view-btn"
+            onclick="viewProduct(
+              'VER-005',
+              'Premium Cotton Shirt',
+              1299
+            )">
+            View Product
+          </button>
+
+          <button
+            class="cart-btn"
+            onclick="addToCart(
+              'VER-005',
+              'Premium Cotton Shirt',
+              1299
+            )">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 6 -->
+
+      <article
+        class="product-card"
+        data-id="VER-006"
+        data-name="Urban Running Sneakers"
+        data-category="footwear"
+        data-price="2999">
+
+        <div class="product-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=85"
+            alt="Urban Running Sneakers"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            Footwear
+          </div>
+
+          <div class="product-name">
+            Urban Running Sneakers
+          </div>
+
+          <div class="product-price">
+            ₹2,999
+          </div>
+
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            class="view-btn"
+            onclick="viewProduct(
+              'VER-006',
+              'Urban Running Sneakers',
+              2999
+            )">
+            View Product
+          </button>
+
+          <button
+            class="cart-btn"
+            onclick="addToCart(
+              'VER-006',
+              'Urban Running Sneakers',
+              2999
+            )">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 7 -->
+
+      <article
+        class="product-card"
+        data-id="VER-007"
+        data-name="Minimal Leather Wallet"
+        data-category="accessories"
+        data-price="999">
+
+        <div class="product-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=900&q=85"
+            alt="Minimal Leather Wallet"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            Accessories
+          </div>
+
+          <div class="product-name">
+            Minimal Leather Wallet
+          </div>
+
+          <div class="product-price">
+            ₹999
+          </div>
+
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            class="view-btn"
+            onclick="viewProduct(
+              'VER-007',
+              'Minimal Leather Wallet',
+              999
+            )">
+            View Product
+          </button>
+
+          <button
+            class="cart-btn"
+            onclick="addToCart(
+              'VER-007',
+              'Minimal Leather Wallet',
+              999
+            )">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 8 -->
+
+      <article
+        class="product-card"
+        data-id="VER-008"
+        data-name="Classic Everyday Backpack"
+        data-category="accessories"
+        data-price="1799">
+
+        <div class="product-image">
+
+          <span class="badge">
+            TRENDING
+          </span>
+
+          <img
+            src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85"
+            alt="Classic Everyday Backpack"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            Accessories
+          </div>
+
+          <div class="product-name">
+            Classic Everyday Backpack
+          </div>
+
+          <div class="product-price">
+            ₹1,799
+          </div>
+
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            class="view-btn"
+            onclick="viewProduct(
+              'VER-008',
+              'Classic Everyday Backpack',
+              1799
+            )">
+            View Product
+          </button>
+
+          <button
+            class="cart-btn"
+            onclick="addToCart(
+              'VER-008',
+              'Classic Everyday Backpack',
+              1799
+            )">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <!-- EMPTY -->
+
+    <div
+      class="empty-state"
+      id="emptyState">
+
+      <h2>
+        No products found
+      </h2>
+
+      <p>
+        Try another category.
+      </p>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="footer-grid">
+
+      <div>
+        <h3>VERIDO</h3>
+
+        <p>
+          Premium everyday essentials designed
+          for modern lifestyles.
+        </p>
+      </div>
+
+      <div>
+
+        <h4>Shop</h4>
+
+        <ul>
+
+          <li>
+            <a href="shop.html">
+              All Products
+            </a>
+          </li>
+
+          <li>
+            <a href="shop.html?category=apparel">
+              Apparel
+            </a>
+          </li>
+
+          <li>
+            <a href="shop.html?category=footwear">
+              Footwear
+            </a>
+          </li>
+
+          <li>
+            <a href="shop.html?category=accessories">
+              Accessories
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div>
+
+        <h4>Support</h4>
+
+        <ul>
+
+          <li>
+            <a href="contact.html">
+              Contact
+            </a>
+          </li>
+
+          <li>
+            <a href="faq.html">
+              FAQ
+            </a>
+          </li>
+
+          <li>
+            <a href="shipping.html">
+              Shipping
+            </a>
+          </li>
+
+          <li>
+            <a href="returns.html">
+              Returns
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div>
+
+        <h4>Company</h4>
+
+        <ul>
+
+          <li>
+            <a href="about.html">
+              About
+            </a>
+          </li>
+
+          <li>
+            <a href="privacy.html">
+              Privacy
+            </a>
+          </li>
+
+          <li>
+            <a href="terms.html">
+              Terms
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 VERIDO
+      </span>
+
+      <span>
+        Performance Marketing Lab
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+    /*
+     * ============================================
+     * EVENT TRACKING HELPER
+     * ============================================
+     */
+
+    function pushEvent(eventName, parameters = {}) {
+
+      window.dataLayer.push({
+
+        event: eventName,
+
+        ...parameters
+
+      });
+
+      console.log(
+        "GA4/GTM Event:",
+        eventName,
+        parameters
+      );
+
+    }
+
+
+    /*
+     * ============================================
+     * PRODUCT VIEW
+     * ============================================
+     */
+
+    function viewProduct(
+      productId,
+      productName,
+      price
+    ) {
+
+      pushEvent(
+        "view_item",
+        {
+
+          ecommerce: {
+
+            currency: "INR",
+
+            value: price,
+
+            items: [
+              {
+                item_id: productId,
+                item_name: productName,
+                price: price
+              }
+            ]
+
+          }
+
+        }
+      );
+
+
+      window.location.href =
+        "product.html?id=" + productId;
+
+    }
+
+
+    /*
+     * ============================================
+     * ADD TO CART
+     * ============================================
+     */
+
+    function addToCart(
+      productId,
+      productName,
+      price
+    ) {
+
+      pushEvent(
+        "add_to_cart",
+        {
+
+          ecommerce: {
+
+            currency: "INR",
+
+            value: price,
+
+            items: [
+              {
+                item_id: productId,
+                item_name: productName,
+                price: price,
+                quantity: 1
+              }
+            ]
+
+          }
+
+        }
+      );
+
+
+      let count =
+        Number(
+          document.getElementById(
+            "cartCount"
+          ).innerText
+        );
+
+
+      count++;
+
+
+      document.getElementById(
+        "cartCount"
+      ).innerText = count;
+
+
+      alert(
+        productName +
+        " added to cart."
+      );
+
+    }
+
+
+    /*
+     * ============================================
+     * CATEGORY FILTER
+     * ============================================
+     */
+
+    const filterButtons =
+      document.querySelectorAll(
+        ".filter-btn"
+      );
+
+
+    const productCards =
+      document.querySelectorAll(
+        ".product-card"
+      );
+
+
+    const resultsCount =
+      document.getElementById(
+        "resultsCount"
+      );
+
+
+    const emptyState =
+      document.getElementById(
+        "emptyState"
+      );
+
+
+    filterButtons.forEach(
+      function(button) {
+
+        button.addEventListener(
+          "click",
+          function() {
+
+            const category =
+              this.dataset.category;
+
+
+            filterButtons.forEach(
+              btn =>
+                btn.classList.remove(
+                  "active"
+                )
+            );
+
+
+            this.classList.add(
+              "active"
+            );
+
+
+            let visibleProducts = 0;
+
+
+            productCards.forEach(
+              function(card) {
+
+                const cardCategory =
+                  card.dataset.category;
+
+
+                if (
+                  category === "all" ||
+                  cardCategory === category
+                ) {
+
+                  card.style.display =
+                    "block";
+
+                  visibleProducts++;
+
+                } else {
+
+                  card.style.display =
+                    "none";
+
+                }
+
+              }
+            );
+
+
+            resultsCount.innerText =
+              "Showing " +
+              visibleProducts +
+              " products";
+
+
+            emptyState.style.display =
+              visibleProducts === 0
+                ? "block"
+                : "none";
+
+
+            pushEvent(
+              "select_item",
+              {
+
+                item_list_name:
+                  category === "all"
+                    ? "All Products"
+                    : category
+
+              }
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+    /*
+     * ============================================
+     * SORTING
+     * ============================================
+     */
+
+    document
+      .getElementById(
+        "sortSelect"
+      )
+      .addEventListener(
+        "change",
+        function() {
+
+          const sort =
+            this.value;
+
+
+          const grid =
+            document.getElementById(
+              "productGrid"
+            );
+
+
+          const cards =
+            Array.from(
+              productCards
+            );
+
+
+          cards.sort(
+            function(a, b) {
+
+              const priceA =
+                Number(
+                  a.dataset.price
+                );
+
+              const priceB =
+                Number(
+                  b.dataset.price
+                );
+
+
+              if (
+                sort === "low"
+              ) {
+                return priceA - priceB;
+              }
+
+
+              if (
+                sort === "high"
+              ) {
+                return priceB - priceA;
+              }
+
+
+              if (
+                sort === "name"
+              ) {
+
+                return a.dataset.name
+                  .localeCompare(
+                    b.dataset.name
+                  );
+
+              }
+
+
+              return 0;
+
+            }
+          );
+
+
+          cards.forEach(
+            card =>
+              grid.appendChild(card)
+          );
+
+
+          pushEvent(
+            "sort_products",
+            {
+              sort_method: sort
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * NAVIGATION EVENT TRACKING
+     * ============================================
+     */
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+        const element =
+          event.target.closest(
+            "[data-event]"
+          );
+
+
+        if (!element) {
+          return;
+        }
+
+
+        const eventName =
+          element.getAttribute(
+            "data-event"
+          );
+
+
+        pushEvent(
+          eventName
+        );
+
+      }
+    );
+
+
+    /*
+     * ============================================
+     * URL CATEGORY PARAMETER
+     *
+     * Example:
+     *
+     * shop.html?category=apparel
+     *
+     * ============================================
+     */
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const urlCategory =
+      params.get(
+        "category"
+      );
+
+
+    if (urlCategory) {
+
+      const matchingButton =
+        document.querySelector(
+          `[data-category="${urlCategory}"]`
+        );
+
+
+      if (matchingButton) {
+
+        matchingButton.click();
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
