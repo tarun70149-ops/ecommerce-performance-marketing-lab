@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>VERIDO | Premium Everyday Essentials</title>
 
@@ -12,10 +17,38 @@
     content="Discover premium everyday essentials designed for modern lifestyles."
   >
 
-  <!-- Future GA4 / GTM -->
-  <!-- Google Tag Manager code will be added later -->
+
+  <!-- =====================================================
+       VERIDO JAVASCRIPT ARCHITECTURE
+  ====================================================== -->
+
+  <script src="config.js"></script>
+  <script src="products.js"></script>
+  <script src="data.js"></script>
+  <script src="utils.js"></script>
+  <script src="events.js"></script>
+  <script src="analytics.js"></script>
+
+  <!-- Main website logic -->
+  <script src="script.js" defer></script>
+
+  <!-- Validation -->
+  <script src="validation.js" defer></script>
+
+  <!-- Cart engine -->
+  <script src="cart.js" defer></script>
+
+
+  <!-- =====================================================
+       FUTURE GTM
+       GTM will be added here later.
+  ====================================================== -->
+
+  <!-- Google Tag Manager will be added later -->
+
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -23,21 +56,25 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
+
     body {
       background: #f8f8f8;
       color: #171717;
       line-height: 1.5;
     }
 
+
     a {
       text-decoration: none;
       color: inherit;
     }
 
+
     button {
       cursor: pointer;
       border: none;
     }
+
 
     /* =========================
        TOP BAR
@@ -51,6 +88,7 @@
       font-size: 13px;
       letter-spacing: .3px;
     }
+
 
     /* =========================
        NAVBAR
@@ -68,11 +106,13 @@
       z-index: 1000;
     }
 
+
     .logo {
       font-size: 25px;
       font-weight: 800;
       letter-spacing: 2px;
     }
+
 
     .nav-links {
       display: flex;
@@ -82,9 +122,11 @@
       font-weight: 600;
     }
 
+
     .nav-links a:hover {
       opacity: .55;
     }
+
 
     .nav-actions {
       display: flex;
@@ -92,6 +134,7 @@
       gap: 18px;
       font-size: 14px;
     }
+
 
     .cart-count {
       background: #111;
@@ -106,6 +149,7 @@
       margin-left: 3px;
     }
 
+
     /* =========================
        HERO
     ========================== */
@@ -117,12 +161,14 @@
       background: #e9e9e9;
     }
 
+
     .hero-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 70px 10%;
     }
+
 
     .hero-label {
       font-size: 13px;
@@ -132,11 +178,13 @@
       text-transform: uppercase;
     }
 
+
     .hero h1 {
       font-size: clamp(42px, 5vw, 72px);
       line-height: 1.02;
       margin-bottom: 22px;
     }
+
 
     .hero p {
       max-width: 500px;
@@ -145,11 +193,13 @@
       margin-bottom: 30px;
     }
 
+
     .hero-buttons {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
     }
+
 
     .btn {
       padding: 14px 24px;
@@ -158,31 +208,41 @@
       transition: .2s;
     }
 
+
     .btn-dark {
       background: #111;
       color: white;
     }
 
+
     .btn-dark:hover {
       background: #333;
     }
+
 
     .btn-light {
       background: white;
       border: 1px solid #ddd;
     }
 
+
     .btn-light:hover {
       background: #eee;
     }
 
+
     .hero-image {
       background:
-        linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.08)),
+        linear-gradient(
+          rgba(0,0,0,.08),
+          rgba(0,0,0,.08)
+        ),
         url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1400&q=85")
         center/cover;
+
       min-height: 570px;
     }
+
 
     /* =========================
        TRUST STRIP
@@ -196,12 +256,14 @@
       border-bottom: 1px solid #eee;
     }
 
+
     .trust-item {
       text-align: center;
       font-size: 13px;
       font-weight: 600;
       padding: 10px;
     }
+
 
     .trust-item span {
       display: block;
@@ -211,6 +273,7 @@
       margin-top: 3px;
     }
 
+
     /* =========================
        SECTION
     ========================== */
@@ -219,6 +282,7 @@
       padding: 80px 6%;
     }
 
+
     .section-header {
       display: flex;
       align-items: end;
@@ -226,20 +290,24 @@
       margin-bottom: 35px;
     }
 
+
     .section-header h2 {
       font-size: 34px;
     }
+
 
     .section-header p {
       color: #777;
       font-size: 14px;
     }
 
+
     .view-all {
       font-size: 14px;
       font-weight: 700;
       text-decoration: underline;
     }
+
 
     /* =========================
        PRODUCTS
@@ -251,17 +319,20 @@
       gap: 22px;
     }
 
+
     .product-card {
       background: white;
       position: relative;
       overflow: hidden;
     }
 
+
     .product-image {
       height: 350px;
       background: #eee;
       overflow: hidden;
     }
+
 
     .product-image img {
       width: 100%;
@@ -270,13 +341,16 @@
       transition: transform .4s ease;
     }
 
+
     .product-card:hover .product-image img {
       transform: scale(1.05);
     }
 
+
     .product-info {
       padding: 17px;
     }
+
 
     .product-category {
       color: #888;
@@ -285,16 +359,19 @@
       letter-spacing: 1px;
     }
 
+
     .product-name {
       font-size: 16px;
       font-weight: 700;
       margin: 5px 0;
     }
 
+
     .product-price {
       font-weight: 700;
       margin-top: 8px;
     }
+
 
     .old-price {
       color: #999;
@@ -303,11 +380,13 @@
       margin-left: 5px;
     }
 
+
     .product-actions {
       display: flex;
       gap: 8px;
       padding: 0 17px 17px;
     }
+
 
     .product-actions button {
       flex: 1;
@@ -316,14 +395,17 @@
       font-weight: 700;
     }
 
+
     .view-product {
       background: #f1f1f1;
     }
+
 
     .add-cart {
       background: #111;
       color: white;
     }
+
 
     /* =========================
        CATEGORY
@@ -334,6 +416,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
+
 
     .category-card {
       min-height: 300px;
@@ -347,27 +430,36 @@
       background-position: center;
     }
 
+
     .category-card::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,.65));
+      background:
+        linear-gradient(
+          transparent,
+          rgba(0,0,0,.65)
+        );
     }
+
 
     .category-content {
       position: relative;
       z-index: 1;
     }
 
+
     .category-content h3 {
       font-size: 27px;
       margin-bottom: 5px;
     }
 
+
     .category-content a {
       font-size: 13px;
       text-decoration: underline;
     }
+
 
     /* =========================
        OFFER
@@ -384,16 +476,19 @@
       gap: 30px;
     }
 
+
     .offer h2 {
       font-size: 40px;
       line-height: 1.1;
       margin-bottom: 12px;
     }
 
+
     .offer p {
       color: #bbb;
       max-width: 520px;
     }
+
 
     /* =========================
        NEWSLETTER
@@ -405,21 +500,25 @@
       background: white;
     }
 
+
     .newsletter h2 {
       font-size: 32px;
       margin-bottom: 10px;
     }
+
 
     .newsletter p {
       color: #777;
       margin-bottom: 25px;
     }
 
+
     .newsletter-form {
       max-width: 500px;
       margin: auto;
       display: flex;
     }
+
 
     .newsletter-form input {
       flex: 1;
@@ -428,12 +527,14 @@
       outline: none;
     }
 
+
     .newsletter-form button {
       padding: 15px 22px;
       background: #111;
       color: white;
       font-weight: 700;
     }
+
 
     /* =========================
        FOOTER
@@ -445,6 +546,7 @@
       padding: 60px 6% 25px;
     }
 
+
     .footer-grid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -452,11 +554,13 @@
       margin-bottom: 50px;
     }
 
+
     .footer-brand h3 {
       font-size: 24px;
       letter-spacing: 2px;
       margin-bottom: 12px;
     }
+
 
     .footer-brand p {
       color: #aaa;
@@ -464,19 +568,23 @@
       font-size: 14px;
     }
 
+
     footer h4 {
       margin-bottom: 15px;
     }
 
+
     footer ul {
       list-style: none;
     }
+
 
     footer li {
       color: #aaa;
       margin-bottom: 9px;
       font-size: 13px;
     }
+
 
     .footer-bottom {
       border-top: 1px solid #333;
@@ -486,6 +594,7 @@
       display: flex;
       justify-content: space-between;
     }
+
 
     /* =========================
        RESPONSIVE
@@ -497,35 +606,44 @@
         display: none;
       }
 
+
       .hero {
         grid-template-columns: 1fr;
       }
+
 
       .hero-image {
         min-height: 400px;
       }
 
+
       .products {
         grid-template-columns: repeat(2, 1fr);
       }
+
 
       .trust-strip {
         grid-template-columns: repeat(2, 1fr);
       }
 
+
       .categories {
         grid-template-columns: 1fr;
       }
+
 
       .offer {
         flex-direction: column;
         align-items: flex-start;
       }
 
+
       .footer-grid {
         grid-template-columns: 1fr 1fr;
       }
+
     }
+
 
     @media (max-width: 600px) {
 
@@ -533,102 +651,162 @@
         padding: 55px 7%;
       }
 
+
       .section {
         padding: 55px 5%;
       }
+
 
       .products {
         grid-template-columns: 1fr;
       }
 
+
       .trust-strip {
         grid-template-columns: 1fr;
       }
+
 
       .product-image {
         height: 420px;
       }
 
+
       .footer-grid {
         grid-template-columns: 1fr;
       }
+
 
       .footer-bottom {
         flex-direction: column;
         gap: 10px;
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <!-- =========================
+
+  <!-- =====================================================
        TOP BAR
-  ========================== -->
+  ====================================================== -->
 
   <div class="top-bar">
-    Free shipping on orders above ₹999 • Easy 7-day returns
+
+    Free shipping on orders above ₹999
+    •
+    Easy 7-day returns
+
   </div>
 
 
-  <!-- =========================
+  <!-- =====================================================
        NAVIGATION
-  ========================== -->
+  ====================================================== -->
 
   <header class="navbar">
 
-    <a href="index.html"
-       class="logo"
-       data-event="logo_click">
+    <a
+      href="index.html"
+      class="logo"
+      data-verido-event="cta_click"
+      data-cta-name="logo"
+    >
       VERIDO
     </a>
 
+
     <nav>
+
       <ul class="nav-links">
 
         <li>
-          <a href="index.html">Home</a>
-        </li>
-
-        <li>
-          <a href="shop.html"
-             data-event="shop_navigation">
-             Shop
+          <a
+            href="index.html"
+          >
+            Home
           </a>
         </li>
 
+
         <li>
-          <a href="offers.html"
-             data-event="offers_navigation">
-             Offers
+          <a
+            href="shop.html"
+            data-verido-event="cta_click"
+            data-cta-name="shop_navigation"
+          >
+            Shop
           </a>
         </li>
 
-        <li>
-          <a href="about.html">About</a>
-        </li>
 
         <li>
-          <a href="contact.html">Contact</a>
+          <a
+            href="offers.html"
+            data-verido-event="cta_click"
+            data-cta-name="offers_navigation"
+          >
+            Offers
+          </a>
+        </li>
+
+
+        <li>
+          <a
+            href="about.html"
+          >
+            About
+          </a>
+        </li>
+
+
+        <li>
+          <a
+            href="contact.html"
+          >
+            Contact
+          </a>
         </li>
 
       </ul>
+
     </nav>
+
 
     <div class="nav-actions">
 
-      <a href="shop.html"
-         aria-label="Search"
-         data-event="search_click">
+      <a
+        href="shop.html"
+        aria-label="Search"
+        data-verido-event="cta_click"
+        data-cta-name="search_click"
+      >
         🔍
       </a>
 
-      <a href="cart.html"
-         aria-label="Shopping Cart"
-         data-event="cart_click">
+
+      <a
+        href="cart.html"
+        aria-label="Shopping Cart"
+        data-verido-event="cta_click"
+        data-cta-name="cart_click"
+      >
+
         🛒
-        <span class="cart-count" id="cartCount">0</span>
+
+        <span
+          class="cart-count"
+          id="cartCount"
+          data-cart-count
+        >
+          0
+        </span>
+
       </a>
 
     </div>
@@ -636,9 +814,9 @@
   </header>
 
 
-  <!-- =========================
+  <!-- =====================================================
        HERO
-  ========================== -->
+  ====================================================== -->
 
   <section class="hero">
 
@@ -648,10 +826,12 @@
         New Collection 2026
       </div>
 
+
       <h1>
         Designed for<br>
         your everyday.
       </h1>
+
 
       <p>
         Premium essentials made for people who believe
@@ -659,19 +839,25 @@
         and perform better.
       </p>
 
+
       <div class="hero-buttons">
 
         <a
           href="shop.html"
           class="btn btn-dark"
-          data-event="hero_shop_click">
+          data-verido-event="cta_click"
+          data-cta-name="hero_shop_collection"
+        >
           Shop Collection
         </a>
+
 
         <a
           href="offers.html"
           class="btn btn-light"
-          data-event="hero_offer_click">
+          data-verido-event="cta_click"
+          data-cta-name="hero_view_offers"
+        >
           View Offers
         </a>
 
@@ -679,57 +865,91 @@
 
     </div>
 
+
     <div class="hero-image"></div>
 
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        TRUST STRIP
-  ========================== -->
+  ====================================================== -->
 
   <section class="trust-strip">
 
     <div class="trust-item">
+
       🚚 Free Shipping
-      <span>On orders above ₹999</span>
+
+      <span>
+        On orders above ₹999
+      </span>
+
     </div>
 
+
     <div class="trust-item">
+
       ↩️ Easy Returns
-      <span>7-day return policy</span>
+
+      <span>
+        7-day return policy
+      </span>
+
     </div>
 
+
     <div class="trust-item">
+
       🔒 Secure Payment
-      <span>100% secure checkout</span>
+
+      <span>
+        100% secure checkout
+      </span>
+
     </div>
 
+
     <div class="trust-item">
+
       💬 Customer Support
-      <span>We're here to help</span>
+
+      <span>
+        We're here to help
+      </span>
+
     </div>
 
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        FEATURED PRODUCTS
-  ========================== -->
+  ====================================================== -->
 
   <section class="section">
 
     <div class="section-header">
 
       <div>
-        <h2>Featured Products</h2>
-        <p>Our most-loved everyday essentials.</p>
+
+        <h2>
+          Featured Products
+        </h2>
+
+        <p>
+          Our most-loved everyday essentials.
+        </p>
+
       </div>
+
 
       <a
         href="shop.html"
         class="view-all"
-        data-event="view_all_products">
+        data-verido-event="cta_click"
+        data-cta-name="view_all_products"
+      >
         View All
       </a>
 
@@ -743,18 +963,25 @@
 
       <article
         class="product-card"
+
         data-product-id="VER-001"
+
         data-product-name="Essential Oversized Tee"
-        data-product-price="899">
+
+        data-product-price="899"
+
+      >
 
         <div class="product-image">
 
           <img
             src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85"
             alt="Essential Oversized Tee"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -762,30 +989,59 @@
             Apparel
           </div>
 
+
           <div class="product-name">
             Essential Oversized Tee
           </div>
 
+
           <div class="product-price">
+
             ₹899
-            <span class="old-price">₹1,199</span>
+
+            <span class="old-price">
+              ₹1,199
+            </span>
+
           </div>
 
         </div>
+
 
         <div class="product-actions">
 
           <button
             class="view-product"
-            onclick="viewProduct('VER-001','Essential Oversized Tee')"
-            data-event="view_product">
+
+            data-product-id="VER-001"
+
+            data-product-name="Essential Oversized Tee"
+
+            data-product-price="899"
+
+            data-product-category="Apparel"
+
+            data-view-product
+          >
             View Product
           </button>
 
+
           <button
             class="add-cart"
-            onclick="addToCart('VER-001','Essential Oversized Tee',899)"
-            data-event="add_to_cart">
+
+            data-add-to-cart
+
+            data-product-id="VER-001"
+
+            data-product-name="Essential Oversized Tee"
+
+            data-product-price="899"
+
+            data-category="Apparel"
+
+            data-quantity="1"
+          >
             Add to Cart
           </button>
 
@@ -798,18 +1054,25 @@
 
       <article
         class="product-card"
+
         data-product-id="VER-002"
+
         data-product-name="Minimal Everyday Hoodie"
-        data-product-price="1499">
+
+        data-product-price="1499"
+
+      >
 
         <div class="product-image">
 
           <img
             src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=85"
             alt="Minimal Everyday Hoodie"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -817,30 +1080,59 @@
             Apparel
           </div>
 
+
           <div class="product-name">
             Minimal Everyday Hoodie
           </div>
 
+
           <div class="product-price">
+
             ₹1,499
-            <span class="old-price">₹1,999</span>
+
+            <span class="old-price">
+              ₹1,999
+            </span>
+
           </div>
 
         </div>
+
 
         <div class="product-actions">
 
           <button
             class="view-product"
-            onclick="viewProduct('VER-002','Minimal Everyday Hoodie')"
-            data-event="view_product">
+
+            data-product-id="VER-002"
+
+            data-product-name="Minimal Everyday Hoodie"
+
+            data-product-price="1499"
+
+            data-product-category="Apparel"
+
+            data-view-product
+          >
             View Product
           </button>
 
+
           <button
             class="add-cart"
-            onclick="addToCart('VER-002','Minimal Everyday Hoodie',1499)"
-            data-event="add_to_cart">
+
+            data-add-to-cart
+
+            data-product-id="VER-002"
+
+            data-product-name="Minimal Everyday Hoodie"
+
+            data-product-price="1499"
+
+            data-category="Apparel"
+
+            data-quantity="1"
+          >
             Add to Cart
           </button>
 
@@ -853,18 +1145,25 @@
 
       <article
         class="product-card"
+
         data-product-id="VER-003"
+
         data-product-name="Classic Everyday Cap"
-        data-product-price="599">
+
+        data-product-price="599"
+
+      >
 
         <div class="product-image">
 
           <img
             src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=900&q=85"
             alt="Classic Everyday Cap"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -872,30 +1171,59 @@
             Accessories
           </div>
 
+
           <div class="product-name">
             Classic Everyday Cap
           </div>
 
+
           <div class="product-price">
+
             ₹599
-            <span class="old-price">₹799</span>
+
+            <span class="old-price">
+              ₹799
+            </span>
+
           </div>
 
         </div>
+
 
         <div class="product-actions">
 
           <button
             class="view-product"
-            onclick="viewProduct('VER-003','Classic Everyday Cap')"
-            data-event="view_product">
+
+            data-product-id="VER-003"
+
+            data-product-name="Classic Everyday Cap"
+
+            data-product-price="599"
+
+            data-product-category="Accessories"
+
+            data-view-product
+          >
             View Product
           </button>
 
+
           <button
             class="add-cart"
-            onclick="addToCart('VER-003','Classic Everyday Cap',599)"
-            data-event="add_to_cart">
+
+            data-add-to-cart
+
+            data-product-id="VER-003"
+
+            data-product-name="Classic Everyday Cap"
+
+            data-product-price="599"
+
+            data-category="Accessories"
+
+            data-quantity="1"
+          >
             Add to Cart
           </button>
 
@@ -908,18 +1236,25 @@
 
       <article
         class="product-card"
+
         data-product-id="VER-004"
+
         data-product-name="Premium Everyday Sneakers"
-        data-product-price="2499">
+
+        data-product-price="2499"
+
+      >
 
         <div class="product-image">
 
           <img
             src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85"
             alt="Premium Everyday Sneakers"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -927,30 +1262,59 @@
             Footwear
           </div>
 
+
           <div class="product-name">
             Premium Everyday Sneakers
           </div>
 
+
           <div class="product-price">
+
             ₹2,499
-            <span class="old-price">₹3,499</span>
+
+            <span class="old-price">
+              ₹3,499
+            </span>
+
           </div>
 
         </div>
+
 
         <div class="product-actions">
 
           <button
             class="view-product"
-            onclick="viewProduct('VER-004','Premium Everyday Sneakers')"
-            data-event="view_product">
+
+            data-product-id="VER-004"
+
+            data-product-name="Premium Everyday Sneakers"
+
+            data-product-price="2499"
+
+            data-product-category="Footwear"
+
+            data-view-product
+          >
             View Product
           </button>
 
+
           <button
             class="add-cart"
-            onclick="addToCart('VER-004','Premium Everyday Sneakers',2499)"
-            data-event="add_to_cart">
+
+            data-add-to-cart
+
+            data-product-id="VER-004"
+
+            data-product-name="Premium Everyday Sneakers"
+
+            data-product-price="2499"
+
+            data-category="Footwear"
+
+            data-quantity="1"
+          >
             Add to Cart
           </button>
 
@@ -963,17 +1327,24 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        CATEGORIES
-  ========================== -->
+  ====================================================== -->
 
   <section class="section">
 
     <div class="section-header">
 
       <div>
-        <h2>Shop by Category</h2>
-        <p>Find exactly what you're looking for.</p>
+
+        <h2>
+          Shop by Category
+        </h2>
+
+        <p>
+          Find exactly what you're looking for.
+        </p>
+
       </div>
 
     </div>
@@ -981,17 +1352,31 @@
 
     <div class="categories">
 
+
       <div
         class="category-card"
-        style="background-image:url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85');">
+
+        style="
+          background-image:url(
+            'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85'
+          );
+        "
+      >
 
         <div class="category-content">
 
-          <h3>Apparel</h3>
+          <h3>
+            Apparel
+          </h3>
+
 
           <a
             href="shop.html?category=apparel"
-            data-event="category_click">
+
+            data-verido-event="cta_click"
+
+            data-cta-name="category_apparel"
+          >
             Shop Apparel →
           </a>
 
@@ -1002,15 +1387,28 @@
 
       <div
         class="category-card"
-        style="background-image:url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=85');">
+
+        style="
+          background-image:url(
+            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=85'
+          );
+        "
+      >
 
         <div class="category-content">
 
-          <h3>Footwear</h3>
+          <h3>
+            Footwear
+          </h3>
+
 
           <a
             href="shop.html?category=footwear"
-            data-event="category_click">
+
+            data-verido-event="cta_click"
+
+            data-cta-name="category_footwear"
+          >
             Shop Footwear →
           </a>
 
@@ -1021,15 +1419,28 @@
 
       <div
         class="category-card"
-        style="background-image:url('https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=1000&q=85');">
+
+        style="
+          background-image:url(
+            'https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=1000&q=85'
+          );
+        "
+      >
 
         <div class="category-content">
 
-          <h3>Accessories</h3>
+          <h3>
+            Accessories
+          </h3>
+
 
           <a
             href="shop.html?category=accessories"
-            data-event="category_click">
+
+            data-verido-event="cta_click"
+
+            data-cta-name="category_accessories"
+          >
             Shop Accessories →
           </a>
 
@@ -1042,9 +1453,9 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        OFFER
-  ========================== -->
+  ====================================================== -->
 
   <section class="offer">
 
@@ -1055,6 +1466,7 @@
         your first order.
       </h2>
 
+
       <p>
         Join the VERIDO community and receive exclusive
         offers, early access and product updates.
@@ -1062,45 +1474,61 @@
 
     </div>
 
+
     <a
       href="#newsletter"
       class="btn btn-light"
-      data-event="offer_signup_click">
+
+      data-verido-event="cta_click"
+
+      data-cta-name="offer_signup"
+    >
       Get My Offer
     </a>
 
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        NEWSLETTER
-  ========================== -->
+  ====================================================== -->
 
   <section
     class="newsletter"
-    id="newsletter">
+    id="newsletter"
+  >
 
     <h2>
       Stay in the loop.
     </h2>
 
+
     <p>
       Get product launches, offers and exclusive updates.
     </p>
 
+
     <form
       class="newsletter-form"
-      id="newsletterForm">
+      id="newsletterForm"
+    >
 
       <input
         type="email"
         id="email"
+        name="email"
         placeholder="Enter your email"
-        required>
+        required
+      >
+
 
       <button
         type="submit"
-        data-event="newsletter_submit">
+
+        data-verido-event="cta_click"
+
+        data-cta-name="newsletter_submit"
+      >
         Subscribe
       </button>
 
@@ -1109,17 +1537,21 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        FOOTER
-  ========================== -->
+  ====================================================== -->
 
   <footer>
 
     <div class="footer-grid">
 
+
       <div class="footer-brand">
 
-        <h3>VERIDO</h3>
+        <h3>
+          VERIDO
+        </h3>
+
 
         <p>
           Premium everyday essentials designed
@@ -1131,13 +1563,19 @@
 
       <div>
 
-        <h4>Shop</h4>
+        <h4>
+          Shop
+        </h4>
+
 
         <ul>
 
           <li>
-            <a href="shop.html">All Products</a>
+            <a href="shop.html">
+              All Products
+            </a>
           </li>
+
 
           <li>
             <a href="shop.html?category=apparel">
@@ -1145,11 +1583,13 @@
             </a>
           </li>
 
+
           <li>
             <a href="shop.html?category=footwear">
               Footwear
             </a>
           </li>
+
 
           <li>
             <a href="shop.html?category=accessories">
@@ -1164,24 +1604,38 @@
 
       <div>
 
-        <h4>Support</h4>
+        <h4>
+          Support
+        </h4>
+
 
         <ul>
 
           <li>
-            <a href="contact.html">Contact Us</a>
+            <a href="contact.html">
+              Contact Us
+            </a>
           </li>
 
-          <li>
-            <a href="faq.html">FAQ</a>
-          </li>
 
           <li>
-            <a href="shipping.html">Shipping</a>
+            <a href="faq.html">
+              FAQ
+            </a>
           </li>
 
+
           <li>
-            <a href="returns.html">Returns</a>
+            <a href="shipping.html">
+              Shipping
+            </a>
+          </li>
+
+
+          <li>
+            <a href="returns.html">
+              Returns
+            </a>
           </li>
 
         </ul>
@@ -1191,20 +1645,31 @@
 
       <div>
 
-        <h4>Company</h4>
+        <h4>
+          Company
+        </h4>
+
 
         <ul>
 
           <li>
-            <a href="about.html">About Us</a>
+            <a href="about.html">
+              About Us
+            </a>
           </li>
 
-          <li>
-            <a href="privacy.html">Privacy</a>
-          </li>
 
           <li>
-            <a href="terms.html">Terms</a>
+            <a href="privacy.html">
+              Privacy
+            </a>
+          </li>
+
+
+          <li>
+            <a href="terms.html">
+              Terms
+            </a>
           </li>
 
         </ul>
@@ -1217,8 +1682,10 @@
     <div class="footer-bottom">
 
       <span>
-        © 2026 VERIDO. All rights reserved.
+        © 2026 VERIDO.
+        All rights reserved.
       </span>
+
 
       <span>
         Performance Marketing Lab
@@ -1229,221 +1696,210 @@
   </footer>
 
 
-  <!-- =========================
-       BASIC DEMO FUNCTIONALITY
-  ========================== -->
+  <!-- =====================================================
+       INDEX PAGE SPECIFIC LOGIC
+  ====================================================== -->
 
   <script>
 
-    /*
-     * ============================================
-     * FUTURE TRACKING ARCHITECTURE
-     * ============================================
-     *
-     * These functions are intentionally prepared
-     * for GA4 + GTM implementation later.
-     *
-     * We will NOT directly connect GA4 yet.
-     *
-     * Later:
-     *
-     * Website
-     *    ↓
-     * dataLayer
-     *    ↓
-     * GTM
-     *    ↓
-     * GA4
-     *    ↓
-     * Key Events
-     *    ↓
-     * Google Ads Conversions
-     *
-     */
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
 
 
-    // Create dataLayer if it doesn't exist
+        /* =========================================
+           NEWSLETTER
+        ========================================= */
 
-    window.dataLayer = window.dataLayer || [];
-
-
-    /*
-     * Generic event helper
-     */
-
-    function pushEvent(eventName, parameters = {}) {
-
-      window.dataLayer.push({
-
-        event: eventName,
-
-        ...parameters
-
-      });
-
-      console.log(
-        "Tracking Event:",
-        eventName,
-        parameters
-      );
-
-    }
+        const newsletterForm =
+          document.getElementById(
+            "newsletterForm"
+          );
 
 
-    /*
-     * Add Product To Cart
-     */
+        if (newsletterForm) {
 
-    function addToCart(productId, productName, price) {
+          newsletterForm.addEventListener(
+            "submit",
+            function (event) {
 
-      pushEvent("add_to_cart", {
+              event.preventDefault();
 
-        ecommerce: {
 
-          currency: "INR",
+              const email =
+                document.getElementById(
+                  "email"
+                ).value.trim();
 
-          value: price,
 
-          items: [
-            {
-              item_id: productId,
-              item_name: productName,
-              price: price,
-              quantity: 1
+              if (!email) {
+                return;
+              }
+
+
+              /*
+               * Do NOT send the email address
+               * to GA4 / dataLayer.
+               *
+               * We only send the business event.
+               */
+
+              window.dataLayer =
+                window.dataLayer || [];
+
+
+              window.dataLayer.push({
+
+                event:
+                  "newsletter_signup",
+
+                method:
+                  "website"
+
+              });
+
+
+              alert(
+                "Thanks for subscribing!"
+              );
+
+
+              newsletterForm.reset();
+
             }
-          ]
+          );
 
         }
 
-      });
+
+        /* =========================================
+           VIEW PRODUCT
+        ========================================= */
+
+        document.addEventListener(
+          "click",
+          function (event) {
+
+            const button =
+              event.target.closest(
+                "[data-view-product]"
+              );
 
 
-      let currentCount =
-        Number(
-          document.getElementById("cartCount").innerText
+            if (!button) {
+              return;
+            }
+
+
+            const productId =
+              button.dataset.productId;
+
+
+            const productName =
+              button.dataset.productName;
+
+
+            const price =
+              Number(
+                button.dataset.productPrice || 0
+              );
+
+
+            const category =
+              button.dataset.productCategory ||
+              "";
+
+
+            /*
+             * Send GA4-style ecommerce event
+             * through the central dataLayer.
+             */
+
+            window.dataLayer =
+              window.dataLayer || [];
+
+
+            window.dataLayer.push({
+
+              event:
+                "view_item",
+
+              ecommerce: {
+
+                currency:
+                  "INR",
+
+                value:
+                  price,
+
+                items: [{
+
+                  item_id:
+                    productId,
+
+                  item_name:
+                    productName,
+
+                  item_category:
+                    category,
+
+                  price:
+                    price,
+
+                  quantity:
+                    1
+
+                }]
+
+              }
+
+            });
+
+
+            /*
+             * Navigate to product page
+             */
+
+            window.location.href =
+              "product.html?id=" +
+              encodeURIComponent(
+                productId
+              );
+
+          }
         );
 
-      currentCount++;
 
-      document.getElementById("cartCount").innerText =
-        currentCount;
-
-
-      alert(productName + " added to cart.");
-
-    }
-
-
-    /*
-     * View Product
-     */
-
-    function viewProduct(productId, productName) {
-
-      pushEvent("view_item", {
-
-        ecommerce: {
-
-          currency: "INR",
-
-          items: [
-            {
-              item_id: productId,
-              item_name: productName
-            }
-          ]
-
-        }
-
-      });
-
-
-      /*
-       * Product page will be connected
-       * after product.html is created.
-       */
-
-      window.location.href =
-        "product.html?id=" + productId;
-
-    }
-
-
-    /*
-     * Generic data-event tracking
-     */
-
-    document.addEventListener(
-      "click",
-      function(event) {
-
-        const element =
-          event.target.closest("[data-event]");
-
-        if (!element) return;
-
-
-        const eventName =
-          element.getAttribute("data-event");
-
-
-        /*
-         * Do not double-track product buttons
-         * because their specific functions already
-         * push ecommerce events.
-         */
+        /* =========================================
+           INITIAL CART COUNT
+        ========================================= */
 
         if (
-          eventName === "add_to_cart" ||
-          eventName === "view_product"
+          window.VERIDO_CART &&
+          typeof
+          window.VERIDO_CART.count ===
+          "function"
         ) {
-          return;
+
+          window.VERIDO_CART.count();
+
         }
 
 
-        pushEvent(eventName);
+        /* =========================================
+           DEBUG MESSAGE
+        ========================================= */
+
+        console.log(
+          "✅ VERIDO index.html initialized."
+        );
 
       }
     );
 
-
-    /*
-     * Newsletter form
-     */
-
-    document
-      .getElementById("newsletterForm")
-      .addEventListener(
-        "submit",
-        function(event) {
-
-          event.preventDefault();
-
-
-          const email =
-            document.getElementById("email").value;
-
-
-          pushEvent(
-            "newsletter_signup",
-            {
-              method: "website"
-            }
-          );
-
-
-          alert(
-            "Thanks for subscribing!"
-          );
-
-
-          this.reset();
-
-        }
-      );
-
-
   </script>
 
+
 </body>
+
 </html>
