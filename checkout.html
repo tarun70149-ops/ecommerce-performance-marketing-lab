@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">checkoutProducts
 
 <head>
 
@@ -833,157 +833,38 @@
         </h2>
 
 
-        <!-- PRODUCT 1 -->
-
-        <div class="summary-product">
-
-          <div class="summary-product-image">
-
-            <img
-              src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=400&q=85"
-              alt="Essential Oversized Tee">
-
-          </div>
-
-
-          <div class="summary-product-info">
-
-            <div class="summary-product-name">
-
-              Essential Oversized Tee
-
-            </div>
-
-            <div class="summary-product-meta">
-
-              Size: M • Qty: 1
-
-            </div>
-
-            <div class="summary-product-price">
-
-              ₹899
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- PRODUCT 2 -->
-
-        <div class="summary-product">
-
-          <div class="summary-product-image">
-
-            <img
-              src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=400&q=85"
-              alt="Classic Everyday Cap">
-
-          </div>
-
-
-          <div class="summary-product-info">
-
-            <div class="summary-product-name">
-
-              Classic Everyday Cap
-
-            </div>
-
-            <div class="summary-product-meta">
-
-              One Size • Qty: 1
-
-            </div>
-
-            <div class="summary-product-price">
-
-              ₹599
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- SUMMARY -->
+        <!-- DYNAMIC ORDER SUMMARY -->
+        <div id="checkoutProducts"></div>
 
         <div class="summary-row">
-
-          <span>
-            Subtotal
-          </span>
-
-          <span>
-            ₹1,498
-          </span>
-
+          <span>Subtotal</span>
+          <span id="checkoutSubtotal">₹0</span>
         </div>
-
 
         <div class="summary-row">
-
-          <span>
-            Shipping
-          </span>
-
-          <span>
-            FREE
-          </span>
-
+          <span>Shipping</span>
+          <span id="checkoutShipping">FREE</span>
         </div>
 
-
-        <div
-          class="summary-row discount">
-
-          <span>
-            Discount
-          </span>
-
-          <span>
-            ₹0
-          </span>
-
+        <div class="summary-row discount">
+          <span>Discount</span>
+          <span id="checkoutDiscount">-₹0</span>
         </div>
-
 
         <div class="divider"></div>
 
-
         <div class="total-row">
-
-          <span>
-            Total
-          </span>
-
-          <span>
-            ₹1,498
-          </span>
-
+          <span>Total</span>
+          <span id="checkoutTotal">₹0</span>
         </div>
 
-
-        <!-- PLACE ORDER -->
-
-        <button
-          class="place-order-btn"
-          id="placeOrderBtn">
-
-          Place Order • ₹1,498
-
+        <button class="place-order-btn" id="placeOrderBtn" type="button">
+          Place Order • ₹0
         </button>
 
-
         <div class="secure-note">
-
           🔒 Your payment information is secure.
-
         </div>
-
 
         <!-- TRUST -->
 
@@ -1037,523 +918,224 @@
   ========================== -->
 
   <script>
+    "use strict";
 
-    /*
-     * ============================================
-     * DATALAYER
-     * ============================================
-     */
+    const CART_KEY = "verido_cart";
+    window.dataLayer = window.dataLayer || [];
+    let orderPlaced = false;
 
-    window.dataLayer =
-      window.dataLayer || [];
-
-
-    /*
-     * ============================================
-     * ORDER DATA
-     * ============================================
-     */
-
-    const order = {
-
-      transaction_id:
-        "VER-DEMO-" +
-        Date.now(),
-
-      currency:
-        "INR",
-
-      value:
-        1498,
-
-      shipping:
-        0,
-
-      tax:
-        0,
-
-      coupon:
-        "",
-
-      items: [
-
-        {
-
-          item_id:
-            "VER-001",
-
-          item_name:
-            "Essential Oversized Tee",
-
-          item_category:
-            "Apparel",
-
-          item_variant:
-            "M",
-
-          price:
-            899,
-
-          quantity:
-            1
-
-        },
-
-        {
-
-          item_id:
-            "VER-003",
-
-          item_name:
-            "Classic Everyday Cap",
-
-          item_category:
-            "Accessories",
-
-          item_variant:
-            "One Size",
-
-          price:
-            599,
-
-          quantity:
-            1
-
-        }
-
-      ]
-
-    };
-
-
-    /*
-     * ============================================
-     * EVENT HELPER
-     * ============================================
-     */
-
-    function pushEvent(
-      eventName,
-      parameters = {}
-    ) {
-
-      window.dataLayer.push({
-
-        event:
-          eventName,
-
-        ...parameters
-
-      });
-
-
-      console.log(
-        "GTM Event:",
-        eventName,
-        parameters
-      );
-
+    function getCart() {
+      try {
+        const cart = JSON.parse(localStorage.getItem(CART_KEY));
+        return Array.isArray(cart) ? cart : [];
+      } catch (e) {
+        return [];
+      }
     }
 
+    function money(value) {
+      return "₹" + Number(value || 0).toLocaleString("en-IN");
+    }
 
-    /*
-     * ============================================
-     * CHECKOUT PAGE EVENT
-     *
-     * This event tells GA4:
-     * User reached checkout.
-     * ============================================
-     */
+    function subtotal(cart) {
+      return cart.reduce(function(total, item) {
+        return total + (Number(item.price) || 0) * (Number(item.quantity) || 1);
+      }, 0);
+    }
 
-    document.addEventListener(
-      "DOMContentLoaded",
-      function() {
+    function variant(item) {
+      if (item.variant) return item.variant;
+      if (item.size) return item.size;
+      return (item.id === "VER-001" || item.id === "VER-005") ? "M" : "One Size";
+    }
 
-        pushEvent(
-          "checkout_page_view",
-          {
+    function escapeHTML(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
 
-            ecommerce: {
+    function gaItems(cart) {
+      return cart.map(function(item) {
+        return {
+          item_id: String(item.id),
+          item_name: item.name || "Product",
+          item_category: item.category || "Product",
+          item_variant: variant(item),
+          price: Number(item.price) || 0,
+          quantity: Number(item.quantity) || 1
+        };
+      });
+    }
 
-              currency:
-                order.currency,
+    function pushEvent(name, data) {
+      window.dataLayer.push({
+        event: name,
+        ...data
+      });
+      console.log("GTM Event:", name, data);
+    }
 
-              value:
-                order.value,
+    function renderCheckout() {
+      const cart = getCart();
+      const products = document.getElementById("checkoutProducts");
+      const subtotalEl = document.getElementById("checkoutSubtotal");
+      const discountEl = document.getElementById("checkoutDiscount");
+      const totalEl = document.getElementById("checkoutTotal");
+      const button = document.getElementById("placeOrderBtn");
 
-              items:
-                order.items
-
-            }
-
-          }
-        );
-
+      if (!products) {
+        console.error("VERIDO: #checkoutProducts is missing.");
+        return;
       }
-    );
 
+      const total = subtotal(cart);
 
-    /*
-     * ============================================
-     * PAYMENT METHOD
-     * ============================================
-     */
+      products.innerHTML = "";
 
-    document
-      .querySelectorAll(
-        'input[name="payment"]'
-      )
-      .forEach(
-        function(radio) {
+      cart.forEach(function(item) {
+        const qty = Number(item.quantity) || 1;
+        const lineTotal = (Number(item.price) || 0) * qty;
 
-          radio.addEventListener(
-            "change",
-            function() {
+        const row = document.createElement("div");
+        row.className = "summary-product";
 
-              document
-                .querySelectorAll(
-                  ".payment-option"
-                )
-                .forEach(
-                  option =>
-                    option.classList.remove(
-                      "active"
-                    )
-                );
+        row.innerHTML =
+          '<div class="summary-product-image">' +
+            (item.image
+              ? '<img src="' + escapeHTML(item.image) + '" alt="' + escapeHTML(item.name) + '">'
+              : '') +
+          '</div>' +
+          '<div class="summary-product-info">' +
+            '<div class="summary-product-name">' + escapeHTML(item.name || "Product") + '</div>' +
+            '<div class="summary-product-meta">' + escapeHTML(variant(item)) + ' • Qty: ' + qty + '</div>' +
+            '<div class="summary-product-price">' + money(lineTotal) + '</div>' +
+          '</div>';
 
+        products.appendChild(row);
+      });
 
-              this
-                .closest(
-                  ".payment-option"
-                )
-                .classList.add(
-                  "active"
-                );
+      subtotalEl.textContent = money(total);
+      discountEl.textContent = "-₹0";
+      totalEl.textContent = money(total);
 
+      if (button) {
+        button.disabled = cart.length === 0;
+        button.style.opacity = cart.length ? "1" : "0.5";
+        button.textContent = cart.length
+          ? "Place Order • " + money(total)
+          : "Cart is Empty";
+      }
+    }
 
-              pushEvent(
-                "select_payment_method",
-                {
-
-                  payment_type:
-                    this.value
-
-                }
-              );
-
-            }
-          );
-
+    function validateForm() {
+      const ids = ["firstName","lastName","email","phone","address","city","state","pin"];
+      for (const id of ids) {
+        if (!document.getElementById(id).value.trim()) {
+          alert("Please complete all required fields.");
+          return false;
         }
-      );
-
-
-    /*
-     * ============================================
-     * PLACE ORDER
-     *
-     * IMPORTANT:
-     *
-     * Purchase should only fire after
-     * successful order completion.
-     * ============================================
-     */
-
-    document
-      .getElementById(
-        "placeOrderBtn"
-      )
-      .addEventListener(
-        "click",
-        function() {
-
-
-          /*
-           * FORM VALIDATION
-           */
-
-          const firstName =
-            document
-              .getElementById(
-                "firstName"
-              )
-              .value
-              .trim();
-
-
-          const lastName =
-            document
-              .getElementById(
-                "lastName"
-              )
-              .value
-              .trim();
-
-
-          const email =
-            document
-              .getElementById(
-                "email"
-              )
-              .value
-              .trim();
-
-
-          const phone =
-            document
-              .getElementById(
-                "phone"
-              )
-              .value
-              .trim();
-
-
-          const address =
-            document
-              .getElementById(
-                "address"
-              )
-              .value
-              .trim();
-
-
-          const city =
-            document
-              .getElementById(
-                "city"
-              )
-              .value
-              .trim();
-
-
-          const state =
-            document
-              .getElementById(
-                "state"
-              )
-              .value;
-
-
-          const pin =
-            document
-              .getElementById(
-                "pin"
-              )
-              .value
-              .trim();
-
-
-          const terms =
-            document
-              .getElementById(
-                "terms"
-              )
-              .checked;
-
-
-          /*
-           * VALIDATION
-           */
-
-          if (
-            !firstName ||
-            !lastName ||
-            !email ||
-            !phone ||
-            !address ||
-            !city ||
-            !state ||
-            !pin
-          ) {
-
-            alert(
-              "Please complete all required fields."
-            );
-
-            return;
-
-          }
-
-
-          if (
-            !/^\d{10}$/.test(
-              phone
-            )
-          ) {
-
-            alert(
-              "Please enter a valid 10-digit phone number."
-            );
-
-            return;
-
-          }
-
-
-          if (
-            !/^\d{6}$/.test(
-              pin
-            )
-          ) {
-
-            alert(
-              "Please enter a valid 6-digit PIN code."
-            );
-
-            return;
-
-          }
-
-
-          if (!terms) {
-
-            alert(
-              "Please accept the Terms & Conditions."
-            );
-
-            return;
-
-          }
-
-
-          /*
-           * GET PAYMENT METHOD
-           */
-
-          const payment =
-            document
-              .querySelector(
-                'input[name="payment"]:checked'
-              )
-              .value;
-
-
-          /*
-           * GENERATE UNIQUE TRANSACTION ID
-           */
-
-          order.transaction_id =
-            "VER-" +
-            Date.now();
-
-
-          /*
-           * ========================================
-           * PURCHASE EVENT
-           * ========================================
-           *
-           * This is our PRIMARY E-COMMERCE
-           * CONVERSION EVENT.
-           *
-           * GA4 receives:
-           *
-           * transaction_id
-           * value
-           * currency
-           * shipping
-           * tax
-           * items
-           *
-           * ========================================
-           */
-
-          pushEvent(
-            "purchase",
-            {
-
-              ecommerce: {
-
-                transaction_id:
-                  order.transaction_id,
-
-                value:
-                  order.value,
-
-                currency:
-                  order.currency,
-
-                shipping:
-                  order.shipping,
-
-                tax:
-                  order.tax,
-
-                coupon:
-                  order.coupon,
-
-                payment_type:
-                  payment,
-
-                items:
-                  order.items
-
-              }
-
-            }
-          );
-
-
-          /*
-           * ========================================
-           * SUCCESS STATE
-           * ========================================
-           */
-
-          document
-            .getElementById(
-              "successMessage"
-            )
-            .style.display =
-            "block";
-
-
-          /*
-           * CHANGE BUTTON
-           */
-
-          this.innerText =
-            "Order Placed ✓";
-
-
-          this.disabled =
-            true;
-
-
-          this.style.background =
-            "#218838";
-
-
-          /*
-           * CONFIRMATION EVENT
-           */
-
-          pushEvent(
-            "order_confirmation_view",
-            {
-
-              transaction_id:
-                order.transaction_id
-
-            }
-          );
-
-
-          /*
-           * SCROLL TO SUCCESS
-           */
-
-          window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
+      }
+
+      const phone = document.getElementById("phone").value.trim();
+      const pin = document.getElementById("pin").value.trim();
+
+      if (!/^\\d{10}$/.test(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return false;
+      }
+
+      if (!/^\\d{6}$/.test(pin)) {
+        alert("Please enter a valid 6-digit PIN code.");
+        return false;
+      }
+
+      if (!document.getElementById("terms").checked) {
+        alert("Please accept the Terms & Conditions.");
+        return false;
+      }
+
+      return true;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const cart = getCart();
+
+      renderCheckout();
+
+      pushEvent("checkout_page_view", {
+        ecommerce: {
+          currency: "INR",
+          value: subtotal(cart),
+          items: gaItems(cart)
+        }
+      });
+
+      document.querySelectorAll('input[name="payment"]').forEach(function(radio) {
+        radio.addEventListener("change", function() {
+          document.querySelectorAll(".payment-option").forEach(function(option) {
+            option.classList.remove("active");
           });
 
+          this.closest(".payment-option").classList.add("active");
+
+          pushEvent("select_payment_method", {
+            payment_type: this.value
+          });
+        });
+      });
+
+      document.getElementById("placeOrderBtn").addEventListener("click", function() {
+        if (orderPlaced) return;
+
+        const currentCart = getCart();
+
+        if (!currentCart.length) {
+          alert("Your cart is empty.");
+          return;
         }
-      );
 
+        if (!validateForm()) return;
 
+        const payment = document.querySelector('input[name="payment"]:checked')?.value || "";
+        const total = subtotal(currentCart);
+        const transactionId = "VER-" + Date.now();
+
+        pushEvent("purchase", {
+          ecommerce: {
+            transaction_id: transactionId,
+            value: total,
+            currency: "INR",
+            shipping: 0,
+            tax: 0,
+            coupon: "",
+            payment_type: payment,
+            items: gaItems(currentCart)
+          }
+        });
+
+        localStorage.setItem("verido_last_order", JSON.stringify({
+          transaction_id: transactionId,
+          value: total,
+          items: currentCart,
+          created_at: new Date().toISOString()
+        }));
+
+        pushEvent("order_confirmation_view", {
+          transaction_id: transactionId
+        });
+
+        orderPlaced = true;
+
+        localStorage.removeItem(CART_KEY);
+        localStorage.removeItem("verido_coupon");
+
+        window.location.href = "thank-you.html";
+      });
+    });
   </script>
 
 </body>
