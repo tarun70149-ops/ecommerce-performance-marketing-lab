@@ -221,14 +221,42 @@
 
 
     .btn-light {
-      background: white;
-      border: 1px solid #ddd;
-    }
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid #ffffff;
+  padding: 14px 24px;
+  font-weight: 700;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
+.btn-light:hover {
+  background: #eeeeee;
+  color: #111111;
+  border-color: #eeeeee;
+  transform: translateY(-1px);
+}
 
-    .btn-light:hover {
-      background: #eee;
-    }
+/* =========================================
+   GET MY OFFER BUTTON — VISIBILITY FIX
+========================================= */
+
+.offer .btn-light {
+  background: #ffffff;
+  color: #111111 !important;
+  border: 1px solid #ffffff;
+  min-width: 180px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.offer .btn-light:hover {
+  background: #eeeeee;
+  color: #111111 !important;
+}
 
 
     .hero-image {
