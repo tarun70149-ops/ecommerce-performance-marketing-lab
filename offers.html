@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Offers | VERIDO</title>
+
+  <meta
+    name="description"
+    content="Discover the latest offers and promotions from VERIDO."
+  >
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #171717;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+    }
+
+    /* =========================
+       TOP BAR
+    ========================== */
+
+    .top-bar {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 9px 15px;
+      font-size: 13px;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .navbar {
+      background: white;
+      border-bottom: 1px solid #eee;
+      padding: 18px 6%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero span {
+      font-size: 11px;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      margin: 15px 0;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      color: #bbb;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* =========================
+       OFFER CONTAINER
+    ========================== */
+
+    .container {
+      max-width: 1250px;
+      margin: auto;
+      padding: 60px 6% 90px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    /* =========================
+       OFFER GRID
+    ========================== */
+
+    .offers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .offer-card {
+      background: white;
+      border: 1px solid #eee;
+      overflow: hidden;
+    }
+
+    .offer-image {
+      height: 260px;
+      background: #ddd;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .offer-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+
+    .offer-card:hover .offer-image img {
+      transform: scale(1.05);
+    }
+
+    .offer-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+
+      background: #111;
+      color: white;
+
+      padding: 7px 10px;
+
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+
+      z-index: 2;
+    }
+
+    .offer-content {
+      padding: 25px;
+    }
+
+    .offer-code {
+      color: #777;
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .offer-content h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .offer-content p {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .offer-details {
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+      margin-bottom: 18px;
+    }
+
+    .offer-details div {
+      font-size: 12px;
+      margin-bottom: 6px;
+      color: #555;
+    }
+
+    .offer-btn {
+      display: block;
+      width: 100%;
+      padding: 13px;
+
+      background: #111;
+      color: white;
+
+      text-align: center;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .offer-btn:hover {
+      background: #333;
+    }
+
+    /* =========================
+       FEATURED OFFER
+    ========================== */
+
+    .featured-offer {
+      margin-top: 25px;
+
+      background: #e9e9e9;
+
+      padding: 45px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 35px;
+
+      align-items: center;
+    }
+
+    .featured-content span {
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    .featured-content h2 {
+      font-size: 38px;
+      margin: 12px 0;
+    }
+
+    .featured-content p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .featured-code {
+      display: inline-block;
+
+      background: white;
+
+      padding: 13px 18px;
+
+      font-weight: 800;
+
+      letter-spacing: 2px;
+
+      margin-bottom: 20px;
+    }
+
+    .featured-image {
+      height: 330px;
+      overflow: hidden;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* =========================
+       TERMS
+    ========================== */
+
+    .terms-section {
+      margin-top: 45px;
+
+      padding: 25px;
+
+      background: white;
+
+      border: 1px solid #eee;
+    }
+
+    .terms-section h3 {
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .terms-section ul {
+      padding-left: 18px;
+    }
+
+    .terms-section li {
+      color: #777;
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      background: #111;
+      color: white;
+      padding: 45px 6% 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    footer h3 {
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    footer h4 {
+      margin-bottom: 14px;
+    }
+
+    footer p,
+    footer li {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 8px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+
+      color: #777;
+      font-size: 12px;
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 900px) {
+
+      .offers {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .featured-offer {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .offers {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-offer {
+        padding: 30px 20px;
+      }
+
+      .featured-content h2 {
+        font-size: 30px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
+  <div class="top-bar">
+
+    Limited-time offers • Free shipping above ₹999
+
+  </div>
+
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
+  <header class="navbar">
+
+    <a
+      href="index.html"
+      class="logo"
+      data-event="logo_click">
+
+      VERIDO
+
+    </a>
+
+
+    <nav>
+
+      <ul class="nav-links">
+
+        <li>
+          <a href="index.html">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="shop.html"
+            data-event="shop_navigation">
+
+            Shop
+
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="offers.html"
+            data-event="offers_navigation">
+
+            Offers
+
+          </a>
+        </li>
+
+        <li>
+          <a href="about.html">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a href="contact.html">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+
+    <div class="nav-actions">
+
+      <a
+        href="cart.html"
+        data-event="cart_click">
+
+        🛒 Cart
+
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero">
+
+    <span>
+      VERIDO PROMOTIONS
+    </span>
+
+    <h1>
+      Special Offers
+    </h1>
+
+    <p>
+
+      Save more on your favorite
+      everyday essentials with our
+      limited-time promotions.
+
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       OFFERS
+  ========================== -->
+
+  <main class="container">
+
+
+    <div class="section-title">
+
+      <h2>
+        Current Offers
+      </h2>
+
+      <p>
+        Choose an offer and start shopping.
+      </p>
+
+    </div>
+
+
+    <section class="offers">
+
+
+      <!-- OFFER 1 -->
+
+      <article
+        class="offer-card"
+        data-promotion-id="VERIDO15"
+        data-promotion-name="15% First Order Discount">
+
+
+        <div class="offer-image">
+
+          <span class="offer-badge">
+            BEST VALUE
+          </span>
+
+          <img
+            src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=900&q=85"
+            alt="15 percent discount">
+
+        </div>
+
+
+        <div class="offer-content">
+
+          <div class="offer-code">
+            CODE: VERIDO15
+          </div>
+
+          <h3>
+            Get 15% OFF
+          </h3>
+
+          <p>
+
+            Get 15% off your first order
+            across selected products.
+
+          </p>
+
+
+          <div class="offer-details">
+
+            <div>
+              ✓ New customers only
+            </div>
+
+            <div>
+              ✓ Minimum order ₹999
+            </div>
+
+            <div>
+              ✓ Limited-time promotion
+            </div>
+
+          </div>
+
+
+          <a
+            href="shop.html?promotion=VERIDO15"
+            class="offer-btn"
+            data-promotion-id="VERIDO15"
+            data-promotion-name="15% First Order Discount">
+
+            Shop With This Offer
+
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- OFFER 2 -->
+
+      <article
+        class="offer-card"
+        data-promotion-id="FREESHIP"
+        data-promotion-name="Free Shipping">
+
+
+        <div class="offer-image">
+
+          <span class="offer-badge">
+            FREE SHIPPING
+          </span>
+
+          <img
+            src="https://images.unsplash.com/photo-1586880244406-556ebe35f282?auto=format&fit=crop&w=900&q=85"
+            alt="Free shipping">
+
+        </div>
+
+
+        <div class="offer-content">
+
+          <div class="offer-code">
+            CODE: FREESHIP
+          </div>
+
+          <h3>
+            Free Shipping
+          </h3>
+
+          <p>
+
+            Enjoy free shipping on eligible
+            orders across India.
+
+          </p>
+
+
+          <div class="offer-details">
+
+            <div>
+              ✓ Minimum order ₹999
+            </div>
+
+            <div>
+              ✓ India-wide delivery
+            </div>
+
+            <div>
+              ✓ No hidden shipping charges
+            </div>
+
+          </div>
+
+
+          <a
+            href="shop.html?promotion=FREESHIP"
+            class="offer-btn"
+            data-promotion-id="FREESHIP"
+            data-promotion-name="Free Shipping">
+
+            Shop With This Offer
+
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- OFFER 3 -->
+
+      <article
+        class="offer-card"
+        data-promotion-id="BUNDLE20"
+        data-promotion-name="Bundle 20% OFF">
+
+
+        <div class="offer-image">
+
+          <span class="offer-badge">
+            BUNDLE DEAL
+          </span>
+
+          <img
+            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=85"
+            alt="Bundle deal">
+
+        </div>
+
+
+        <div class="offer-content">
+
+          <div class="offer-code">
+            CODE: BUNDLE20
+          </div>
+
+          <h3>
+            Bundle & Save
+          </h3>
+
+          <p>
+
+            Buy selected products together
+            and save up to 20%.
+
+          </p>
+
+
+          <div class="offer-details">
+
+            <div>
+              ✓ Selected products
+            </div>
+
+            <div>
+              ✓ Up to 20% savings
+            </div>
+
+            <div>
+              ✓ Limited stock
+            </div>
+
+          </div>
+
+
+          <a
+            href="shop.html?promotion=BUNDLE20"
+            class="offer-btn"
+            data-promotion-id="BUNDLE20"
+            data-promotion-name="Bundle 20% OFF">
+
+            Shop With This Offer
+
+          </a>
+
+        </div>
+
+      </article>
+
+
+    </section>
+
+
+    <!-- =========================
+         FEATURED OFFER
+    ========================== -->
+
+    <section class="featured-offer">
+
+
+      <div class="featured-content">
+
+        <span>
+          LIMITED TIME
+        </span>
+
+        <h2>
+          Weekend Sale
+        </h2>
+
+        <p>
+
+          Get up to 30% off selected
+          everyday essentials during
+          our weekend promotion.
+
+        </p>
+
+
+        <div class="featured-code">
+
+          WEEKEND30
+
+        </div>
+
+
+        <br>
+
+
+        <a
+          href="shop.html?promotion=WEEKEND30"
+          class="offer-btn"
+          id="featuredOfferBtn"
+          data-promotion-id="WEEKEND30"
+          data-promotion-name="Weekend Sale 30% OFF"
+          style="display:inline-block;width:auto;padding:14px 25px;">
+
+          Shop Weekend Sale
+
+        </a>
+
+      </div>
+
+
+      <div class="featured-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1000&q=85"
+          alt="Weekend sale">
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         TERMS
+    ========================== -->
+
+    <section class="terms-section">
+
+      <h3>
+        Offer Terms
+      </h3>
+
+      <ul>
+
+        <li>
+          Offers are valid for a limited time.
+        </li>
+
+        <li>
+          Some products may be excluded.
+        </li>
+
+        <li>
+          Promotions cannot always be combined.
+        </li>
+
+        <li>
+          Minimum order value may apply.
+        </li>
+
+        <li>
+          VERIDO reserves the right to modify
+          or end promotions.
+        </li>
+
+      </ul>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+
+    <div class="footer-grid">
+
+
+      <div>
+
+        <h3>
+          VERIDO
+        </h3>
+
+        <p>
+
+          Premium everyday essentials
+          designed for modern lifestyles.
+
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Shop
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="shop.html">
+              All Products
+            </a>
+          </li>
+
+          <li>
+            <a href="shop.html?category=apparel">
+              Apparel
+            </a>
+          </li>
+
+          <li>
+            <a href="shop.html?category=footwear">
+              Footwear
+            </a>
+          </li>
+
+          <li>
+            <a href="shop.html?category=accessories">
+              Accessories
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Support
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="contact.html">
+              Contact
+            </a>
+          </li>
+
+          <li>
+            <a href="faq.html">
+              FAQ
+            </a>
+          </li>
+
+          <li>
+            <a href="shipping.html">
+              Shipping
+            </a>
+          </li>
+
+          <li>
+            <a href="returns.html">
+              Returns
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Company
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="about.html">
+              About
+            </a>
+          </li>
+
+          <li>
+            <a href="privacy.html">
+              Privacy
+            </a>
+          </li>
+
+          <li>
+            <a href="terms.html">
+              Terms
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 VERIDO
+      </span>
+
+      <span>
+        Performance Marketing Lab
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+
+    /*
+     * ============================================
+     * DATALAYER
+     * ============================================
+     */
+
+    window.dataLayer =
+      window.dataLayer || [];
+
+
+    /*
+     * ============================================
+     * EVENT HELPER
+     * ============================================
+     */
+
+    function pushEvent(
+      eventName,
+      parameters = {}
+    ) {
+
+      window.dataLayer.push({
+
+        event:
+          eventName,
+
+        ...parameters
+
+      });
+
+
+      console.log(
+        "GTM Event:",
+        eventName,
+        parameters
+      );
+
+    }
+
+
+    /*
+     * ============================================
+     * PROMOTION CLICK TRACKING
+     *
+     * We are intentionally using a custom
+     * event so later we can understand:
+     *
+     * Which offer was clicked?
+     *
+     * Which promotion generated traffic?
+     * ============================================
+     */
+
+    document
+      .querySelectorAll(
+        "[data-promotion-id]"
+      )
+      .forEach(
+        function(element) {
+
+          element.addEventListener(
+            "click",
+            function() {
+
+              const promotionId =
+                this.getAttribute(
+                  "data-promotion-id"
+                );
+
+
+              const promotionName =
+                this.getAttribute(
+                  "data-promotion-name"
+                );
+
+
+              pushEvent(
+                "select_promotion",
+                {
+
+                  promotion_id:
+                    promotionId,
+
+                  promotion_name:
+                    promotionName
+
+                }
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * OFFER PAGE VIEW
+     * ============================================
+     */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        pushEvent(
+          "view_promotion_page",
+          {
+
+            page_type:
+              "offers",
+
+            page_title:
+              document.title
+
+          }
+        );
+
+      }
+    );
+
+
+    /*
+     * ============================================
+     * NAVIGATION TRACKING
+     * ============================================
+     */
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+        const element =
+          event.target.closest(
+            "[data-event]"
+          );
+
+
+        if (!element) {
+          return;
+        }
+
+
+        const eventName =
+          element.getAttribute(
+            "data-event"
+          );
+
+
+        pushEvent(
+          eventName
+        );
+
+      }
+    );
+
+
+  </script>
+
+</body>
+
+</html>
