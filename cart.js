@@ -1,24 +1,8 @@
 /**
- * ============================================================
+ * =========================================================
  * VERIDO E-COMMERCE PERFORMANCE MARKETING LAB
- * CART ENGINE
- * ============================================================
- *
- * Responsibilities:
- *
- * 1. Add products to cart
- * 2. Store cart in localStorage
- * 3. Increase quantity for duplicate products
- * 4. Maintain cart count
- * 5. Remove / update cart data
- * 6. GA4 ecommerce events
- * 7. Support shop.html
- * 8. Support cart.html
- *
- * Storage:
- * verido_cart
- *
- * ============================================================
+ * CART ENGINE — FINAL VERSION
+ * =========================================================
  */
 
 (function () {
@@ -26,37 +10,28 @@
   "use strict";
 
 
-  /* ============================================================
+  /* =========================================================
+     CONFIG
+  ========================================================= */
+
+  const CART_KEY = "verido_cart";
+
+
+  /* =========================================================
      DATA LAYER
-  ============================================================ */
+  ========================================================= */
 
   window.dataLayer =
     window.dataLayer || [];
 
 
-  /* ============================================================
-     CONSTANTS
-  ============================================================ */
-
-  const CART_KEY =
-    "verido_cart";
-
-
-  /* ============================================================
-     EVENT HELPER
-  ============================================================ */
-
-  function pushEvent(
-    eventName,
-    parameters = {}
-  ) {
+  function pushEvent(eventName, data = {}) {
 
     window.dataLayer.push({
 
-      event:
-        eventName,
+      event: eventName,
 
-      ...parameters
+      ...data
 
     });
 
@@ -64,15 +39,53 @@
     console.log(
       "[VERIDO CART]",
       eventName,
-      parameters
+      data
     );
 
   }
 
 
-  /* ============================================================
+  /* =========================================================
+     PRODUCT IMAGE MAP
+  ========================================================= */
+
+  const productImages = {
+
+    "VER-001":
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85",
+
+    "VER-002":
+      "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=85",
+
+    "VER-003":
+      "https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=700&q=85",
+
+    "VER-004":
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85"
+
+  };
+
+
+  /* =========================================================
+     PRODUCT CATEGORY MAP
+  ========================================================= */
+
+  const productCategories = {
+
+    "VER-001": "Apparel",
+
+    "VER-002": "Apparel",
+
+    "VER-003": "Accessories",
+
+    "VER-004": "Footwear"
+
+  };
+
+
+  /* =========================================================
      GET CART
-  ============================================================ */
+  ========================================================= */
 
   function getCart() {
 
@@ -91,24 +104,18 @@
       }
 
 
-      const parsedCart =
-        JSON.parse(
-          storedCart
-        );
+      const cart =
+        JSON.parse(storedCart);
 
 
-      if (
-        !Array.isArray(
-          parsedCart
-        )
-      ) {
+      if (!Array.isArray(cart)) {
 
         return [];
 
       }
 
 
-      return parsedCart;
+      return cart;
 
     }
 
@@ -119,7 +126,6 @@
         error
       );
 
-
       return [];
 
     }
@@ -127,73 +133,126 @@
   }
 
 
-  /* ============================================================
+  /* =========================================================
      SAVE CART
-  ============================================================ */
+  ========================================================= */
 
   function saveCart(cart) {
 
-    try {
+    localStorage.setItem(
 
-      localStorage.setItem(
+      CART_KEY,
 
-        CART_KEY,
+      JSON.stringify(cart)
 
-        JSON.stringify(cart)
-
-      );
+    );
 
 
-      updateCartCount();
-
-
-      window.dispatchEvent(
-        new CustomEvent(
-          "veridoCartUpdated",
-          {
-            detail: {
-              cart: cart
-            }
-          }
-        )
-      );
-
-
-      return true;
-
-    }
-
-    catch (error) {
-
-      console.error(
-        "VERIDO cart save error:",
-        error
-      );
-
-
-      return false;
-
-    }
+    updateCartCount();
 
   }
 
 
-  /* ============================================================
-     GET TOTAL QUANTITY
-  ============================================================ */
+  /* =========================================================
+     FORMAT MONEY
+  ========================================================= */
 
-  function getCartQuantity(
-    cart = getCart()
+  function money(value) {
+
+    return "₹" +
+      Number(value || 0)
+        .toLocaleString("en-IN");
+
+  }
+
+
+  /* =========================================================
+     NORMALIZE PRODUCT
+  ========================================================= */
+
+  function normalizeProduct(
+
+    productId,
+
+    productName,
+
+    price,
+
+    category = "",
+
+    image = ""
+
   ) {
+
+    return {
+
+      id:
+        String(productId || ""),
+
+      name:
+        String(productName || "VERIDO Product"),
+
+      category:
+        category ||
+        productCategories[
+          String(productId || "")
+        ] ||
+        "Product",
+
+      price:
+        Number(price || 0),
+
+      image:
+        image ||
+        productImages[
+          String(productId || "")
+        ] ||
+        ""
+
+    };
+
+  }
+
+
+  /* =========================================================
+     GET CART VALUE
+  ========================================================= */
+
+  function getCartValue(cart) {
 
     return cart.reduce(
 
-      function (
-        total,
-        item
-      ) {
+      function (total, item) {
 
         return total +
+
+          (
+            Number(item.price || 0) *
+
+            Number(item.quantity || 1)
+          );
+
+      },
+
+      0
+
+    );
+
+  }
+
+
+  /* =========================================================
+     GET TOTAL QUANTITY
+  ========================================================= */
+
+  function getCartQuantity(cart) {
+
+    return cart.reduce(
+
+      function (total, item) {
+
+        return total +
+
           Number(
             item.quantity || 1
           );
@@ -207,138 +266,11 @@
   }
 
 
-  /* ============================================================
-     UPDATE CART COUNT
-  ============================================================ */
+  /* =========================================================
+     GA4 ITEMS
+  ========================================================= */
 
-  function updateCartCount() {
-
-    const cart =
-      getCart();
-
-
-    const quantity =
-      getCartQuantity(
-        cart
-      );
-
-
-    const counters =
-      document.querySelectorAll(
-        "#cartCount, [data-cart-count]"
-      );
-
-
-    counters.forEach(
-
-      function (element) {
-
-        element.textContent =
-          quantity;
-
-      }
-
-    );
-
-
-    return quantity;
-
-  }
-
-
-  /* ============================================================
-     FIND PRODUCT
-  ============================================================ */
-
-  function findProduct(
-    productId,
-    cart = getCart()
-  ) {
-
-    return cart.find(
-
-      function (item) {
-
-        return String(
-          item.id
-        ) ===
-        String(
-          productId
-        );
-
-      }
-
-    );
-
-  }
-
-
-  /* ============================================================
-     GET PRODUCT INFORMATION FROM SHOP CARD
-  ============================================================ */
-
-  function getProductDetailsFromCard(
-    productId
-  ) {
-
-    const card =
-      document.querySelector(
-
-        `.product-card[data-id="${productId}"]`
-
-      );
-
-
-    if (!card) {
-
-      return {};
-
-    }
-
-
-    const imageElement =
-      card.querySelector(
-        ".product-image img"
-      );
-
-
-    return {
-
-      id:
-        card.dataset.id ||
-        productId,
-
-      name:
-        card.dataset.name ||
-        "",
-
-      category:
-        card.dataset.category ||
-        "",
-
-      price:
-        Number(
-          card.dataset.price ||
-          0
-        ),
-
-      image:
-        imageElement
-          ? imageElement.src
-          : ""
-
-    };
-
-  }
-
-
-  /* ============================================================
-     CONVERT CART TO GA4 ITEMS
-  ============================================================ */
-
-  function convertCartToGA4Items(
-    cart
-  ) {
+  function getGA4Items(cart) {
 
     return cart.map(
 
@@ -356,14 +288,10 @@
             item.category || "",
 
           price:
-            Number(
-              item.price || 0
-            ),
+            Number(item.price || 0),
 
           quantity:
-            Number(
-              item.quantity || 1
-            )
+            Number(item.quantity || 1)
 
         };
 
@@ -374,628 +302,766 @@
   }
 
 
-  /* ============================================================
-     ADD TO CART
-  ============================================================ */
+  /* =========================================================
+     UPDATE CART COUNT
+  ========================================================= */
 
-  window.addToCart =
-    function (
-      productId,
-      productName,
-      price
-    ) {
+  function updateCartCount() {
+
+    const cart =
+      getCart();
 
 
-      console.log(
-        "================================"
-      );
+    const count =
+      getCartQuantity(cart);
 
 
-      console.log(
-        "VERIDO ADD TO CART"
-      );
+    /*
+     * Support both:
+     *
+     * #cartCount
+     *
+     * [data-cart-count]
+     */
 
+    document
+      .querySelectorAll(
+        "#cartCount, [data-cart-count]"
+      )
+      .forEach(
 
-      console.log(
-        "Product ID:",
-        productId
-      );
+        function (element) {
 
-
-      console.log(
-        "Product Name:",
-        productName
-      );
-
-
-      console.log(
-        "Price:",
-        price
-      );
-
-
-      console.log(
-        "================================"
-      );
-
-
-      /* --------------------------------------------------------
-         READ CURRENT CART
-      -------------------------------------------------------- */
-
-      const cart =
-        getCart();
-
-
-      /* --------------------------------------------------------
-         GET PRODUCT CARD DATA
-      -------------------------------------------------------- */
-
-      const cardData =
-        getProductDetailsFromCard(
-          productId
-        );
-
-
-      /* --------------------------------------------------------
-         CREATE CLEAN PRODUCT OBJECT
-      -------------------------------------------------------- */
-
-      const product = {
-
-        id:
-          String(
-            productId
-          ),
-
-        name:
-          productName ||
-          cardData.name ||
-          "VERIDO Product",
-
-        category:
-          cardData.category ||
-          "",
-
-        price:
-          Number(
-            price ||
-            cardData.price ||
-            0
-          ),
-
-        image:
-          cardData.image ||
-          "",
-
-        quantity:
-          1
-
-      };
-
-
-      /* --------------------------------------------------------
-         CHECK IF PRODUCT ALREADY EXISTS
-      -------------------------------------------------------- */
-
-      const existingProduct =
-        cart.find(
-
-          function (item) {
-
-            return String(
-              item.id
-            ) ===
-            String(
-              product.id
-            );
-
-          }
-
-        );
-
-
-      /* ========================================================
-         EXISTING PRODUCT
-      ======================================================== */
-
-      if (existingProduct) {
-
-
-        existingProduct.quantity =
-          Number(
-            existingProduct.quantity || 1
-          ) + 1;
-
-
-        /*
-         * Keep latest product information
-         * without destroying existing quantity.
-         */
-
-        existingProduct.name =
-          product.name;
-
-
-        existingProduct.category =
-          product.category;
-
-
-        existingProduct.price =
-          product.price;
-
-
-        if (
-          product.image
-        ) {
-
-          existingProduct.image =
-            product.image;
+          element.textContent =
+            count;
 
         }
 
+      );
 
-        saveCart(
-          cart
+
+    return count;
+
+  }
+
+
+  /* =========================================================
+     ADD PRODUCT TO CART
+     =========================================================
+     
+     SUPPORTS BOTH FORMATS:
+     
+     1.
+     addToCart(
+       "VER-001",
+       "Essential Oversized Tee",
+       899
+     );
+     
+     2.
+     addToCart({
+       id: "VER-001",
+       name: "Essential Oversized Tee",
+       price: 899
+     });
+     
+  ========================================================= */
+
+  function addToCart(
+
+    productOrId,
+
+    productName,
+
+    price,
+
+    category = "",
+
+    image = ""
+
+  ) {
+
+
+    let product;
+
+
+    /* ---------------------------------------------------------
+       OBJECT FORMAT
+    --------------------------------------------------------- */
+
+    if (
+
+      typeof productOrId ===
+      "object"
+
+    ) {
+
+      product =
+        normalizeProduct(
+
+          productOrId.id,
+
+          productOrId.name,
+
+          productOrId.price,
+
+          productOrId.category,
+
+          productOrId.image
+
         );
 
+    }
 
-        /* ------------------------------------------------------
-           GA4 ADD TO CART
-        ------------------------------------------------------ */
 
-        pushEvent(
+    /* ---------------------------------------------------------
+       OLD STRING FORMAT
+    --------------------------------------------------------- */
 
-          "add_to_cart",
+    else {
 
-          {
+      product =
+        normalizeProduct(
 
-            ecommerce: {
+          productOrId,
 
-              currency:
-                "INR",
+          productName,
 
-              value:
+          price,
+
+          category,
+
+          image
+
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       VALIDATION
+    --------------------------------------------------------- */
+
+    if (!product.id) {
+
+      console.error(
+        "VERIDO: Product ID missing."
+      );
+
+      return;
+
+    }
+
+
+    if (
+
+      !Number.isFinite(
+        product.price
+      )
+
+    ) {
+
+      console.error(
+        "VERIDO: Invalid product price."
+      );
+
+      return;
+
+    }
+
+
+    /* =========================================================
+       GET CURRENT CART
+    ========================================================= */
+
+    const cart =
+      getCart();
+
+
+    /* =========================================================
+       CHECK IF PRODUCT ALREADY EXISTS
+    ========================================================= */
+
+    const existingProduct =
+      cart.find(
+
+        function (item) {
+
+          return String(item.id) ===
+            String(product.id);
+
+        }
+
+      );
+
+
+    /* =========================================================
+       EXISTING PRODUCT
+       → INCREASE QUANTITY
+    ========================================================= */
+
+    if (existingProduct) {
+
+      existingProduct.quantity =
+        Number(
+          existingProduct.quantity || 1
+        ) + 1;
+
+
+      /*
+       * Keep latest product data
+       */
+
+      existingProduct.name =
+        product.name;
+
+      existingProduct.price =
+        product.price;
+
+      existingProduct.category =
+        product.category;
+
+      existingProduct.image =
+        product.image;
+
+    }
+
+
+    /* =========================================================
+       NEW PRODUCT
+       → PUSH NEW ITEM
+    ========================================================= */
+
+    else {
+
+      cart.push({
+
+        id:
+          product.id,
+
+        name:
+          product.name,
+
+        category:
+          product.category,
+
+        price:
+          product.price,
+
+        quantity:
+          1,
+
+        image:
+          product.image
+
+      });
+
+    }
+
+
+    /* =========================================================
+       SAVE
+    ========================================================= */
+
+    saveCart(cart);
+
+
+    /* =========================================================
+       GA4 ADD TO CART
+    ========================================================= */
+
+    pushEvent(
+
+      "add_to_cart",
+
+      {
+
+        ecommerce: {
+
+          currency:
+            "INR",
+
+          value:
+            product.price,
+
+          items: [
+
+            {
+
+              item_id:
+                product.id,
+
+              item_name:
+                product.name,
+
+              item_category:
+                product.category,
+
+              price:
                 product.price,
 
-              items: [
-
-                {
-
-                  item_id:
-                    product.id,
-
-                  item_name:
-                    product.name,
-
-                  item_category:
-                    product.category,
-
-                  price:
-                    product.price,
-
-                  quantity:
-                    1
-
-                }
-
-              ]
+              quantity:
+                1
 
             }
 
-          }
+          ]
 
-        );
-
-
-        showCartMessage(
-
-          product.name +
-          " quantity increased."
-
-        );
-
-
-        return;
+        }
 
       }
 
-
-      /* ========================================================
-         NEW PRODUCT
-      ======================================================== */
-
-      cart.push(
-        product
-      );
+    );
 
 
-      /* --------------------------------------------------------
-         SAVE
-      -------------------------------------------------------- */
+    /* =========================================================
+       UPDATE CART COUNT
+    ========================================================= */
 
-      saveCart(
-        cart
-      );
+    updateCartCount();
 
 
-      /* --------------------------------------------------------
-         GA4
-      -------------------------------------------------------- */
+    /* =========================================================
+       CONSOLE DEBUG
+    ========================================================= */
 
-      pushEvent(
+    console.log(
+      "✅ Added to VERIDO cart:",
+      product
+    );
 
-        "add_to_cart",
 
-        {
+    console.log(
+      "🛒 Current cart:",
+      getCart()
+    );
 
-          ecommerce: {
 
-            currency:
-              "INR",
+    console.log(
+      "🛒 Total quantity:",
+      getCartQuantity(
+        getCart()
+      )
+    );
 
-            value:
-              product.price,
 
-            items: [
+    /*
+     * IMPORTANT:
+     * No alert here.
+     *
+     * This keeps the shopping experience clean.
+     */
 
-              {
+  }
 
-                item_id:
-                  product.id,
 
-                item_name:
-                  product.name,
+  /* =========================================================
+     REMOVE PRODUCT
+  ========================================================= */
 
-                item_category:
-                  product.category,
+  function removeFromCart(productId) {
 
-                price:
-                  product.price,
+    const cart =
+      getCart();
 
-                quantity:
-                  1
 
-              }
+    const product =
+      cart.find(
 
-            ]
+        function (item) {
 
-          }
+          return String(item.id) ===
+            String(productId);
 
         }
 
       );
 
 
-      /* --------------------------------------------------------
-         SUCCESS MESSAGE
-      -------------------------------------------------------- */
+    if (!product) {
 
-      showCartMessage(
+      return;
 
-        product.name +
-        " added to cart."
+    }
+
+
+    const updatedCart =
+      cart.filter(
+
+        function (item) {
+
+          return String(item.id) !==
+            String(productId);
+
+        }
 
       );
 
 
-    };
+    saveCart(
+      updatedCart
+    );
 
 
-  /* ============================================================
-     CART MESSAGE
-  ============================================================ */
+    pushEvent(
 
-  function showCartMessage(
-    message
-  ) {
+      "remove_from_cart",
 
-    /*
-     * Keep existing alert-style behaviour
-     * so current QA flow remains familiar.
-     */
+      {
 
-    alert(
-      message
+        ecommerce: {
+
+          currency:
+            "INR",
+
+          value:
+            Number(product.price || 0) *
+            Number(product.quantity || 1),
+
+          items: [
+
+            {
+
+              item_id:
+                product.id,
+
+              item_name:
+                product.name,
+
+              item_category:
+                product.category || "",
+
+              price:
+                Number(product.price || 0),
+
+              quantity:
+                Number(product.quantity || 1)
+
+            }
+
+          ]
+
+        }
+
+      }
+
+    );
+
+
+    console.log(
+      "🗑️ Removed from cart:",
+      product
     );
 
   }
 
 
-  /* ============================================================
-     REMOVE PRODUCT
-  ============================================================ */
+  /* =========================================================
+     UPDATE QUANTITY
+  ========================================================= */
+
+  function updateQuantity(
+
+    productId,
+
+    quantity
+
+  ) {
+
+    const cart =
+      getCart();
+
+
+    const product =
+      cart.find(
+
+        function (item) {
+
+          return String(item.id) ===
+            String(productId);
+
+        }
+
+      );
+
+
+    if (!product) {
+
+      return;
+
+    }
+
+
+    let newQuantity =
+      Number(quantity);
+
+
+    if (
+
+      !Number.isFinite(
+        newQuantity
+      )
+
+    ) {
+
+      return;
+
+    }
+
+
+    newQuantity =
+      Math.floor(
+        newQuantity
+      );
+
+
+    if (
+      newQuantity <= 0
+    ) {
+
+      removeFromCart(
+        productId
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * Maximum quantity = 99
+     */
+
+    newQuantity =
+      Math.min(
+        99,
+        newQuantity
+      );
+
+
+    product.quantity =
+      newQuantity;
+
+
+    saveCart(cart);
+
+
+    pushEvent(
+
+      "cart_quantity_update",
+
+      {
+
+        item_id:
+          product.id,
+
+        quantity:
+          product.quantity
+
+      }
+
+    );
+
+
+    console.log(
+      "🔢 Quantity updated:",
+      product.id,
+      product.quantity
+    );
+
+  }
+
+
+  /* =========================================================
+     CLEAR CART
+  ========================================================= */
+
+  function clearCart() {
+
+    const cart =
+      getCart();
+
+
+    if (!cart.length) {
+
+      return;
+
+    }
+
+
+    const previousValue =
+      getCartValue(cart);
+
+
+    localStorage.removeItem(
+      CART_KEY
+    );
+
+
+    localStorage.removeItem(
+      "verido_coupon"
+    );
+
+
+    pushEvent(
+
+      "clear_cart",
+
+      {
+
+        previous_cart_items:
+          cart.length,
+
+        previous_cart_quantity:
+          getCartQuantity(cart),
+
+        previous_cart_value:
+          previousValue
+
+      }
+
+    );
+
+
+    updateCartCount();
+
+
+    console.log(
+      "🧹 VERIDO cart cleared."
+    );
+
+  }
+
+
+  /* =========================================================
+     VIEW CART
+  ========================================================= */
+
+  function viewCart() {
+
+    const cart =
+      getCart();
+
+
+    pushEvent(
+
+      "view_cart",
+
+      {
+
+        ecommerce: {
+
+          currency:
+            "INR",
+
+          value:
+            getCartValue(cart),
+
+          items:
+            getGA4Items(cart)
+
+        }
+
+      }
+
+    );
+
+  }
+
+
+  /* =========================================================
+     EXPOSE GLOBAL API
+  ========================================================= */
+
+  window.VERIDO_CART = {
+
+    get:
+      getCart,
+
+    add:
+      addToCart,
+
+    remove:
+      removeFromCart,
+
+    updateQuantity:
+      updateQuantity,
+
+    clear:
+      clearCart,
+
+    value:
+      function () {
+
+        return getCartValue(
+          getCart()
+        );
+
+      },
+
+    count:
+      updateCartCount,
+
+    view:
+      viewCart,
+
+    items:
+      function () {
+
+        return getGA4Items(
+          getCart()
+        );
+
+      }
+
+  };
+
+
+  /* =========================================================
+     GLOBAL addToCart()
+     
+     This is VERY IMPORTANT because shop.html
+     currently calls:
+     
+     addToCart(
+       'VER-001',
+       'Essential Oversized Tee',
+       899
+     );
+     
+  ========================================================= */
+
+  window.addToCart =
+    addToCart;
+
+
+  /* =========================================================
+     GLOBAL REMOVE
+  ========================================================= */
 
   window.removeFromCart =
-    function (
-      productId
-    ) {
-
-      const cart =
-        getCart();
+    removeFromCart;
 
 
-      const product =
-        findProduct(
-          productId,
-          cart
-        );
-
-
-      if (!product) {
-
-        return;
-
-      }
-
-
-      const updatedCart =
-        cart.filter(
-
-          function (item) {
-
-            return String(
-              item.id
-            ) !==
-            String(
-              productId
-            );
-
-          }
-
-        );
-
-
-      saveCart(
-        updatedCart
-      );
-
-
-      /* ------------------------------------------------------
-         GA4 REMOVE FROM CART
-      ------------------------------------------------------ */
-
-      pushEvent(
-
-        "remove_from_cart",
-
-        {
-
-          ecommerce: {
-
-            currency:
-              "INR",
-
-            value:
-              Number(
-                product.price || 0
-              ) *
-              Number(
-                product.quantity || 1
-              ),
-
-            items: [
-
-              {
-
-                item_id:
-                  product.id,
-
-                item_name:
-                  product.name,
-
-                item_category:
-                  product.category ||
-                  "",
-
-                price:
-                  Number(
-                    product.price || 0
-                  ),
-
-                quantity:
-                  Number(
-                    product.quantity || 1
-                  )
-
-              }
-
-            ]
-
-          }
-
-        }
-
-      );
-
-
-    };
-
-
-  /* ============================================================
-     UPDATE PRODUCT QUANTITY
-  ============================================================ */
+  /* =========================================================
+     GLOBAL UPDATE QUANTITY
+  ========================================================= */
 
   window.updateCartQuantity =
-    function (
-      productId,
-      quantity
-    ) {
-
-      const cart =
-        getCart();
+    updateQuantity;
 
 
-      const product =
-        findProduct(
-          productId,
-          cart
-        );
-
-
-      if (!product) {
-
-        return;
-
-      }
-
-
-      let newQuantity =
-        Number(
-          quantity
-        );
-
-
-      if (
-        !Number.isFinite(
-          newQuantity
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      newQuantity =
-        Math.floor(
-          newQuantity
-        );
-
-
-      /* ------------------------------------------------------
-         QUANTITY 0 = REMOVE
-      ------------------------------------------------------ */
-
-      if (
-        newQuantity <= 0
-      ) {
-
-        window.removeFromCart(
-          productId
-        );
-
-
-        return;
-
-      }
-
-
-      /* ------------------------------------------------------
-         MAXIMUM SAFETY LIMIT
-      ------------------------------------------------------ */
-
-      if (
-        newQuantity > 99
-      ) {
-
-        newQuantity =
-          99;
-
-      }
-
-
-      product.quantity =
-        newQuantity;
-
-
-      saveCart(
-        cart
-      );
-
-
-    };
-
-
-  /* ============================================================
-     CLEAR CART
-  ============================================================ */
+  /* =========================================================
+     GLOBAL CLEAR
+  ========================================================= */
 
   window.clearVeridoCart =
-    function () {
-
-      const cart =
-        getCart();
+    clearCart;
 
 
-      if (
-        cart.length === 0
-      ) {
-
-        return;
-
-      }
-
-
-      localStorage.removeItem(
-        CART_KEY
-      );
-
-
-      updateCartCount();
-
-
-      window.dispatchEvent(
-        new CustomEvent(
-          "veridoCartUpdated",
-          {
-            detail: {
-              cart: []
-            }
-          }
-        )
-      );
-
-
-      pushEvent(
-
-        "clear_cart",
-
-        {
-
-          previous_cart_items:
-            cart.length,
-
-          previous_cart_quantity:
-            getCartQuantity(
-              cart
-            )
-
-        }
-
-      );
-
-
-    };
-
-
-  /* ============================================================
-     GET CART PUBLIC API
-  ============================================================ */
-
-  window.getVeridoCart =
-    function () {
-
-      return getCart();
-
-    };
-
-
-  /* ============================================================
-     GET CART COUNT PUBLIC API
-  ============================================================ */
-
-  window.getVeridoCartCount =
-    function () {
-
-      return getCartQuantity();
-
-    };
-
-
-  /* ============================================================
-     CHECK CART
-  ============================================================ */
+  /* =========================================================
+     GLOBAL DEBUG
+  ========================================================= */
 
   window.veridoCartDebug =
     function () {
@@ -1005,12 +1071,18 @@
 
 
       console.log(
-        "=========================================="
+        "================================"
       );
 
 
       console.log(
         "VERIDO CART DEBUG"
+      );
+
+
+      console.log(
+        "Cart:",
+        cart
       );
 
 
@@ -1022,101 +1094,48 @@
 
       console.log(
         "Total Quantity:",
-        getCartQuantity(
-          cart
-        )
-      );
-
-
-      console.table(
-        cart
+        getCartQuantity(cart)
       );
 
 
       console.log(
-        "localStorage:",
-        localStorage.getItem(
-          CART_KEY
-        )
+        "Cart Value:",
+        getCartValue(cart)
       );
 
 
       console.log(
-        "=========================================="
+        "GA4 Items:",
+        getGA4Items(cart)
       );
 
 
-      return cart;
+      console.log(
+        "DataLayer:",
+        window.dataLayer
+      );
+
+
+      console.log(
+        "================================"
+      );
 
     };
 
 
-  /* ============================================================
-     INITIALIZE
-  ============================================================ */
+  /* =========================================================
+     INITIAL CART COUNT
+  ========================================================= */
 
-  function initializeCart() {
-
-    updateCartCount();
+  updateCartCount();
 
 
-    console.log(
-      "✅ VERIDO cart.js loaded successfully."
-    );
+  /* =========================================================
+     INITIAL LOG
+  ========================================================= */
 
-
-    console.log(
-      "Cart:",
-      getCart()
-    );
-
-  }
-
-
-  /* ============================================================
-     DOM READY
-  ============================================================ */
-
-  if (
-    document.readyState ===
-    "loading"
-  ) {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      initializeCart
-    );
-
-  }
-
-  else {
-
-    initializeCart();
-
-  }
-
-
-  /* ============================================================
-     CART STORAGE SYNC
-  ============================================================ */
-
-  window.addEventListener(
-
-    "storage",
-
-    function (event) {
-
-      if (
-        event.key ===
-        CART_KEY
-      ) {
-
-        updateCartCount();
-
-      }
-
-    }
-
+  console.log(
+    "✅ VERIDO FINAL cart.js loaded successfully."
   );
 
 
