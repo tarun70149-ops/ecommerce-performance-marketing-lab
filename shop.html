@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Shop | VERIDO</title>
 
@@ -13,6 +18,7 @@
   >
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -35,6 +41,7 @@
       border: none;
     }
 
+
     /* =========================
        TOP BAR
     ========================== */
@@ -46,6 +53,7 @@
       padding: 9px 15px;
       font-size: 13px;
     }
+
 
     /* =========================
        NAVBAR
@@ -95,8 +103,9 @@
       font-size: 11px;
     }
 
+
     /* =========================
-       PAGE HERO
+       PAGE HEADER
     ========================== */
 
     .page-header {
@@ -122,6 +131,7 @@
       max-width: 550px;
       margin: auto;
     }
+
 
     /* =========================
        SHOP AREA
@@ -154,6 +164,7 @@
       min-width: 180px;
     }
 
+
     /* =========================
        FILTERS
     ========================== */
@@ -179,6 +190,7 @@
       color: white;
       border-color: #111;
     }
+
 
     /* =========================
        PRODUCTS
@@ -276,6 +288,11 @@
       color: white;
     }
 
+    .cart-btn:hover {
+      background: #333;
+    }
+
+
     /* =========================
        EMPTY STATE
     ========================== */
@@ -291,6 +308,7 @@
       color: #111;
       margin-bottom: 8px;
     }
+
 
     /* =========================
        FOOTER
@@ -342,6 +360,7 @@
       justify-content: space-between;
     }
 
+
     /* =========================
        RESPONSIVE
     ========================== */
@@ -359,7 +378,9 @@
       .footer-grid {
         grid-template-columns: 1fr 1fr;
       }
+
     }
+
 
     @media (max-width: 600px) {
 
@@ -383,11 +404,16 @@
         flex-direction: column;
         gap: 10px;
       }
+
     }
+
   </style>
+
 </head>
 
+
 <body>
+
 
   <!-- =========================
        TOP BAR
@@ -407,22 +433,27 @@
     <a
       href="index.html"
       class="logo"
-      data-event="logo_click">
+      data-event="logo_click"
+    >
       VERIDO
     </a>
+
 
     <nav>
 
       <ul class="nav-links">
 
         <li>
-          <a href="index.html">Home</a>
+          <a href="index.html">
+            Home
+          </a>
         </li>
 
         <li>
           <a
             href="shop.html"
-            data-event="shop_navigation">
+            data-event="shop_navigation"
+          >
             Shop
           </a>
         </li>
@@ -430,7 +461,8 @@
         <li>
           <a
             href="offers.html"
-            data-event="offers_navigation">
+            data-event="offers_navigation"
+          >
             Offers
           </a>
         </li>
@@ -451,17 +483,23 @@
 
     </nav>
 
+
     <div class="nav-actions">
 
       <a
         href="cart.html"
-        data-event="cart_click">
+        data-event="cart_click"
+      >
+
         🛒
+
         <span
           class="cart-count"
-          id="cartCount">
+          id="cartCount"
+        >
           0
         </span>
+
       </a>
 
     </div>
@@ -475,9 +513,13 @@
 
   <section class="page-header">
 
-    <span>VERIDO COLLECTION</span>
+    <span>
+      VERIDO COLLECTION
+    </span>
 
-    <h1>Shop All</h1>
+    <h1>
+      Shop All
+    </h1>
 
     <p>
       Explore premium everyday essentials
@@ -493,20 +535,24 @@
 
   <main class="shop-container">
 
-    <!-- Toolbar -->
+
+    <!-- TOOLBAR -->
 
     <div class="shop-toolbar">
 
       <div
         class="results-count"
-        id="resultsCount">
+        id="resultsCount"
+      >
         Showing 8 products
       </div>
+
 
       <select
         class="sort-select"
         id="sortSelect"
-        data-event="sort_products">
+        data-event="sort_products"
+      >
 
         <option value="default">
           Sort: Featured
@@ -529,31 +575,35 @@
     </div>
 
 
-    <!-- Category Filters -->
+    <!-- CATEGORY FILTERS -->
 
     <div class="category-filters">
 
       <button
         class="filter-btn active"
-        data-category="all">
+        data-category="all"
+      >
         All
       </button>
 
       <button
         class="filter-btn"
-        data-category="apparel">
+        data-category="apparel"
+      >
         Apparel
       </button>
 
       <button
         class="filter-btn"
-        data-category="footwear">
+        data-category="footwear"
+      >
         Footwear
       </button>
 
       <button
         class="filter-btn"
-        data-category="accessories">
+        data-category="accessories"
+      >
         Accessories
       </button>
 
@@ -566,7 +616,8 @@
 
     <div
       class="products"
-      id="productGrid">
+      id="productGrid"
+    >
 
 
       <!-- PRODUCT 1 -->
@@ -576,7 +627,8 @@
         data-id="VER-001"
         data-name="Essential Oversized Tee"
         data-category="apparel"
-        data-price="899">
+        data-price="899"
+      >
 
         <div class="product-image">
 
@@ -587,9 +639,11 @@
           <img
             src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85"
             alt="Essential Oversized Tee"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -603,12 +657,15 @@
 
           <div class="product-price">
             ₹899
+
             <span class="old-price">
               ₹1,199
             </span>
+
           </div>
 
         </div>
+
 
         <div class="product-actions">
 
@@ -618,7 +675,8 @@
               'VER-001',
               'Essential Oversized Tee',
               899
-            )">
+            )"
+          >
             View Product
           </button>
 
@@ -628,7 +686,8 @@
               'VER-001',
               'Essential Oversized Tee',
               899
-            )">
+            )"
+          >
             Add to Cart
           </button>
 
@@ -644,16 +703,19 @@
         data-id="VER-002"
         data-name="Minimal Everyday Hoodie"
         data-category="apparel"
-        data-price="1499">
+        data-price="1499"
+      >
 
         <div class="product-image">
 
           <img
             src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=85"
             alt="Minimal Everyday Hoodie"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -667,12 +729,15 @@
 
           <div class="product-price">
             ₹1,499
+
             <span class="old-price">
               ₹1,999
             </span>
+
           </div>
 
         </div>
+
 
         <div class="product-actions">
 
@@ -682,7 +747,8 @@
               'VER-002',
               'Minimal Everyday Hoodie',
               1499
-            )">
+            )"
+          >
             View Product
           </button>
 
@@ -692,7 +758,8 @@
               'VER-002',
               'Minimal Everyday Hoodie',
               1499
-            )">
+            )"
+          >
             Add to Cart
           </button>
 
@@ -708,16 +775,19 @@
         data-id="VER-003"
         data-name="Classic Everyday Cap"
         data-category="accessories"
-        data-price="599">
+        data-price="599"
+      >
 
         <div class="product-image">
 
           <img
             src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=900&q=85"
             alt="Classic Everyday Cap"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -731,12 +801,15 @@
 
           <div class="product-price">
             ₹599
+
             <span class="old-price">
               ₹799
             </span>
+
           </div>
 
         </div>
+
 
         <div class="product-actions">
 
@@ -746,7 +819,8 @@
               'VER-003',
               'Classic Everyday Cap',
               599
-            )">
+            )"
+          >
             View Product
           </button>
 
@@ -756,7 +830,8 @@
               'VER-003',
               'Classic Everyday Cap',
               599
-            )">
+            )"
+          >
             Add to Cart
           </button>
 
@@ -772,16 +847,19 @@
         data-id="VER-004"
         data-name="Premium Everyday Sneakers"
         data-category="footwear"
-        data-price="2499">
+        data-price="2499"
+      >
 
         <div class="product-image">
 
           <img
             src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85"
             alt="Premium Everyday Sneakers"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -795,12 +873,15 @@
 
           <div class="product-price">
             ₹2,499
+
             <span class="old-price">
               ₹3,499
             </span>
+
           </div>
 
         </div>
+
 
         <div class="product-actions">
 
@@ -810,7 +891,8 @@
               'VER-004',
               'Premium Everyday Sneakers',
               2499
-            )">
+            )"
+          >
             View Product
           </button>
 
@@ -820,7 +902,8 @@
               'VER-004',
               'Premium Everyday Sneakers',
               2499
-            )">
+            )"
+          >
             Add to Cart
           </button>
 
@@ -836,7 +919,8 @@
         data-id="VER-005"
         data-name="Premium Cotton Shirt"
         data-category="apparel"
-        data-price="1299">
+        data-price="1299"
+      >
 
         <div class="product-image">
 
@@ -847,9 +931,11 @@
           <img
             src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=900&q=85"
             alt="Premium Cotton Shirt"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -867,6 +953,7 @@
 
         </div>
 
+
         <div class="product-actions">
 
           <button
@@ -875,7 +962,8 @@
               'VER-005',
               'Premium Cotton Shirt',
               1299
-            )">
+            )"
+          >
             View Product
           </button>
 
@@ -885,7 +973,8 @@
               'VER-005',
               'Premium Cotton Shirt',
               1299
-            )">
+            )"
+          >
             Add to Cart
           </button>
 
@@ -901,16 +990,19 @@
         data-id="VER-006"
         data-name="Urban Running Sneakers"
         data-category="footwear"
-        data-price="2999">
+        data-price="2999"
+      >
 
         <div class="product-image">
 
           <img
             src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=85"
             alt="Urban Running Sneakers"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -928,6 +1020,7 @@
 
         </div>
 
+
         <div class="product-actions">
 
           <button
@@ -936,7 +1029,8 @@
               'VER-006',
               'Urban Running Sneakers',
               2999
-            )">
+            )"
+          >
             View Product
           </button>
 
@@ -946,7 +1040,8 @@
               'VER-006',
               'Urban Running Sneakers',
               2999
-            )">
+            )"
+          >
             Add to Cart
           </button>
 
@@ -962,16 +1057,19 @@
         data-id="VER-007"
         data-name="Minimal Leather Wallet"
         data-category="accessories"
-        data-price="999">
+        data-price="999"
+      >
 
         <div class="product-image">
 
           <img
             src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=900&q=85"
             alt="Minimal Leather Wallet"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -989,6 +1087,7 @@
 
         </div>
 
+
         <div class="product-actions">
 
           <button
@@ -997,7 +1096,8 @@
               'VER-007',
               'Minimal Leather Wallet',
               999
-            )">
+            )"
+          >
             View Product
           </button>
 
@@ -1007,7 +1107,8 @@
               'VER-007',
               'Minimal Leather Wallet',
               999
-            )">
+            )"
+          >
             Add to Cart
           </button>
 
@@ -1023,7 +1124,8 @@
         data-id="VER-008"
         data-name="Classic Everyday Backpack"
         data-category="accessories"
-        data-price="1799">
+        data-price="1799"
+      >
 
         <div class="product-image">
 
@@ -1034,9 +1136,11 @@
           <img
             src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85"
             alt="Classic Everyday Backpack"
-            loading="lazy">
+            loading="lazy"
+          >
 
         </div>
+
 
         <div class="product-info">
 
@@ -1054,6 +1158,7 @@
 
         </div>
 
+
         <div class="product-actions">
 
           <button
@@ -1062,7 +1167,8 @@
               'VER-008',
               'Classic Everyday Backpack',
               1799
-            )">
+            )"
+          >
             View Product
           </button>
 
@@ -1072,7 +1178,8 @@
               'VER-008',
               'Classic Everyday Backpack',
               1799
-            )">
+            )"
+          >
             Add to Cart
           </button>
 
@@ -1080,14 +1187,16 @@
 
       </article>
 
+
     </div>
 
 
-    <!-- EMPTY -->
+    <!-- EMPTY STATE -->
 
     <div
       class="empty-state"
-      id="emptyState">
+      id="emptyState"
+    >
 
       <h2>
         No products found
@@ -1098,6 +1207,7 @@
       </p>
 
     </div>
+
 
   </main>
 
@@ -1111,17 +1221,24 @@
     <div class="footer-grid">
 
       <div>
-        <h3>VERIDO</h3>
+
+        <h3>
+          VERIDO
+        </h3>
 
         <p>
           Premium everyday essentials designed
           for modern lifestyles.
         </p>
+
       </div>
+
 
       <div>
 
-        <h4>Shop</h4>
+        <h4>
+          Shop
+        </h4>
 
         <ul>
 
@@ -1153,9 +1270,12 @@
 
       </div>
 
+
       <div>
 
-        <h4>Support</h4>
+        <h4>
+          Support
+        </h4>
 
         <ul>
 
@@ -1187,9 +1307,12 @@
 
       </div>
 
+
       <div>
 
-        <h4>Company</h4>
+        <h4>
+          Company
+        </h4>
 
         <ul>
 
@@ -1217,6 +1340,7 @@
 
     </div>
 
+
     <div class="footer-bottom">
 
       <span>
@@ -1232,30 +1356,49 @@
   </footer>
 
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
+  <!-- =====================================================
+       VERIDO CART ENGINE
+       MUST LOAD BEFORE SHOP JAVASCRIPT
+  ====================================================== -->
+
+  <script src="cart.js"></script>
+
+
+  <!-- =====================================================
+       SHOP PAGE JAVASCRIPT
+  ====================================================== -->
 
   <script>
 
-    window.dataLayer = window.dataLayer || [];
+    "use strict";
 
 
-    /*
-     * ============================================
-     * EVENT TRACKING HELPER
-     * ============================================
-     */
+    /* =====================================================
+       DATA LAYER
+    ====================================================== */
 
-    function pushEvent(eventName, parameters = {}) {
+    window.dataLayer =
+      window.dataLayer || [];
+
+
+    /* =====================================================
+       EVENT TRACKING HELPER
+    ====================================================== */
+
+    function pushEvent(
+      eventName,
+      parameters = {}
+    ) {
 
       window.dataLayer.push({
 
-        event: eventName,
+        event:
+          eventName,
 
         ...parameters
 
       });
+
 
       console.log(
         "GA4/GTM Event:",
@@ -1266,11 +1409,9 @@
     }
 
 
-    /*
-     * ============================================
-     * PRODUCT VIEW
-     * ============================================
-     */
+    /* =====================================================
+       PRODUCT VIEW
+    ====================================================== */
 
     function viewProduct(
       productId,
@@ -1284,16 +1425,30 @@
 
           ecommerce: {
 
-            currency: "INR",
+            currency:
+              "INR",
 
-            value: price,
+            value:
+              Number(price),
 
             items: [
+
               {
-                item_id: productId,
-                item_name: productName,
-                price: price
+
+                item_id:
+                  productId,
+
+                item_name:
+                  productName,
+
+                price:
+                  Number(price),
+
+                quantity:
+                  1
+
               }
+
             ]
 
           }
@@ -1303,81 +1458,69 @@
 
 
       window.location.href =
-        "product.html?id=" + productId;
-
-    }
-
-
-    /*
-     * ============================================
-     * ADD TO CART
-     * ============================================
-     */
-
-    function addToCart(productId, productName, price) {
-
-  window.VERIDO_CART.add(
-    productId,
-    productName,
-    price
-  );
-
-}
-
-      pushEvent(
-        "add_to_cart",
-        {
-
-          ecommerce: {
-
-            currency: "INR",
-
-            value: price,
-
-            items: [
-              {
-                item_id: productId,
-                item_name: productName,
-                price: price,
-                quantity: 1
-              }
-            ]
-
-          }
-
-        }
-      );
-
-
-      let count =
-        Number(
-          document.getElementById(
-            "cartCount"
-          ).innerText
+        "product.html?id=" +
+        encodeURIComponent(
+          productId
         );
 
-
-      count++;
-
-
-      document.getElementById(
-        "cartCount"
-      ).innerText = count;
+    }
 
 
-      alert(
-        productName +
-        " added to cart."
+    /* =====================================================
+       ADD TO CART
+       
+       IMPORTANT:
+       Only ONE cart engine.
+       cart.js handles:
+       - localStorage
+       - quantity
+       - cart count
+       - add_to_cart event
+    ====================================================== */
+
+    function addToCart(
+      productId,
+      productName,
+      price
+    ) {
+
+      if (
+        !window.VERIDO_CART ||
+        typeof window.VERIDO_CART.add !==
+        "function"
+      ) {
+
+        console.error(
+          "❌ VERIDO CART ENGINE NOT LOADED"
+        );
+
+        alert(
+          "Cart system is not loaded. Please refresh the page."
+        );
+
+        return;
+
+      }
+
+
+      window.VERIDO_CART.add(
+        productId,
+        productName,
+        Number(price)
+      );
+
+
+      console.log(
+        "🛒 Added to cart:",
+        productName
       );
 
     }
 
 
-    /*
-     * ============================================
-     * CATEGORY FILTER
-     * ============================================
-     */
+    /* =====================================================
+       CATEGORY FILTER
+    ====================================================== */
 
     const filterButtons =
       document.querySelectorAll(
@@ -1404,21 +1547,24 @@
 
 
     filterButtons.forEach(
-      function(button) {
+      function (button) {
 
         button.addEventListener(
           "click",
-          function() {
+          function () {
 
             const category =
               this.dataset.category;
 
 
             filterButtons.forEach(
-              btn =>
+              function (btn) {
+
                 btn.classList.remove(
                   "active"
-                )
+                );
+
+              }
             );
 
 
@@ -1427,11 +1573,12 @@
             );
 
 
-            let visibleProducts = 0;
+            let visibleProducts =
+              0;
 
 
             productCards.forEach(
-              function(card) {
+              function (card) {
 
                 const cardCategory =
                   card.dataset.category;
@@ -1447,7 +1594,9 @@
 
                   visibleProducts++;
 
-                } else {
+                }
+
+                else {
 
                   card.style.display =
                     "none";
@@ -1489,108 +1638,121 @@
     );
 
 
-    /*
-     * ============================================
-     * SORTING
-     * ============================================
-     */
+    /* =====================================================
+       SORTING
+    ====================================================== */
 
-    document
-      .getElementById(
+    const sortSelect =
+      document.getElementById(
         "sortSelect"
-      )
-      .addEventListener(
-        "change",
-        function() {
-
-          const sort =
-            this.value;
-
-
-          const grid =
-            document.getElementById(
-              "productGrid"
-            );
-
-
-          const cards =
-            Array.from(
-              productCards
-            );
-
-
-          cards.sort(
-            function(a, b) {
-
-              const priceA =
-                Number(
-                  a.dataset.price
-                );
-
-              const priceB =
-                Number(
-                  b.dataset.price
-                );
-
-
-              if (
-                sort === "low"
-              ) {
-                return priceA - priceB;
-              }
-
-
-              if (
-                sort === "high"
-              ) {
-                return priceB - priceA;
-              }
-
-
-              if (
-                sort === "name"
-              ) {
-
-                return a.dataset.name
-                  .localeCompare(
-                    b.dataset.name
-                  );
-
-              }
-
-
-              return 0;
-
-            }
-          );
-
-
-          cards.forEach(
-            card =>
-              grid.appendChild(card)
-          );
-
-
-          pushEvent(
-            "sort_products",
-            {
-              sort_method: sort
-            }
-          );
-
-        }
       );
 
 
-    /*
-     * ============================================
-     * NAVIGATION EVENT TRACKING
-     * ============================================
-     */
+    sortSelect.addEventListener(
+      "change",
+      function () {
+
+        const sort =
+          this.value;
+
+
+        const grid =
+          document.getElementById(
+            "productGrid"
+          );
+
+
+        const cards =
+          Array.from(
+            productCards
+          );
+
+
+        cards.sort(
+          function (a, b) {
+
+            const priceA =
+              Number(
+                a.dataset.price
+              );
+
+
+            const priceB =
+              Number(
+                b.dataset.price
+              );
+
+
+            if (
+              sort === "low"
+            ) {
+
+              return priceA -
+                priceB;
+
+            }
+
+
+            if (
+              sort === "high"
+            ) {
+
+              return priceB -
+                priceA;
+
+            }
+
+
+            if (
+              sort === "name"
+            ) {
+
+              return a.dataset.name
+                .localeCompare(
+                  b.dataset.name
+                );
+
+            }
+
+
+            return 0;
+
+          }
+        );
+
+
+        cards.forEach(
+          function (card) {
+
+            grid.appendChild(
+              card
+            );
+
+          }
+        );
+
+
+        pushEvent(
+          "sort_products",
+          {
+
+            sort_method:
+              sort
+
+          }
+        );
+
+      }
+    );
+
+
+    /* =====================================================
+       NAVIGATION EVENT TRACKING
+    ====================================================== */
 
     document.addEventListener(
       "click",
-      function(event) {
+      function (event) {
 
         const element =
           event.target.closest(
@@ -1599,7 +1761,9 @@
 
 
         if (!element) {
+
           return;
+
         }
 
 
@@ -1617,16 +1781,12 @@
     );
 
 
-    /*
-     * ============================================
-     * URL CATEGORY PARAMETER
-     *
-     * Example:
-     *
-     * shop.html?category=apparel
-     *
-     * ============================================
-     */
+    /* =====================================================
+       URL CATEGORY PARAMETER
+       
+       Example:
+       shop.html?category=apparel
+    ====================================================== */
 
     const params =
       new URLSearchParams(
@@ -1656,7 +1816,39 @@
 
     }
 
+
+    /* =====================================================
+       FINAL SHOP READY CHECK
+    ====================================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        if (
+          window.VERIDO_CART
+        ) {
+
+          console.log(
+            "✅ VERIDO SHOP + CART ENGINE READY"
+          );
+
+        }
+
+        else {
+
+          console.error(
+            "❌ VERIDO CART ENGINE FAILED TO LOAD"
+          );
+
+        }
+
+      }
+    );
+
   </script>
 
+
 </body>
+
 </html>
