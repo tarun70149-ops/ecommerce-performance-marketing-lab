@@ -1,12 +1,11 @@
 /**
  * VERIDO E-COMMERCE PERFORMANCE MARKETING LAB
- * Checkout Tracking Engine
+ * Checkout Tracking + Order Completion Engine
  */
 
 (function () {
 
   "use strict";
-
 
   /* =========================================
      DATA LAYER
@@ -43,13 +42,23 @@
 
     try {
 
-      return JSON.parse(
-        localStorage.getItem(
-          "verido_cart"
-        )
-      ) || [];
+      const cart =
+        JSON.parse(
+          localStorage.getItem(
+            "verido_cart"
+          )
+        );
+
+      return Array.isArray(cart)
+        ? cart
+        : [];
 
     } catch (error) {
+
+      console.error(
+        "[VERIDO CHECKOUT] Cart read error:",
+        error
+      );
 
       return [];
 
@@ -127,6 +136,16 @@
       const cart =
         getCart();
 
+      if (!cart.length) {
+
+        console.warn(
+          "[VERIDO] Cannot begin checkout: cart is empty."
+        );
+
+        return;
+
+      }
+
       const value =
         calculateCartValue(cart);
 
@@ -140,11 +159,14 @@
 
           ecommerce: {
 
-            currency: "INR",
+            currency:
+              "INR",
 
-            value: value,
+            value:
+              value,
 
-            items: items
+            items:
+              items
 
           }
 
@@ -159,10 +181,15 @@
   ========================================= */
 
   window.veridoAddShippingInfo =
-    function (shippingTier = "standard") {
+    function (
+      shippingTier = "standard"
+    ) {
 
       const cart =
         getCart();
+
+      if (!cart.length) return;
+
 
       const value =
         calculateCartValue(cart);
@@ -177,14 +204,17 @@
 
           ecommerce: {
 
-            currency: "INR",
+            currency:
+              "INR",
 
-            value: value,
+            value:
+              value,
 
             shipping_tier:
               shippingTier,
 
-            items: items
+            items:
+              items
 
           }
 
@@ -199,10 +229,15 @@
   ========================================= */
 
   window.veridoAddPaymentInfo =
-    function (paymentType = "unknown") {
+    function (
+      paymentType = "unknown"
+    ) {
 
       const cart =
         getCart();
+
+      if (!cart.length) return;
+
 
       const value =
         calculateCartValue(cart);
@@ -217,14 +252,17 @@
 
           ecommerce: {
 
-            currency: "INR",
+            currency:
+              "INR",
 
-            value: value,
+            value:
+              value,
 
             payment_type:
               paymentType,
 
-            items: items
+            items:
+              items
 
           }
 
@@ -244,10 +282,34 @@
       const cart =
         getCart();
 
+
+      /* -----------------------------------------
+         EMPTY CART CHECK
+      ----------------------------------------- */
+
+      if (!cart.length) {
+
+        console.warn(
+          "[VERIDO] Purchase blocked: cart is empty."
+        );
+
+        return false;
+
+      }
+
+
+      /* -----------------------------------------
+         CALCULATE ORDER
+      ----------------------------------------- */
+
+      const cartValue =
+        calculateCartValue(cart);
+
+
       const value =
         Number(
           orderData.value ||
-          calculateCartValue(cart)
+          cartValue
         );
 
 
@@ -256,11 +318,47 @@
         convertToGA4Items(cart);
 
 
+      /* -----------------------------------------
+         TRANSACTION ID
+      ----------------------------------------- */
+
       const transactionId =
         orderData.transaction_id ||
         "VERIDO-" +
         Date.now();
 
+
+      /* -----------------------------------------
+         SHIPPING
+      ----------------------------------------- */
+
+      const shipping =
+        Number(
+          orderData.shipping || 0
+        );
+
+
+      /* -----------------------------------------
+         TAX
+      ----------------------------------------- */
+
+      const tax =
+        Number(
+          orderData.tax || 0
+        );
+
+
+      /* -----------------------------------------
+         COUPON
+      ----------------------------------------- */
+
+      const coupon =
+        orderData.coupon || "";
+
+
+      /* -----------------------------------------
+         PURCHASE EVENT
+      ----------------------------------------- */
 
       pushEvent(
         "purchase",
@@ -279,17 +377,13 @@
               "INR",
 
             tax:
-              Number(
-                orderData.tax || 0
-              ),
+              tax,
 
             shipping:
-              Number(
-                orderData.shipping || 0
-              ),
+              shipping,
 
             coupon:
-              orderData.coupon || "",
+              coupon,
 
             items:
               items
@@ -301,34 +395,88 @@
 
 
       /* -----------------------------------------
-         SAVE ORDER INFORMATION
+         SAVE LAST ORDER
       ----------------------------------------- */
+
+      const order = {
+
+        transaction_id:
+          transactionId,
+
+        value:
+          value,
+
+        currency:
+          orderData.currency ||
+          "INR",
+
+        tax:
+          tax,
+
+        shipping:
+          shipping,
+
+        coupon:
+          coupon,
+
+        items:
+          items,
+
+        timestamp:
+          new Date().toISOString()
+
+      };
+
 
       localStorage.setItem(
 
         "verido_last_order",
 
-        JSON.stringify({
-
-          transaction_id:
-            transactionId,
-
-          value:
-            value,
-
-          currency:
-            orderData.currency ||
-            "INR",
-
-          items:
-            items,
-
-          timestamp:
-            new Date().toISOString()
-
-        })
+        JSON.stringify(order)
 
       );
+
+
+      /* -----------------------------------------
+         CLEAR CART
+      ----------------------------------------- */
+
+      localStorage.removeItem(
+        "verido_cart"
+      );
+
+
+      console.log(
+        "✅ VERIDO cart cleared after purchase."
+      );
+
+
+      /* -----------------------------------------
+         SAVE PURCHASE COMPLETION FLAG
+      ----------------------------------------- */
+
+      sessionStorage.setItem(
+        "verido_purchase_completed",
+        "true"
+      );
+
+
+      /* -----------------------------------------
+         REDIRECT TO THANK YOU
+      ----------------------------------------- */
+
+      setTimeout(
+        function () {
+
+          window.location.href =
+            "thank-you.html";
+
+        },
+        300
+      );
+
+
+      return true;
 
     };
 
@@ -433,24 +581,95 @@
       if (!button) return;
 
 
+      /*
+       * Prevent duplicate purchase clicks
+       */
+
+      if (
+        sessionStorage.getItem(
+          "verido_purchase_completed"
+        ) === "true"
+      ) {
+
+        console.warn(
+          "[VERIDO] Purchase already completed."
+        );
+
+        return;
+
+      }
+
+
+      const cart =
+        getCart();
+
+
+      if (!cart.length) {
+
+        alert(
+          "Your cart is empty."
+        );
+
+        return;
+
+      }
+
+
+      const cartValue =
+        calculateCartValue(cart);
+
+
       const orderValue =
         Number(
           button.dataset.orderValue ||
+          cartValue
+        );
+
+
+      const transactionId =
+        button.dataset.transactionId ||
+        "VERIDO-" +
+        Date.now();
+
+
+      const shipping =
+        Number(
+          button.dataset.shipping ||
           0
         );
+
+
+      const tax =
+        Number(
+          button.dataset.tax ||
+          0
+        );
+
+
+      const coupon =
+        button.dataset.coupon ||
+        "";
 
 
       window.veridoPurchase({
 
         transaction_id:
-          button.dataset.transactionId ||
-          "",
+          transactionId,
 
         value:
           orderValue,
 
         currency:
-          "INR"
+          "INR",
+
+        shipping:
+          shipping,
+
+        tax:
+          tax,
+
+        coupon:
+          coupon
 
       });
 
@@ -491,8 +710,9 @@
       const cart =
         getCart();
 
+
       console.log(
-        "=============================="
+        "================================"
       );
 
       console.log(
@@ -515,12 +735,26 @@
       );
 
       console.log(
+        "Last Order:",
+        localStorage.getItem(
+          "verido_last_order"
+        )
+      );
+
+      console.log(
+        "Purchase Completed:",
+        sessionStorage.getItem(
+          "verido_purchase_completed"
+        )
+      );
+
+      console.log(
         "DataLayer:",
         window.dataLayer
       );
 
       console.log(
-        "=============================="
+        "================================"
       );
 
     };
@@ -533,6 +767,5 @@
   console.log(
     "✅ VERIDO checkout.js loaded successfully."
   );
-
 
 })();
