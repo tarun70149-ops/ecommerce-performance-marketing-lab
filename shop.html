@@ -1478,44 +1478,7 @@
        - add_to_cart event
     ====================================================== */
 
-    function addToCart(
-      productId,
-      productName,
-      price
-    ) {
-
-      if (
-        !window.VERIDO_CART ||
-        typeof window.VERIDO_CART.add !==
-        "function"
-      ) {
-
-        console.error(
-          "❌ VERIDO CART ENGINE NOT LOADED"
-        );
-
-        alert(
-          "Cart system is not loaded. Please refresh the page."
-        );
-
-        return;
-
-      }
-
-
-      window.VERIDO_CART.add(
-        productId,
-        productName,
-        Number(price)
-      );
-
-
-      console.log(
-        "🛒 Added to cart:",
-        productName
-      );
-
-    }
+ 
 
 
     /* =====================================================
