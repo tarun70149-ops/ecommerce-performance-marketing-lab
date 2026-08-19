@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Returns & Refunds | VERIDO</title>
+
+  <meta
+    name="description"
+    content="Learn about VERIDO returns, exchanges, refunds and the return process."
+  >
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #171717;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =========================
+       TOP BAR
+    ========================== */
+
+    .top-bar {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 9px 15px;
+      font-size: 13px;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .navbar {
+      background: white;
+      border-bottom: 1px solid #eee;
+
+      padding: 18px 6%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+
+      list-style: none;
+
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-actions {
+      font-size: 14px;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      background: #e9e9e9;
+
+      text-align: center;
+
+      padding: 70px 20px;
+    }
+
+    .hero span {
+      font-size: 11px;
+
+      letter-spacing: 3px;
+
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+
+      margin: 14px 0;
+    }
+
+    .hero p {
+      max-width: 650px;
+
+      margin: auto;
+
+      color: #666;
+
+      font-size: 15px;
+
+      line-height: 1.7;
+    }
+
+    /* =========================
+       CONTAINER
+    ========================== */
+
+    .container {
+      max-width: 1050px;
+
+      margin: auto;
+
+      padding: 60px 6% 90px;
+    }
+
+    /* =========================
+       QUICK CARDS
+    ========================== */
+
+    .return-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 18px;
+
+      margin-bottom: 45px;
+    }
+
+    .return-card {
+      background: white;
+
+      border: 1px solid #eee;
+
+      padding: 25px;
+
+      text-align: center;
+    }
+
+    .return-icon {
+      font-size: 28px;
+
+      margin-bottom: 14px;
+    }
+
+    .return-card h3 {
+      font-size: 17px;
+
+      margin-bottom: 8px;
+    }
+
+    .return-card p {
+      color: #777;
+
+      font-size: 12px;
+
+      line-height: 1.6;
+    }
+
+    /* =========================
+       CONTENT
+    ========================== */
+
+    .content-card {
+      background: white;
+
+      border: 1px solid #eee;
+
+      padding: 35px;
+
+      margin-bottom: 20px;
+    }
+
+    .content-card h2 {
+      font-size: 23px;
+
+      margin-bottom: 18px;
+    }
+
+    .content-card h3 {
+      font-size: 16px;
+
+      margin: 25px 0 8px;
+    }
+
+    .content-card p {
+      color: #666;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+
+      margin-bottom: 12px;
+    }
+
+    .content-card ul {
+      padding-left: 20px;
+    }
+
+    .content-card li {
+      color: #666;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+
+      margin-bottom: 5px;
+    }
+
+    /* =========================
+       PROCESS
+    ========================== */
+
+    .process {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 12px;
+
+      margin-top: 25px;
+    }
+
+    .step {
+      background: #f3f3f3;
+
+      padding: 20px;
+
+      text-align: center;
+    }
+
+    .step-number {
+      width: 35px;
+      height: 35px;
+
+      margin: 0 auto 12px;
+
+      background: #111;
+
+      color: white;
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 12px;
+
+      font-weight: 700;
+    }
+
+    .step h4 {
+      font-size: 13px;
+
+      margin-bottom: 7px;
+    }
+
+    .step p {
+      color: #777;
+
+      font-size: 11px;
+
+      line-height: 1.5;
+    }
+
+    /* =========================
+       FAQ
+    ========================== */
+
+    .faq-item {
+      border-top: 1px solid #eee;
+      padding: 18px 0;
+    }
+
+    .faq-item:first-child {
+      border-top: none;
+    }
+
+    .faq-question {
+      font-weight: 700;
+
+      font-size: 13px;
+
+      margin-bottom: 7px;
+    }
+
+    .faq-answer {
+      color: #777;
+
+      font-size: 12px;
+
+      line-height: 1.6;
+    }
+
+    /* =========================
+       CTA
+    ========================== */
+
+    .cta {
+      background: #111;
+
+      color: white;
+
+      text-align: center;
+
+      padding: 45px 25px;
+
+      margin-top: 30px;
+    }
+
+    .cta h2 {
+      font-size: 28px;
+
+      margin-bottom: 10px;
+    }
+
+    .cta p {
+      color: #aaa;
+
+      font-size: 13px;
+
+      margin-bottom: 22px;
+    }
+
+    .cta-buttons {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 10px;
+    }
+
+    .cta-btn {
+      padding: 13px 21px;
+
+      font-size: 12px;
+
+      font-weight: 700;
+    }
+
+    .primary {
+      background: white;
+
+      color: #111;
+    }
+
+    .secondary {
+      border: 1px solid #555;
+
+      color: white;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      background: #111;
+
+      color: white;
+
+      padding: 45px 6% 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+
+      grid-template-columns:
+        2fr 1fr 1fr 1fr;
+
+      gap: 40px;
+
+      margin-bottom: 40px;
+    }
+
+    footer h3 {
+      letter-spacing: 2px;
+
+      margin-bottom: 12px;
+    }
+
+    footer h4 {
+      margin-bottom: 14px;
+    }
+
+    footer p,
+    footer li {
+      color: #aaa;
+
+      font-size: 13px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 8px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+
+      padding-top: 20px;
+
+      color: #777;
+
+      font-size: 12px;
+
+      display: flex;
+
+      justify-content: space-between;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 900px) {
+
+      .return-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .process {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .return-grid,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .content-card {
+        padding: 25px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .cta-btn {
+        width: 100%;
+
+        text-align: center;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+
+        gap: 10px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
+  <div class="top-bar">
+
+    Easy returns • Customer-first support
+
+  </div>
+
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
+  <header class="navbar">
+
+    <a
+      href="index.html"
+      class="logo"
+      data-event="logo_click">
+
+      VERIDO
+
+    </a>
+
+
+    <nav>
+
+      <ul class="nav-links">
+
+        <li>
+          <a href="index.html">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="shop.html"
+            data-event="shop_navigation">
+
+            Shop
+
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="offers.html"
+            data-event="offers_navigation">
+
+            Offers
+
+          </a>
+        </li>
+
+        <li>
+          <a href="about.html">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a href="contact.html">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+
+    <div class="nav-actions">
+
+      <a
+        href="cart.html"
+        data-event="cart_click">
+
+        🛒 Cart
+
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero">
+
+    <span>
+      VERIDO RETURNS
+    </span>
+
+    <h1>
+      Returns & Refunds
+    </h1>
+
+    <p>
+
+      Simple information about returns,
+      exchanges, refunds and the return process.
+
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main class="container">
+
+
+    <!-- =========================
+         QUICK INFO
+    ========================== -->
+
+    <section class="return-grid">
+
+
+      <div class="return-card">
+
+        <div class="return-icon">
+          ↩
+        </div>
+
+        <h3>
+          7-Day Returns
+        </h3>
+
+        <p>
+
+          Eligible products can be returned
+          within 7 days.
+
+        </p>
+
+      </div>
+
+
+      <div class="return-card">
+
+        <div class="return-icon">
+          🔄
+        </div>
+
+        <h3>
+          Easy Exchange
+        </h3>
+
+        <p>
+
+          Eligible items may be exchanged
+          according to availability.
+
+        </p>
+
+      </div>
+
+
+      <div class="return-card">
+
+        <div class="return-icon">
+          ₹
+        </div>
+
+        <h3>
+          Refunds
+        </h3>
+
+        <p>
+
+          Approved refunds are processed
+          according to the payment method.
+
+        </p>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         ELIGIBILITY
+    ========================== -->
+
+    <section class="content-card">
+
+
+      <h2>
+        Return Eligibility
+      </h2>
+
+
+      <p>
+
+        To keep the return process simple,
+        returned products should generally
+        meet the following conditions.
+
+      </p>
+
+
+      <ul>
+
+        <li>
+          Return request should be raised
+          within the applicable return window.
+        </li>
+
+        <li>
+          Product should be unused and
+          in acceptable condition.
+        </li>
+
+        <li>
+          Original packaging and relevant
+          accessories should be retained.
+        </li>
+
+        <li>
+          Product should not show signs of
+          intentional damage or misuse.
+        </li>
+
+        <li>
+          Certain products may have different
+          return eligibility.
+        </li>
+
+      </ul>
+
+
+    </section>
+
+
+    <!-- =========================
+         PROCESS
+    ========================== -->
+
+    <section class="content-card">
+
+
+      <h2>
+        How Returns Work
+      </h2>
+
+
+      <div class="process">
+
+
+        <div class="step">
+
+          <div class="step-number">
+            1
+          </div>
+
+          <h4>
+            Contact
+          </h4>
+
+          <p>
+            Contact support with your order details.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">
+            2
+          </div>
+
+          <h4>
+            Review
+          </h4>
+
+          <p>
+            Our team checks return eligibility.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">
+            3
+          </div>
+
+          <h4>
+            Pickup
+          </h4>
+
+          <p>
+            Eligible items may be collected.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">
+            4
+          </div>
+
+          <h4>
+            Refund
+          </h4>
+
+          <p>
+            Approved refund is processed.
+          </p>
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         REFUNDS
+    ========================== -->
+
+    <section class="content-card">
+
+
+      <h2>
+        Refund Information
+      </h2>
+
+
+      <h3>
+        When is the refund processed?
+      </h3>
+
+      <p>
+
+        Once the returned product has been
+        received and approved, the refund
+        process can begin.
+
+      </p>
+
+
+      <h3>
+        Where will the refund go?
+      </h3>
+
+      <p>
+
+        Refunds are generally returned through
+        the applicable original payment method,
+        subject to the payment provider's process.
+
+      </p>
+
+
+      <h3>
+        What if my product is damaged?
+      </h3>
+
+      <p>
+
+        Contact support as soon as possible
+        and provide the relevant order details
+        so the issue can be reviewed.
+
+      </p>
+
+
+    </section>
+
+
+    <!-- =========================
+         FAQ
+    ========================== -->
+
+    <section class="content-card">
+
+
+      <h2>
+        Return Questions
+      </h2>
+
+
+      <div class="faq-item">
+
+        <div class="faq-question">
+          Can I return every product?
+        </div>
+
+        <div class="faq-answer">
+
+          Not necessarily. Eligibility can vary
+          by product category and condition.
+
+        </div>
+
+      </div>
+
+
+      <div class="faq-item">
+
+        <div class="faq-question">
+          Can I exchange a product?
+        </div>
+
+        <div class="faq-answer">
+
+          Eligible products may be exchanged
+          depending on product availability.
+
+        </div>
+
+      </div>
+
+
+      <div class="faq-item">
+
+        <div class="faq-question">
+          How do I start a return?
+        </div>
+
+        <div class="faq-answer">
+
+          Contact our support team with your
+          order information.
+
+        </div>
+
+      </div>
+
+
+      <div class="faq-item">
+
+        <div class="faq-question">
+          How can I get help?
+        </div>
+
+        <div class="faq-answer">
+
+          Visit our contact page and choose
+          the support option that works for you.
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="cta">
+
+
+      <h2>
+        Need Help With a Return?
+      </h2>
+
+
+      <p>
+
+        Our support team can help you
+        understand the next steps.
+
+      </p>
+
+
+      <div class="cta-buttons">
+
+
+        <a
+          href="contact.html"
+          class="cta-btn primary"
+          id="returnContactCta">
+
+          Contact Support
+
+        </a>
+
+
+        <a
+          href="shop.html"
+          class="cta-btn secondary"
+          id="returnShopCta">
+
+          Continue Shopping
+
+        </a>
+
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+
+    <div class="footer-grid">
+
+
+      <div>
+
+        <h3>
+          VERIDO
+        </h3>
+
+        <p>
+
+          Premium everyday essentials
+          designed for modern lifestyles.
+
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Shop
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="shop.html">
+              All Products
+            </a>
+          </li>
+
+          <li>
+            <a href="offers.html">
+              Offers
+            </a>
+          </li>
+
+          <li>
+            <a href="cart.html">
+              Cart
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Support
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="contact.html">
+              Contact
+            </a>
+          </li>
+
+          <li>
+            <a href="faq.html">
+              FAQ
+            </a>
+          </li>
+
+          <li>
+            <a href="shipping.html">
+              Shipping
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Company
+        </h4>
+
+        <ul>
+
+          <li>
+            <a href="about.html">
+              About
+            </a>
+          </li>
+
+          <li>
+            <a href="privacy.html">
+              Privacy
+            </a>
+          </li>
+
+          <li>
+            <a href="terms.html">
+              Terms
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 VERIDO
+      </span>
+
+      <span>
+        Performance Marketing Lab
+      </span>
+
+    </div>
+
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+
+    /*
+     * ============================================
+     * DATALAYER
+     * ============================================
+     */
+
+    window.dataLayer =
+      window.dataLayer || [];
+
+
+    /*
+     * ============================================
+     * EVENT HELPER
+     * ============================================
+     */
+
+    function pushEvent(
+      eventName,
+      parameters = {}
+    ) {
+
+      window.dataLayer.push({
+
+        event:
+          eventName,
+
+        ...parameters
+
+      });
+
+
+      console.log(
+        "GTM Event:",
+        eventName,
+        parameters
+      );
+
+    }
+
+
+    /*
+     * ============================================
+     * RETURNS PAGE VIEW
+     * ============================================
+     */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        pushEvent(
+          "view_returns_page",
+          {
+
+            page_type:
+              "returns",
+
+            page_title:
+              document.title
+
+          }
+        );
+
+      }
+    );
+
+
+    /*
+     * ============================================
+     * RETURN SUPPORT CTA
+     * ============================================
+     */
+
+    document
+      .getElementById(
+        "returnContactCta"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          pushEvent(
+            "return_contact_cta_click",
+            {
+
+              destination:
+                "contact.html"
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * CONTINUE SHOPPING
+     * ============================================
+     */
+
+    document
+      .getElementById(
+        "returnShopCta"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          pushEvent(
+            "return_shop_cta_click",
+            {
+
+              destination:
+                "shop.html"
+
+            }
+
+          );
+
+        }
+      );
+
+
+    /*
+     * ============================================
+     * NAVIGATION TRACKING
+     * ============================================
+     */
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+        const element =
+          event.target.closest(
+            "[data-event]"
+          );
+
+
+        if (!element) {
+          return;
+        }
+
+
+        const eventName =
+          element.getAttribute(
+            "data-event"
+          );
+
+
+        pushEvent(
+          eventName
+        );
+
+      }
+    );
+
+
+  </script>
+
+</body>
+
+</html>
