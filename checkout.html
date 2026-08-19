@@ -580,7 +580,7 @@
               <input
                 type="tel"
                 id="phone"
-                placeholder="70149..."
+                placeholder="9876543210"
                 required>
 
             </div>
@@ -1043,12 +1043,12 @@
       const phone = document.getElementById("phone").value.trim();
       const pin = document.getElementById("pin").value.trim();
 
-      if (!/^\\d{10}$/.test(phone)) {
+      if (!/^\d{10}$/.test(phone)) {
         alert("Please enter a valid 10-digit phone number.");
         return false;
       }
 
-      if (!/^\\d{6}$/.test(pin)) {
+      if (!/^\d{6}$/.test(pin)) {
         alert("Please enter a valid 6-digit PIN code.");
         return false;
       }
